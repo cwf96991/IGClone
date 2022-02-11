@@ -1,5 +1,5 @@
 import { Meta } from "../layout/Meta";
-// import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 // import { AnimationOnScroll } from "react-animation-on-scroll";
 // import { Footer } from "./Footer";
 import { AppConfig } from "../utils/AppConfig";
@@ -7,21 +7,20 @@ import { AppConfig } from "../utils/AppConfig";
 const Basic = (props) => {
   const title = props?.title === undefined ? "" : `${props?.title} | `;
   return (
-    <div className="antialiased text-gray-600 font-sans bg-white">
+    <div className="antialiased text-black  bg-[#fafafa] flex flex-col w-screen ">
       <Meta
         title={`${title}${AppConfig.title}`}
         ogTitle={`${title}${AppConfig.ogTitle}`}
+        description={AppConfig.description}
+        canonical={AppConfig.url}
         ogDescription={AppConfig.ogDescription}
       />
-      {/* <Navbar
-        graidentStyle={AppConfig.graidentStyle}
-        isHelpCenter={props.isHelpCenter}
-        isAboutUs={props.isAboutUs}
-        isHide={props.isHide}
-      /> */}
+      <Navbar />
 
       {props.children}
-
+      {/* <div>
+        footer
+      </div> */}
       {/* <AnimationOnScroll animateIn="animate__fadeIn">
         <Footer />
       </AnimationOnScroll> */}

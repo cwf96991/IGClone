@@ -1,5 +1,5 @@
 
-import About from "../templates/about"
+import About from "../templates/index"
 const Index = () => <About/>;
 export function getStaticProps({ locale }) {
   return {

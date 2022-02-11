@@ -1,14 +1,12 @@
-import { NextSeo } from 'next-seo';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { NextSeo } from "next-seo";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
-import { AppConfig } from '@/utils/AppConfig';
-
-
+import { AppConfig } from "../utils/AppConfig";
 
 const Meta = (props) => {
-  const router = useRouter();
-
+  
+  const favIcon = "/icon.ico"
   return (
     <>
       <Head>
@@ -20,26 +18,26 @@ const Meta = (props) => {
         />
         <link
           rel="apple-touch-icon"
-          href={`${router.basePath}/apple-touch-icon.png`}
+          type="image/x-icon" href={favIcon}
           key="apple"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href={`${router.basePath}/favicon-32x32.png`}
+          type="image/x-icon" href={favIcon}
           key="icon32"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href={`${router.basePath}/favicon-16x16.png`}
+          type="image/x-icon" href={favIcon}
           key="icon16"
         />
         <link
           rel="icon"
-          href={`${router.basePath}/favicon.ico`}
+          type="image/x-icon" href={favIcon}
           key="favicon"
         />
       </Head>
@@ -53,6 +51,14 @@ const Meta = (props) => {
           url: props.canonical,
           locale: AppConfig.locale,
           site_name: AppConfig.site_name,
+          images: [
+            {
+              url: AppConfig.image,
+              width: 192,
+              height: 192,
+              alt: AppConfig.site_name,
+            },
+          ],
         }}
       />
     </>
