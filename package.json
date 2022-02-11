@@ -14,8 +14,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
     "@fortawesome/react-fontawesome": "^0.1.17",
+    "@material-ui/core": "^4.12.3",
     "@mpth/react-no-ssr": "^1.0.1",
+    "@mui/icons-material": "^5.4.1",
+    "@mui/material": "^5.4.1",
     "@splidejs/react-splide": "^0.6.20",
     "@walletconnect/web3-provider": "^1.7.0",
     "daisyui": "^1.25.4",

@@ -1,12 +1,4 @@
-import {
-  HomeSvg,
-  MessengerSvg,
-  NewPostSvg,
-  ExploreSvg,
-  FavSvg,
-  SearchSvg,
-  CloseSvg,
-} from "./image";
+import { SearchSvg, CloseSvg } from "./image";
 
 import NavbarBtnList from "./navBarBtnList";
 const Navbar = () => {
@@ -24,9 +16,8 @@ const Navbar = () => {
             <SearchSvg />
           </div>
           <div className="absolute right-[11px] invisible h-[30px] my-auto peer-focus:visible">
-          <CloseSvg />
+            <CloseSvg />
           </div>
-          
         </div>
       </div>
       <NavbarBtnList />
