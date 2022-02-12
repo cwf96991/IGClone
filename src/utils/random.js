@@ -4,11 +4,16 @@ import axios from "axios";
 function randomEmoji() {
   return emojis[Math.floor(Math.random() * emojis.length)];
 }
-function getRandomUsername() {
+function getRandomUsername(fixedName) {
   const name = faker.name.findName();
-  const username = faker.internet.userName(name);
+  const username = faker.internet.userName(fixedName ?? name);
   return username;
 }
+// function getRandomNickName() {
+//   let isMale = faker.datatype.boolean();
+//   let firstName = faker.name.firstName(isMale);
+//   return faker.name.findName(firstName);
+// }
 function getRandomHashTag() {
   let tempHashTag = faker.word.noun();
   return (
@@ -47,13 +52,25 @@ async function getRandomdGif() {
 
   return result;
 }
+function getRandomUser() {
+  const name = faker.name.findName();
+  const isNew = faker.datatype.boolean();
+  const follower = getRandomUsername();
+  const extraFollower = faker.datatype.number(100);
+  return {
+    avatar: faker.image.avatar(),
+    isNFT: faker.datatype.boolean(),
+    username: getRandomUsername(name),
+    nickName: name,
+    isNew,
+    follower,
+    extraFollower,
+  };
+}
 function getRandomUserList() {
   let list = [];
   for (let index = 0; index < 20; index++) {
-    list.push({
-      avatar: faker.image.avatar(),
-      isNFT: faker.datatype.boolean(),
-    });
+    list.push(getRandomUser());
   }
   return list;
 }
@@ -105,6 +122,7 @@ async function getRandomPostList() {
 export {
   getRandomPostList,
   getRandomUserList,
+  getRandomUser,
   getRandomdGif,
   randomEmoji,
   getRandomUsername,

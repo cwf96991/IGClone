@@ -7,7 +7,7 @@ import {
   randomEmoji,
   getRandomUsername,
   getRandomHashTag,
-} from "../utils/random";
+} from "../../utils/random";
 // The RegExp is char sets of Chinese, Japanese and Korean
 LinkifyCore.addCharsSupport(/[\u2E80-\u9FFF]/);
 

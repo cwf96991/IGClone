@@ -7,7 +7,7 @@ import { AppConfig } from "../utils/AppConfig";
 const Basic = (props) => {
   const title = props?.title === undefined ? "" : `${props?.title} | `;
   return (
-    <div className="antialiased text-black  font-sans bg-white flex flex-col w-screen ">
+    <div className="antialiased text-black  font-sans bg-[#fafafa] flex flex-col w-screen ">
       <Meta
         title={`${title}${AppConfig.title}`}
         ogTitle={`${title}${AppConfig.ogTitle}`}
@@ -15,9 +15,9 @@ const Basic = (props) => {
         canonical={AppConfig.url}
         ogDescription={AppConfig.ogDescription}
       />
-      <Navbar />
+      <Navbar user={props.user}/>
 
-      {props.children}
+      <div className="mt-[65px]">{props.children}</div>
       {/* <div>
         footer
       </div> */}

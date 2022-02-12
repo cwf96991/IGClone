@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import Avatar from "./avatar";
+import Avatar from "../avatar";
 import {
   MoreSvg,
   FavSvg,
@@ -8,12 +8,13 @@ import {
   BookmarkSvg,
   EmojiSvg,
   FavedSvg,
-} from "./image";
+} from "../image";
 import React, { useState, useEffect, useRef } from "react";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import {ImgSlider} from "./slider";
+import { ImgSlider } from "../slider";
 import PostDesc from "./postDesc";
-import InputEmoji from "react-input-emoji";
+import EmojiTextPost from "./emojiTextPost";
+
 const Post = ({ data }) => {
   const { user, post } = data;
   const { imgList, isfav, commentCount, likeCount, postTime, isFdLiked } = post;
@@ -88,7 +89,7 @@ const Post = ({ data }) => {
         {isFdLiked ? (
           <div className="flex items-center">
             {fd.isMultiple ? (
-              <div className="-space-x-2 avatar-group">
+              <div className="-space-x-2 ">
                 <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
                 <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar2} />
                 <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar3} />
@@ -109,36 +110,7 @@ const Post = ({ data }) => {
       </>
     );
   };
-  const EmojiTextPost = () => {
-    const [commentInput, setCommentInput] = useState("");
-    return (
-      <div className=" mx-4 my-3 justify-between items-center hidden md:flex">
-        <div className="flex items-center grow">
-          <div className="btnText "><EmojiSvg /></div>
-          <input
-            type="text"
-            value={commentInput}
-            className="grow text-black  focus:outline-none  placeholder-gray-300 ml-4 font-semibold text-sm"
-            placeholder="Add a comment..."
-            onChange={(e) => setCommentInput(e.target.value)}
-          />
-        </div>
-        <div
-          onClick={() => {
-            if (commentInput.length != 0) {
-              setCommentInput("");
-              setFinalCommentCount(finalCommentCount + 1);
-            }
-          }}
-          className={`btnText font-bold text-sm !text-lightBlue ${
-            commentInput.length != 0 ? "" : "opacity-30"
-          }`}
-        >
-          Post
-        </div>
-      </div>
-    );
-  };
+  
   const CommentSession = () => {
     return (
       <div className="text-gray-300 text-sm">
@@ -166,7 +138,11 @@ const Post = ({ data }) => {
         <div className="text-gray-300 text-2xs mb-3">{postTime} HOURS AGO</div>
       </div>
       <hr className="mb-3 hidden md:flex" />
-      <EmojiTextPost />
+      <EmojiTextPost
+        callback={() => {
+          setFinalCommentCount(finalCommentCount + 1);
+        }}
+      />
     </div>
   );
 };

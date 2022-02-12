@@ -1,38 +1,37 @@
 import { HomeSvg, MessengerSvg, NewPostSvg, ExploreSvg, FavSvg } from "./image";
-import { faker } from "@faker-js/faker";
 
-const BtnList = [
-  {
-    icon: <HomeSvg />,
-    link: "/",
-  },
-  {
-    icon: <MessengerSvg />,
-    link: "/direct/inbox",
-  },
-  {
-    icon: <NewPostSvg />,
-  },
-  {
-    icon: <ExploreSvg />,
-    link: "/explore",
-  },
-  {
-    icon: <FavSvg />,
-  },
-  {
-    icon: (
-      <div className="avatar ">
-        <div className="rounded-full w-[24px] h-[24px] ">
-          <img src={faker.image.avatar()} className="" />
+const NavbarBtnList = ({ user }) => {
+  const BtnList = [
+    {
+      icon: <HomeSvg />,
+      link: "/",
+    },
+    {
+      icon: <MessengerSvg />,
+      link: "/direct/inbox",
+    },
+    {
+      icon: <NewPostSvg />,
+    },
+    {
+      icon: <ExploreSvg />,
+      link: "/explore",
+    },
+    {
+      icon: <FavSvg />,
+    },
+    {
+      icon: (
+        <div className="avatar ">
+          <div className="rounded-full w-[24px] h-[24px] ">
+            <img src={user.avatar} className="" />
+          </div>
         </div>
-      </div>
-    ),
-  },
-];
-const NavbarBtnList = () => {
+      ),
+    },
+  ];
   return (
-    <div className="flex w-[280px] justify-evenly items-center mr-auto">
+    <div className="flex w-[325px] mr-auto justify-evenly items-center ">
       {BtnList.map((item, index) => {
         const { icon, link } = item;
         return (

@@ -43,3 +43,12 @@ a:hover {
 .btnText {
   @apply cursor-pointer btn btn-sm normal-case btn-ghost hover:bg-transparent p-0 m-0
 }
+.react-input-emoji--input{
+  @apply hidden
+}
+.react-input-emoji--container{
+  @apply hidden
+}
+.emoji-mart-preview{
+  @apply hidden
+}

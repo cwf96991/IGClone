@@ -2,13 +2,22 @@ import Base from "./Base";
 import { StorySlider } from "../components/slider";
 import { useMobile945 } from "../hook/useMobile";
 import { useState, useEffect, useRef } from "react";
-import PostList from "../components/postList";
-
+import { getRandomUser } from "../utils/random";
+import PostList from "../components/post";
+import UserList from "../components/userPanel";
 const Index = () => {
   const isHideSidePanel = useMobile945();
-
+  const [user, setUser] = useState({});
+  const userRef = useRef({});
+  function fetchData() {
+    let user = getRandomUser();
+    setUser(user);
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
-    <Base>
+    <Base user={user}>
       <div className="flex ">
         <div
           className={`${
@@ -18,7 +27,13 @@ const Index = () => {
           <StorySlider />
           <PostList />
         </div>
-        {!isHideSidePanel && <div className="w-[325px] mr-auto">username</div>}
+        {!isHideSidePanel && (
+          <div className="w-[325px] mr-auto">
+            <div className="fixed w-full">
+              <UserList user={user} />
+            </div>
+          </div>
+        )}
       </div>
     </Base>
   );

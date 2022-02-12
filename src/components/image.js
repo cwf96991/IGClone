@@ -354,7 +354,7 @@ const EmojiSvg = () => {
   return (
     <svg
       aria-label="Emoji"
-      className="fill-black group hover:fill-gray-300"
+      className="fill-black group hover:fill-gray-300 react-input-emoji--button--icon"
       height="24"
       role="img"
       viewBox="0 0 24 24"

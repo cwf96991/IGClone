@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Post from "./post";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Loader from "./loader";
-import { getRandomPostList } from "../utils/random";
+import Loader from "../loader";
+import { getRandomPostList } from "../../utils/random";
 const PostList = () => {
   const [postList, SetPostList] = useState([]);
   async function fetchData() {
