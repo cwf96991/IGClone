@@ -40,7 +40,6 @@ const PostList = () => {
         // }
       >
         {postList.map((item, key) => {
-
           return <Post key={key} data={item} />;
         })}
       </InfiniteScroll>

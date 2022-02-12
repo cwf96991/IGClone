@@ -2,11 +2,12 @@ import Avatar from "./avatar";
 import { useState, useEffect } from "react";
 import { getRandomUser } from "../utils/random";
 import { truncateName } from "../utils/function";
-
+import { personalWebsite, footerList } from "../utils/constant";
+import Modal from "./modal/modal";
 const SuggestItem = ({ user }) => {
   const { avatar, isNFT, username, nickName, isNew, follower, extraFollower } =
     user;
-    const [isFollow,setIsFollow] = useState(false)
+  const [isFollow, setIsFollow] = useState(false);
   return (
     <div className="flex items-center justify-between mb-3">
       <div className="flex items-center w-[325px]">
@@ -23,13 +24,18 @@ const SuggestItem = ({ user }) => {
             </div>
           </div>
 
-          <div 
-          onClick={()=>{
-            if (!isFollow){
-                setIsFollow(true)
-            }
-          }}
-          className={`btnText ${isFollow?"text-black":"!text-lightBlue"} !text-xs`}>{isFollow?"Following":"Follow"}</div>
+          <div
+            onClick={() => {
+              if (!isFollow) {
+                setIsFollow(true);
+              }
+            }}
+            className={`btnText ${
+              isFollow ? "text-black" : "!text-lightBlue"
+            } !text-xs`}
+          >
+            {isFollow ? "Following" : "Follow"}
+          </div>
         </div>
       </div>
     </div>
@@ -57,7 +63,7 @@ const UserPanel = ({ user }) => {
           <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} />
           <div className="flex flex-row items-center justify-between grow">
             <div className="flex flex-col text-sm ml-4 grow">
-              <div className="font-bold ">{username}</div>
+              <div className="font-bold ">{truncateName(username)}</div>
               <div>{nickName}</div>
             </div>
 
@@ -76,6 +82,28 @@ const UserPanel = ({ user }) => {
         suggestionList.map((user, index) => {
           return <SuggestItem user={user} key={index} />;
         })}
+      <div className="flex flex-wrap w-[325px] text-gray-100 text-2xs font-bold mt-6 mb-4">
+        {footerList.map((item, index) => {
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                window.open(personalWebsite);
+              }}
+              className="cursor-pointer"
+            >
+              {`${item}`}
+              {index != footerList.length - 1 && (
+                <div className="inline cursor-default">．</div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className="text-gray-100 text-2xs font-bold">
+        © 2022 CWFGRAM FROM CWF
+      </div>
+      <Modal />
     </div>
   );
 };

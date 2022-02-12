@@ -1,7 +1,9 @@
 import App from "next/app";
 import { NextIntlProvider } from "next-intl";
 import "../styles/global.css";
-
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 const MyApp = ({ Component, pageProps }) => (
   <NextIntlProvider messages={pageProps.messages}>
     <Component {...pageProps} />

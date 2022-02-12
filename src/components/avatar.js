@@ -9,7 +9,7 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
     size = "!w-[20px] !h-[20px]";
   }
   return isHighlight ? (
-    <div className="avatar carousel-item">
+    <div className="avatar carousel-item ">
       <div
         className={`rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-fuchsia-700`}
       >
@@ -20,7 +20,7 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
     </div>
   ) : (
     <div className="avatar ">
-      <img src={img} className={`rounded-full ${size} ${isNFT}`} />
+      <img src={img} className={`rounded-full !z-0 ${size} ${isNFT}`} />
     </div>
   );
 };

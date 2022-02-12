@@ -3,16 +3,19 @@ const ImgSlider = ({ imgList }) => {
   return imgList.length == 1 ? (
     <img
       src={imgList[0]}
-      className="w-full object-cover object-center aspect-square "
+      className="w-full object-cover object-center h-auto "
     />
   ) : (
-    <Slider style={" carousel"}>
+    <Slider style={" carousel"} isPagination={true}>
       {imgList.map((img, key) => {
         return (
-          <div className=" carousel-item " key={key}>
+          <div
+            className=" carousel-item !w-full object-cover object-center !aspect-square !block"
+            key={key}
+          >
             <img
               src={img}
-              className="!w-full object-cover object-center aspect-square inline-block"
+              className="!w-full object-cover object-center !aspect-square !block "
             />
           </div>
         );

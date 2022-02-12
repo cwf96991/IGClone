@@ -52,3 +52,7 @@ a:hover {
 .emoji-mart-preview{
   @apply hidden
 }
+
+.ignoreNavBar {
+  padding-top:-65px
+}

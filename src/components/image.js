@@ -197,36 +197,20 @@ const CloseSvg = () => {
 const LeftArrow = () => {
   return (
     <svg
+      className="fill-white drop-shadow-2xl"
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      version="1.1"
-      viewBox="0 0 256 256"
-      xmlSpace="preserve"
+      viewBox="0 0 512 512"
     >
-      <desc>Created with Fabric.js 1.7.22</desc>
-      <defs></defs>
-      <g transform="translate(128 128) scale(0.72 0.72)">
-        <g
-          className="fill-transparent"
-          //   style="stroke: none; strokeWidth: 0; stroke-dasharray: none; strokeLinecap: butt; strokeLinejoin: miter; strokeMiterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
-          transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)"
-        >
-          <circle
-            cx="45"
-            cy="45"
-            r="45"
-            className="fill-white"
-            // style="stroke: none; strokeWidth: 1; stroke-dasharray: none; strokeLinecap: butt; strokeLinejoin: miter; strokeMiterlimit: 10; fill: white; fill-rule: nonzero; opacity: 1;"
-            transform="  matrix(1 0 0 1 0 0) "
-          />
-          <polygon
-            className="fill-transparent"
-            points="45.36,20 35.66,29.81 43.78,38.05 20,38.05 20,51.95 43.78,51.95 35.67,60.17 45.36,70 70,45 "
-            // style="stroke: none; strokeWidth: 1; stroke-dasharray: none; strokeLinecap: butt; strokeLinejoin: miter; strokeMiterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 0;"
-            transform="  matrix(1 0 0 1 0 0) "
-          />
-        </g>
-      </g>
+      <path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM310.6 345.4c12.5 12.5 12.5 32.75 0 45.25s-32.75 12.5-45.25 0l-112-112C147.1 272.4 144 264.2 144 256s3.125-16.38 9.375-22.62l112-112c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L221.3 256L310.6 345.4z" />
+    </svg>
+  );
+};
+const RightArrow = () => {
+  return (
+    <svg 
+    className="fill-white drop-shadow-2xl"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM358.6 278.6l-112 112c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25L290.8 256L201.4 166.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l112 112C364.9 239.6 368 247.8 368 256S364.9 272.4 358.6 278.6z" />
     </svg>
   );
 };
@@ -373,6 +357,7 @@ export {
   NewPostSvg,
   ExploreSvg,
   LeftArrow,
+  RightArrow,
   FavSvg,
   FavedSvg,
   SearchSvg,

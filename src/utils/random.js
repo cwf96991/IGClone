@@ -31,7 +31,7 @@ async function getRandomdGif() {
     tag: "fail",
     type: "random",
     rating: "pg-13",
-    categories: "square",
+    
   };
 
   let giphyURL = encodeURI(
@@ -42,9 +42,7 @@ async function getRandomdGif() {
       "&tag=" +
       giphy.tag +
       "&rating=" +
-      giphy.rating +
-      "&categories=" +
-      giphy.categories
+      giphy.rating 
   );
 
   const response = await axios.get(giphyURL);
@@ -106,7 +104,8 @@ async function getRandomPostList() {
       if (faker.datatype.boolean()) {
         tempImgList.push(faker.image.image());
       } else {
-        let url = randomGifs();
+        // let url = randomGifs();
+        let url = await getRandomdGif();
         tempImgList.push(url);
       }
     }

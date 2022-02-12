@@ -823,5 +823,20 @@ var emojis = [
   const gifs =[
     "https://c.tenor.com/FxAZmdm-RtoAAAAd/square-sf.gif",
     "https://c.tenor.com/6Y-LlVKJJfAAAAAM/square-dog.gif",
+    "https://i.gifer.com/McuD.gif"
   ]
-  export { gifs, emojis };
+  const personalWebsite = "https://cwf96991.github.io/"
+  const footerList = [
+    "About",
+    "Help",
+    "Press",
+    "API",
+    "Jobs",
+    "Privacy",
+    "Terms",
+    "Locations",
+    "Top accounts",
+    "Hashtags",
+    "Language",
+  ];
+  export { gifs, emojis,personalWebsite,footerList };
