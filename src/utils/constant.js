@@ -820,4 +820,8 @@ var emojis = [
     "🔹",
   ];
 
-  export { emojis };
+  const gifs =[
+    "https://c.tenor.com/FxAZmdm-RtoAAAAd/square-sf.gif",
+    "https://c.tenor.com/6Y-LlVKJJfAAAAAM/square-dog.gif",
+  ]
+  export { gifs, emojis };

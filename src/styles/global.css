@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playball&display=swap");
 
 @tailwind base;
 
@@ -29,6 +28,18 @@ a:hover {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .noScrollBar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.linkified {
+  @apply text-navyBlue hover:border-0;
+}
+
+.showMoreText {
+  @apply text-gray-300 hover:border-0;
+}
+
+.btnText {
+  @apply cursor-pointer btn btn-sm normal-case btn-ghost hover:bg-transparent p-0 m-0
 }

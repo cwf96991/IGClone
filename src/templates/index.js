@@ -1,36 +1,22 @@
 import Base from "./Base";
-import StorySlider from "../components/storySlider";
-import Avatar from "../components/avatar";
-import { faker } from "@faker-js/faker";
+import { StorySlider } from "../components/slider";
 import { useMobile945 } from "../hook/useMobile";
-import {
-  MoreSvg,
-  FavSvg,
-  CommentSvg,
-  MsgSvg,
-  BookmarkSvg,
-  FavedSvg,
-} from "../components/image";
-import Post from "../components/post";
+import { useState, useEffect, useRef } from "react";
+import PostList from "../components/postList";
 
 const Index = () => {
   const isHideSidePanel = useMobile945();
+
   return (
     <Base>
       <div className="flex ">
         <div
           className={`${
             isHideSidePanel ? "mx-auto" : "ml-auto"
-          } flex flex-col max-w-[620px]`}
+          } flex flex-col max-w-full md:max-w-[620px]`}
         >
           <StorySlider />
-          {[...Array(10)].map((item, key) => {
-            const user = faker.helpers.createCard();
-            user.isfav = faker.random.boolean();
-            user.img = faker.image.image();
-            user.avatar = faker.image.avatar();
-            return <Post key={key} user={user} />;
-          })}
+          <PostList />
         </div>
         {!isHideSidePanel && <div className="w-[325px] mr-auto">username</div>}
       </div>

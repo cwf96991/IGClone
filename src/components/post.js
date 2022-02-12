@@ -6,80 +6,167 @@ import {
   CommentSvg,
   MsgSvg,
   BookmarkSvg,
+  EmojiSvg,
   FavedSvg,
 } from "./image";
-import React, { useState, useEffect } from "react";
-import { emojis } from "../utils/constant";
-
-function randomEmoji() {
-  return emojis[Math.floor(Math.random() * emojis.length)];
-}
-function getRandomUsername() {
-  const name = faker.name.findName();
-  const username = faker.internet.userName(name);
-  return username;
-}
-function getRandomHashTag() {
-  let tempHashTag = faker.word.noun();
-  return '#'+faker.word.adjective() +tempHashTag.charAt(0).toUpperCase() + tempHashTag.slice(1);
-}
-const Post = ({ user }) => {
-  const { username, avatar, img, isfav } = user;
+import React, { useState, useEffect, useRef } from "react";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import {ImgSlider} from "./slider";
+import PostDesc from "./postDesc";
+import InputEmoji from "react-input-emoji";
+const Post = ({ data }) => {
+  const { user, post } = data;
+  const { imgList, isfav, commentCount, likeCount, postTime, isFdLiked } = post;
+  const { username, avatar, isNFT, isHighlight, isFollowing, fd } = user;
+  const [finalLikeCount, setFinalLikeCount] = useState(likeCount);
+  const [finalCommentCount, setFinalCommentCount] = useState(likeCount);
   const [isFav, setIsFav] = useState(isfav);
+
+  const FavWidget = () => {
+    return (
+      <div
+        onClick={() => {
+          if (isFav) {
+            setFinalLikeCount(finalLikeCount - 1);
+          } else {
+            setFinalLikeCount(finalLikeCount + 1);
+          }
+          setIsFav(!isFav);
+        }}
+        className="!mr-3 btnText"
+      >
+        {isFav ? <FavedSvg /> : <FavSvg />}
+      </div>
+    );
+  };
   const BtnList = () => {
     return (
       <div className="my-4 flex justify-between items-center">
         <div className="flex items-center">
-          <div
-            onClick={() => {
-              setIsFav(!isFav);
-            }}
-            className="mr-3 btn btn-sm btn-ghost m-0 p-0"
-          >
-            {isFav ? <FavedSvg /> : <FavSvg />}
-          </div>
-          <div className="mr-3">
+          <FavWidget />
+          <div className="!mr-3 btnText">
             <CommentSvg />
           </div>
-          <div className="mr-3">
+          <div className="!mr-3 btnText">
             <MsgSvg />
           </div>
         </div>
-        <BookmarkSvg />
+        <div className="btnText">
+          <BookmarkSvg />
+        </div>
+      </div>
+    );
+  };
+  const UserMoreBar = ({ user }) => {
+    const { username, avatar, isNFT, isHighlight, isFollowing } = user;
+    return (
+      <div className="flex justify-between items-center my-2 mx-4 ">
+        <div className="flex items-center">
+          <Avatar
+            size={"32"}
+            isHighlight={isHighlight}
+            img={avatar}
+            isNFT={isNFT}
+          />
+          <div className="ml-4 text-black font-bold">{username}</div>
+          <div className="text-bold text-2xl">．</div>
+          {isFollowing ? (
+            <div className="btnText font-bold">Following</div>
+          ) : (
+            <div className="btnText !text-lightBlue">Follow</div>
+          )}
+        </div>
+        <div className="btnText">
+          <MoreSvg />
+        </div>
+      </div>
+    );
+  };
+  const LikeSession = ({ fd, isFdLiked }) => {
+    return (
+      <>
+        {isFdLiked ? (
+          <div className="flex items-center">
+            {fd.isMultiple ? (
+              <div className="-space-x-2 avatar-group">
+                <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
+                <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar2} />
+                <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar3} />
+              </div>
+            ) : (
+              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
+            )}
+            <div className="font-bold text-sm inline ml-2">
+              <div className="font-normal inline">Liked by</div>
+              {` ${fd.username} `}
+              <div className="font-normal inline">and</div>
+              {` ${finalLikeCount} others`}
+            </div>
+          </div>
+        ) : (
+          <div className="font-bold text-sm">{finalLikeCount} likes</div>
+        )}
+      </>
+    );
+  };
+  const EmojiTextPost = () => {
+    const [commentInput, setCommentInput] = useState("");
+    return (
+      <div className=" mx-4 my-3 justify-between items-center hidden md:flex">
+        <div className="flex items-center grow">
+          <div className="btnText "><EmojiSvg /></div>
+          <input
+            type="text"
+            value={commentInput}
+            className="grow text-black  focus:outline-none  placeholder-gray-300 ml-4 font-semibold text-sm"
+            placeholder="Add a comment..."
+            onChange={(e) => setCommentInput(e.target.value)}
+          />
+        </div>
+        <div
+          onClick={() => {
+            if (commentInput.length != 0) {
+              setCommentInput("");
+              setFinalCommentCount(finalCommentCount + 1);
+            }
+          }}
+          className={`btnText font-bold text-sm !text-lightBlue ${
+            commentInput.length != 0 ? "" : "opacity-30"
+          }`}
+        >
+          Post
+        </div>
+      </div>
+    );
+  };
+  const CommentSession = () => {
+    return (
+      <div className="text-gray-300 text-sm">
+        View all {finalCommentCount} comments
       </div>
     );
   };
   return (
-    <div className="border-[#dbdbdb] mt-4 border">
-      <div className="flex justify-between items-center my-2 mx-3">
-        <div className="flex items-center">
-          <Avatar size={"32"} isHighlight={true} img={avatar} />
-          <div className="ml-4 text-black font-bold">{username}</div>
+    <div className="border-gray-100 mt-4 border">
+      <UserMoreBar user={user} />
+      {imgList && (
+        <div className="relative max-w-full md:max-w-[620px]">
+          <ImgSlider imgList={imgList} />
         </div>
-        <MoreSvg />
-      </div>
-      <img
-        src={img}
-        className="w-full object-cover object-center aspect-square"
-      />
+      )}
 
-      <div className="flex flex-col  mx-3">
+      <div className="flex flex-col  mx-4">
         <BtnList />
-        <div className="font-bold text-sm">{faker.datatype.number()} likes</div>
-        <div className=" ">
-          <div className="font-bold text-sm">
-            {username}
-            <div className="font-normal inline ml-1">{`${faker.lorem.lines()} ${randomEmoji()}`}</div>
-            <div className="font-normal inline ml-1 text-[#00376B]">{`@${getRandomUsername()}`}</div>
-            <div className="font-normal inline ml-1 text-[#00376B]">
-            <div className="inline ml-1">{`${getRandomHashTag()}`}</div>
-              
-            </div>
-          </div>
-          <div className="text-[#8E8E8E] text-sm">View all {faker.datatype.number(1000)} comments</div>
-          <div className="text-[#8E8E8E] text-2xs">{faker.datatype.number(23,{ min: 1 })} HOURS AGO</div>
+        <LikeSession fd={fd} isFdLiked={isFdLiked} />
+        <div className="font-bold text-sm ">
+          {username}
+          <PostDesc />
         </div>
+        <CommentSession />
+        <div className="text-gray-300 text-2xs mb-3">{postTime} HOURS AGO</div>
       </div>
+      <hr className="mb-3 hidden md:flex" />
+      <EmojiTextPost />
     </div>
   );
 };

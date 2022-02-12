@@ -7,7 +7,7 @@ import { AppConfig } from "../utils/AppConfig";
 const Basic = (props) => {
   const title = props?.title === undefined ? "" : `${props?.title} | `;
   return (
-    <div className="antialiased text-black  bg-[#fafafa] flex flex-col w-screen ">
+    <div className="antialiased text-black  font-sans bg-white flex flex-col w-screen ">
       <Meta
         title={`${title}${AppConfig.title}`}
         ogTitle={`${title}${AppConfig.ogTitle}`}

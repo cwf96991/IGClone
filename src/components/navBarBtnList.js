@@ -22,8 +22,8 @@ const BtnList = [
   },
   {
     icon: (
-      <div class="avatar ">
-        <div class="rounded-full w-[24px] h-[24px] ">
+      <div className="avatar ">
+        <div className="rounded-full w-[24px] h-[24px] ">
           <img src={faker.image.avatar()} className="" />
         </div>
       </div>
@@ -37,7 +37,9 @@ const NavbarBtnList = () => {
         const { icon, link } = item;
         return (
           <div key={index} className="w-[24px] h-[24px] cursor-pointer">
-            <a href={link} className="hover:border-0">{icon}</a>
+            <a href={link} className="hover:border-0">
+              {icon}
+            </a>
           </div>
         );
       })}

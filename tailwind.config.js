@@ -15,12 +15,13 @@ module.exports = {
       "5xl": "3rem",
       "6xl": "4rem",
     },
+    
     extend: {
       colors: {
         gray: {
-          100: "#f7fafc",
+          100: "#dbdbdb",
           200: "#edf2f7",
-          300: "#e2e8f0",
+          300: "#8E8E8E",
           400: "#cbd5e0",
           500: "#a0aec0",
           600: "#718096",
@@ -39,6 +40,8 @@ module.exports = {
           800: "#2c5282",
           900: "#2a4365",
         },
+        navyBlue: "#00376B",
+        lightBlue:"#0095F6"
       },
       fontFamily: {
         'playball': ['"Playball"', 'cursive']
