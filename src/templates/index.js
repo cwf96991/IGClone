@@ -1,4 +1,4 @@
-import Base from "./Base";
+import Base from "./base";
 import { StorySlider } from "../components/slider";
 import { useMobile945 } from "../hook/useMobile";
 import { useState, useEffect, useRef } from "react";

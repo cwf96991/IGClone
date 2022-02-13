@@ -54,8 +54,8 @@ const Meta = (props) => {
           images: [
             {
               url: AppConfig.image,
-              width: 192,
-              height: 192,
+              width: 200,
+              height: 200,
               alt: AppConfig.site_name,
             },
           ],
