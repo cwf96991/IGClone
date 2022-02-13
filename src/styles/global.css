@@ -41,18 +41,22 @@ a:hover {
 }
 
 .btnText {
-  @apply cursor-pointer btn btn-sm normal-case btn-ghost hover:bg-transparent p-0 m-0
+  @apply cursor-pointer btn btn-sm normal-case btn-ghost hover:bg-transparent p-0 m-0;
 }
-.react-input-emoji--input{
-  @apply hidden
+.bigBtn {
+  @apply cursor-pointer btn btn-lg normal-case btn-ghost hover:bg-transparent ;
 }
-.react-input-emoji--container{
-  @apply hidden
+.react-input-emoji--input {
+  @apply hidden;
 }
-.emoji-mart-preview{
-  @apply hidden
+.react-input-emoji--container {
+  @apply hidden;
+}
+.emoji-mart-preview {
+  @apply hidden;
 }
 
 .ignoreNavBar {
-  padding-top:-65px
+  padding-top: -65px;
+  z-index: 10000 !important;
 }

@@ -8,7 +8,7 @@ import UserList from "../components/userPanel";
 const Index = () => {
   const isHideSidePanel = useMobile945();
   const [user, setUser] = useState({});
-  const userRef = useRef({});
+  
   function fetchData() {
     let user = getRandomUser();
     setUser(user);
@@ -29,9 +29,12 @@ const Index = () => {
         </div>
         {!isHideSidePanel && (
           <div className="w-[325px] mr-auto">
-            <div className="fixed w-full">
-              <UserList user={user} />
-            </div>
+            <UserList
+              user={user}
+              setUser={(user) => {
+                setUser(user);
+              }}
+            />
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { HomeSvg, MessengerSvg, NewPostSvg, ExploreSvg, FavSvg } from "./image";
-
+import Avatar from "./avatar";
 const NavbarBtnList = ({ user }) => {
   const BtnList = [
     {
@@ -22,11 +22,7 @@ const NavbarBtnList = ({ user }) => {
     },
     {
       icon: (
-        <div className="avatar ">
-          <div className="rounded-full w-[24px] h-[24px] ">
-            <img src={user.avatar} className="" />
-          </div>
-        </div>
+        <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />
       ),
     },
   ];

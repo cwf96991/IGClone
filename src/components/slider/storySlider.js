@@ -15,12 +15,13 @@ const StorySlider = () => {
     <div className=" mt-8 relative ">
       <Slider style="border px-[9px] border-gray-100 ">
         {userList.map((user, key) => {
-          const { avatar, username, isNFT } = user;
+          const { avatar, username, isNFT ,isClosedFD} = user;
           let style = isNFT ? "mask mask-hexagon" : "";
+          let circleStyle = isClosedFD?" bg-green-500":"bg-gradient-to-tr from-amber-500 to-fuchsia-700"
           return (
-            <div className="flex  flex-col my-3 mx-[9px] items-center">
+            <div key={key} className="flex  flex-col my-3 mx-[9px] items-center cursor-pointer">
               <div className="avatar carousel-item mt-[8px] " key={key}>
-                <div className="rounded-full  p-[2px] bg-gradient-to-tr from-amber-500 to-fuchsia-700 ">
+                <div className={`rounded-full  p-[2px] ${circleStyle} `}>
                   <div className="p-[2px] bg-white rounded-full">
                     <img
                       src={avatar}

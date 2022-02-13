@@ -1,3 +1,4 @@
+import VerifiedIcon from "@mui/icons-material/Verified";
 const HomeSvg = () => {
   return (
     <svg
@@ -207,9 +208,11 @@ const LeftArrow = () => {
 };
 const RightArrow = () => {
   return (
-    <svg 
-    className="fill-white drop-shadow-2xl"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <svg
+      className="fill-white drop-shadow-2xl"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
       <path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM358.6 278.6l-112 112c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25L290.8 256L201.4 166.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l112 112C364.9 239.6 368 247.8 368 256S364.9 272.4 358.6 278.6z" />
     </svg>
   );
@@ -312,6 +315,20 @@ const BookmarkSvg = () => {
     </svg>
   );
 };
+const BookmarkedSvg = () => {
+  return (
+    <svg
+      aria-label="Remove"
+      className="fill-black group hover:fill-gray-300"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M20 22a.999.999 0 01-.687-.273L12 14.815l-7.313 6.912A1 1 0 013 21V3a1 1 0 011-1h16a1 1 0 011 1v18a1 1 0 01-1 1z"></path>
+    </svg>
+  );
+};
 const FavedSvg = () => {
   return (
     <svg
@@ -348,12 +365,31 @@ const EmojiSvg = () => {
     </svg>
   );
 };
+const BlueTickSvg = () => {
+  return (
+    <svg
+      aria-label="Filled tick icon"
+      color="#0095f6"
+      fill="#0095f6"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M12.001.504a11.5 11.5 0 1011.5 11.5 11.513 11.513 0 00-11.5-11.5zm5.706 9.21l-6.5 6.495a1 1 0 01-1.414-.001l-3.5-3.503a1 1 0 111.414-1.414l2.794 2.796L16.293 8.3a1 1 0 011.414 1.415z"></path>
+    </svg>
+  );
+};
+const VerifyIcon = ({size}) => {
+  return <VerifiedIcon className="text-lightBlue" sx={{ fontSize: size??16 }}/>;
+};
 export {
   CloseSvg,
   PlayBtnSvg,
   EmojiSvg,
   HomeSvg,
   MessengerSvg,
+  BlueTickSvg,
   NewPostSvg,
   ExploreSvg,
   LeftArrow,
@@ -362,7 +398,9 @@ export {
   FavedSvg,
   SearchSvg,
   MoreSvg,
+  VerifyIcon,
   CommentSvg,
   MsgSvg,
   BookmarkSvg,
+  BookmarkedSvg,
 };

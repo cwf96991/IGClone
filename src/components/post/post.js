@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import Avatar from "../avatar";
 import {
   MoreSvg,
@@ -6,23 +5,45 @@ import {
   CommentSvg,
   MsgSvg,
   BookmarkSvg,
+  BookmarkedSvg,
   EmojiSvg,
+  VerifyIcon,
   FavedSvg,
 } from "../image";
 import React, { useState, useEffect, useRef } from "react";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import { ImgSlider } from "../slider";
 import PostDesc from "./postDesc";
 import EmojiTextPost from "./emojiTextPost";
-
+import MoreBtnWidget from "./moreBtnWidget";
+import { LikeSection, UserInfoPopUp, UserMoreBar } from "./postWidget";
 const Post = ({ data }) => {
   const { user, post } = data;
-  const { imgList, isfav, commentCount, likeCount, postTime, isFdLiked } = post;
-  const { username, avatar, isNFT, isHighlight, isFollowing, fd } = user;
+  const {
+    imgList,
+    isfav,
+    isbookmark,
+    commentCount,
+    likeCount,
+    postTime,
+    isFdLiked,
+    isAddress,
+    address,
+  } = post;
+  const {
+    username,
+    avatar,
+    isNFT,
+    isHighlight,
+    isFollowing,
+    fd,
+    isVerify,
+    
+  } = user;
   const [finalLikeCount, setFinalLikeCount] = useState(likeCount);
   const [finalCommentCount, setFinalCommentCount] = useState(likeCount);
+  const [isFollow, setIsFollow] = useState(isFollowing);
   const [isFav, setIsFav] = useState(isfav);
-
+  const [isBookmark, setIsBookmark] = useState(isbookmark);
   const FavWidget = () => {
     return (
       <div
@@ -40,6 +61,18 @@ const Post = ({ data }) => {
       </div>
     );
   };
+  const BookmarkWidget = () => {
+    return (
+      <div
+        onClick={() => {
+          setIsBookmark(!isBookmark);
+        }}
+        className="!mr-3 btnText"
+      >
+        {isBookmark ? <BookmarkedSvg /> : <BookmarkSvg />}
+      </div>
+    );
+  };
   const BtnList = () => {
     return (
       <div className="my-4 flex justify-between items-center">
@@ -52,75 +85,29 @@ const Post = ({ data }) => {
             <MsgSvg />
           </div>
         </div>
-        <div className="btnText">
-          <BookmarkSvg />
-        </div>
+        <BookmarkWidget />
       </div>
     );
   };
-  const UserMoreBar = ({ user }) => {
-    const { username, avatar, isNFT, isHighlight, isFollowing } = user;
-    return (
-      <div className="flex justify-between items-center my-2 mx-4 ">
-        <div className="flex items-center">
-          <Avatar
-            size={"32"}
-            isHighlight={isHighlight}
-            img={avatar}
-            isNFT={isNFT}
-          />
-          <div className="ml-4 text-black font-bold">{username}</div>
-          <div className="text-bold text-2xl">．</div>
-          {isFollowing ? (
-            <div className="btnText font-bold">Following</div>
-          ) : (
-            <div className="btnText !text-lightBlue">Follow</div>
-          )}
-        </div>
-        <div className="btnText">
-          <MoreSvg />
-        </div>
-      </div>
-    );
-  };
-  const LikeSession = ({ fd, isFdLiked }) => {
-    return (
-      <>
-        {isFdLiked ? (
-          <div className="flex items-center">
-            {fd.isMultiple ? (
-              <div className="-space-x-2 ">
-                <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
-                <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar2} />
-                <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar3} />
-              </div>
-            ) : (
-              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
-            )}
-            <div className="font-bold text-sm inline ml-2">
-              <div className="font-normal inline">Liked by</div>
-              {` ${fd.username} `}
-              <div className="font-normal inline">and</div>
-              {` ${finalLikeCount} others`}
-            </div>
-          </div>
-        ) : (
-          <div className="font-bold text-sm">{finalLikeCount} likes</div>
-        )}
-      </>
-    );
-  };
-  
+
   const CommentSession = () => {
     return (
-      <div className="text-gray-300 text-sm">
+      <div className="text-gray-300 text-sm cursor-pointer font-semibold">
         View all {finalCommentCount} comments
       </div>
     );
   };
   return (
     <div className="border-gray-100 mt-4 border">
-      <UserMoreBar user={user} />
+      <UserMoreBar
+        user={user}
+        post={post}
+        isFollow={isFollow}
+        followCallback = {()=>{
+          setIsFollow(true);
+        }}
+        
+      />
       {imgList && (
         <div className="relative max-w-full md:max-w-[620px]">
           <ImgSlider imgList={imgList} />
@@ -129,10 +116,19 @@ const Post = ({ data }) => {
 
       <div className="flex flex-col  mx-4">
         <BtnList />
-        <LikeSession fd={fd} isFdLiked={isFdLiked} />
+        <LikeSection
+          fd={fd}
+          isFdLiked={isFdLiked}
+          finalLikeCount={finalLikeCount}
+        />
         <div className="font-bold text-sm ">
-          {username}
-          <PostDesc />
+          <UserInfoPopUp user={user} style={"dropdown-top"}>
+            <div className="hover:underline inline">{username}</div>
+          </UserInfoPopUp>
+
+          <div className="inline">
+            <PostDesc />
+          </div>
         </div>
         <CommentSession />
         <div className="text-gray-300 text-2xs mb-3">{postTime} HOURS AGO</div>

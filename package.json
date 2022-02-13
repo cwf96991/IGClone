@@ -31,6 +31,7 @@
     "emoji-mart": "^3.0.1",
     "ethers": "^5.5.2",
     "faker": "^6.6.6",
+    "framer-motion": "^6.2.6",
     "linkify-html": "^3.0.5",
     "linkify-react": "^3.0.4",
     "linkifyjs": "^3.0.5",

@@ -5,7 +5,9 @@ module.exports = {
   theme: {
     fontSize: {
       xs: "0.75rem",
+      ssm: "12px",
       sm: "0.875rem",
+
       base: "1rem",
       lg: "1.125rem",
       xl: "1.25rem",
@@ -15,7 +17,7 @@ module.exports = {
       "5xl": "3rem",
       "6xl": "4rem",
     },
-    
+
     extend: {
       colors: {
         gray: {
@@ -41,11 +43,11 @@ module.exports = {
           900: "#2a4365",
         },
         navyBlue: "#00376B",
-        lightBlue:"#0095F6"
+        lightBlue: "#0095F6",
       },
       fontFamily: {
-        'playball': ['"Playball"', 'cursive']
-      }
+        playball: ['"Playball"', "cursive"],
+      },
     },
   },
   variants: {},
