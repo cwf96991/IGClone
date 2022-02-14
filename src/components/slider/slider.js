@@ -13,7 +13,12 @@ const Slider = (props) => {
       ref.current.scrollLeft ==
         ref.current.scrollWidth - ref.current.clientWidth
     );
-    setCurrentIndex(Math.round(ref.current.scrollLeft / ref.current.scrollWidth*props.children.length))
+    setCurrentIndex(
+      Math.round(
+        (ref.current.scrollLeft / ref.current.scrollWidth) *
+          props.children.length
+      )
+    );
   }
   useEffect(() => {
     if (ref.current) {
@@ -25,6 +30,8 @@ const Slider = (props) => {
       }
     };
   }, [ref]);
+  let isInside = props.isInside ?? false;
+  let paginationStyle = isInside ? "-translate-y-[20px]" : "translate-y-[20px]";
   return (
     <div
       ref={ref}
@@ -52,14 +59,20 @@ const Slider = (props) => {
         </button>
       )}
       {isPagination && (
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex translate-y-[20px]">
+        <div
+          className={`absolute bottom-0 left-1/2 -translate-x-1/2 flex ${paginationStyle}`}
+        >
           {[...Array(props.children.length)].map((item, index) => {
             let isSelected = currentIndex == index;
             return (
               <div
                 key={index}
                 className={`${
-                  isSelected ? "bg-lightBlue" : "bg-gray-300"
+                  isSelected
+                    ? isInside
+                      ? "bg-white"
+                      : "bg-lightBlue"
+                    : "bg-gray-300"
                 } h-[6px] w-[6px] mx-[1px] rounded-full`}
               ></div>
             );

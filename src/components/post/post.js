@@ -15,7 +15,13 @@ import { ImgSlider } from "../slider";
 import PostDesc from "./postDesc";
 import EmojiTextPost from "./emojiTextPost";
 import MoreBtnWidget from "./moreBtnWidget";
-import { LikeSection, UserInfoPopUp, UserMoreBar } from "./postWidget";
+import {
+  LikeSection,
+  UserInfoPopUp,
+  UserMoreBar,
+  PostTimeWidget,
+} from "./postWidget";
+import CommentSection from "./commentSection";
 const Post = ({ data }) => {
   const { user, post } = data;
   const {
@@ -29,16 +35,8 @@ const Post = ({ data }) => {
     isAddress,
     address,
   } = post;
-  const {
-    username,
-    avatar,
-    isNFT,
-    isHighlight,
-    isFollowing,
-    fd,
-    isVerify,
-    
-  } = user;
+  const { username, avatar, isNFT, isHighlight, isFollowing, fd, isVerify } =
+    user;
   const [finalLikeCount, setFinalLikeCount] = useState(likeCount);
   const [finalCommentCount, setFinalCommentCount] = useState(likeCount);
   const [isFollow, setIsFollow] = useState(isFollowing);
@@ -90,23 +88,15 @@ const Post = ({ data }) => {
     );
   };
 
-  const CommentSession = () => {
-    return (
-      <div className="text-gray-300 text-sm cursor-pointer font-semibold">
-        View all {finalCommentCount} comments
-      </div>
-    );
-  };
   return (
     <div className="border-gray-100 mt-4 border">
       <UserMoreBar
         user={user}
         post={post}
         isFollow={isFollow}
-        followCallback = {()=>{
+        followCallback={() => {
           setIsFollow(true);
         }}
-        
       />
       {imgList && (
         <div className="relative max-w-full md:max-w-[620px]">
@@ -130,8 +120,38 @@ const Post = ({ data }) => {
             <PostDesc />
           </div>
         </div>
-        <CommentSession />
-        <div className="text-gray-300 text-2xs mb-3">{postTime} HOURS AGO</div>
+        <CommentSection
+          post={post}
+          user={user}
+          finalCommentCount={finalCommentCount}
+          headBar={
+            <UserMoreBar
+              user={user}
+              post={post}
+              isFollow={isFollow}
+              followCallback={() => {
+                setIsFollow(true);
+              }}
+            />
+          }
+          btnBar={<BtnList />}
+          likeSection={
+            <LikeSection
+              fd={fd}
+              isFdLiked={isFdLiked}
+              finalLikeCount={finalLikeCount}
+            />
+          }
+          postTime={<PostTimeWidget postTime={postTime} />}
+          emojiCommentBar={
+            <EmojiTextPost
+              callback={() => {
+                setFinalCommentCount(finalCommentCount + 1);
+              }}
+            />
+          }
+        />
+        <PostTimeWidget postTime={postTime} />
       </div>
       <hr className="mb-3 hidden md:flex" />
       <EmojiTextPost

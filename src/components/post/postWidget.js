@@ -165,7 +165,14 @@ const UserInfoPopUp = (props) => {
     </div>
   );
 };
-const UserMoreBar = ({ user, post, isFollow, followCallback }) => {
+const UserMoreBar = ({
+  user,
+  post,
+  isFollow,
+  followCallback,
+  isHideAddress,
+}) => {
+  isHideAddress = isHideAddress ?? false;
   const { username, avatar, isNFT, isHighlight, isFollowing, isVerify } = user;
   const {
     imgList,
@@ -213,7 +220,7 @@ const UserMoreBar = ({ user, post, isFollow, followCallback }) => {
               </div>
             )}
           </div>
-          {isAddress && (
+          {isAddress && !isHideAddress && (
             <div className=" text-gray-300 text-ssm">{address}</div>
           )}
         </div>
@@ -236,10 +243,16 @@ const UserMoreBar = ({ user, post, isFollow, followCallback }) => {
     </div>
   );
 };
+const PostTimeWidget = ({ postTime }) => {
+  return (
+    <div className="text-gray-300 text-2xs mb-3">{postTime} HOURS AGO</div>
+  );
+};
 export {
   LikeSection,
   UserPostFollowerCol,
   UserHoverPopUp,
+  PostTimeWidget,
   UserInfoPopUp,
   UserMoreBar,
 };
