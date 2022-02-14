@@ -24,7 +24,7 @@ const SwitchAccountWidget = ({ user, extraAccount, onClick,closeModal }) => {
   return (
     <div className="flex flex-col items-center ">
       <div className="font-bold py-[6px]">Switch accounts</div>
-      <div className="h-[1px] bg-gray-100 w-full" />
+      <div className="lightGrayDivider" />
       <SwitchAccountItem
         user={user}
         onClick={() => {
@@ -41,7 +41,7 @@ const SwitchAccountWidget = ({ user, extraAccount, onClick,closeModal }) => {
           }}
         />
       )}
-      <div className="h-[1px] bg-gray-100 w-full" />
+      <div className="lightGrayDivider" />
       <div
         onClick={() => {
           closeModal();

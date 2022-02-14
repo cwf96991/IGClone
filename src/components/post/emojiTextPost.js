@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
-const EmojiTextPost = ({ callback }) => {
+const EmojiTextPost = ({ callback ,setText,text}) => {
   const [commentInput, setCommentInput] = useState("");
 
   const [showEmojis, setShowEmojis] = useState(false);
@@ -29,7 +29,7 @@ const EmojiTextPost = ({ callback }) => {
     let codesArray = [];
     sym.forEach((el) => codesArray.push("0x" + el));
     let emoji = String.fromCodePoint(...codesArray);
-    setCommentInput(commentInput + emoji);
+    setText(text + emoji);
   };
   return (
     <div className=" mx-4 my-3 justify-between items-center hidden md:flex">
@@ -58,21 +58,22 @@ const EmojiTextPost = ({ callback }) => {
         </div>
         <input
           type="text"
-          value={commentInput}
+          value={text}
           className="grow text-black  focus:outline-none  placeholder-gray-300 ml-4 font-semibold text-sm"
           placeholder="Add a comment..."
-          onChange={(e) => setCommentInput(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
         />
       </div>
       <div
         onClick={() => {
-          if (commentInput.length != 0) {
-            setCommentInput("");
-            callback();
+          if (text.length != 0) {
+            
+            callback(text);
+            setText("");
           }
         }}
         className={`btnText font-bold text-sm !text-lightBlue ${
-          commentInput.length != 0 ? "" : "opacity-30"
+          text.length != 0 ? "" : "opacity-30"
         }`}
       >
         Post

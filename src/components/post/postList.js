@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import Post from "./post";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Loader from "../loader";
+import PostLoader from "./postLoader";
 import { getRandomPostList } from "../../utils/random";
-const PostList = () => {
+const PostList = ({ currentUser }) => {
   const [postList, SetPostList] = useState([]);
   async function fetchData() {
     let list = await getRandomPostList();
@@ -18,18 +18,17 @@ const PostList = () => {
         dataLength={postList.length} //This is important field to render the next data
         next={async () => {
           let list = await getRandomPostList();
-
           SetPostList([...postList, ...list]);
         }}
         hasMore={true}
-        loader={<Loader />}
+        loader={<PostLoader />}
         // endMessage={
         //   <p style={{ textAlign: "center" }}>
         //     <b>Yay! You have seen it all</b>
         //   </p>
         // }
         // below props only if you need pull down functionality
-        refreshFunction={fetchData}
+        // refreshFunction={fetchData}
         // pullDownToRefresh
         // pullDownToRefreshThreshold={50}
         // pullDownToRefreshContent={
@@ -40,7 +39,7 @@ const PostList = () => {
         // }
       >
         {postList.map((item, key) => {
-          return <Post key={key} data={item} />;
+          return <Post key={key} data={item} currentUser={currentUser} />;
         })}
       </InfiniteScroll>
     </>

@@ -59,7 +59,7 @@ const MobileProfileModal = () => {
                             {btn}
                           </div>
                           {index != btnList.length - 1 && (
-                            <div className="w-full h-[0.5px] bg-gray-100"></div>
+                            <div className="lightGrayDivider-sm"></div>
                           )}
                         </div>
                       );

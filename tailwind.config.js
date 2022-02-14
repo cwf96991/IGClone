@@ -4,6 +4,7 @@ module.exports = {
   purge: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx,vue}"],
   theme: {
     fontSize: {
+      "2xs": "12px",
       xs: "0.75rem",
       ssm: "12px",
       sm: "0.875rem",

@@ -25,7 +25,7 @@ const Index = () => {
           } flex flex-col max-w-full md:max-w-[620px]`}
         >
           <StorySlider />
-          <PostList />
+          <PostList currentUser ={user}/>
         </div>
         {!isHideSidePanel && (
           <div className="w-[325px] mr-auto">

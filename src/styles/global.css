@@ -60,3 +60,10 @@ a:hover {
   padding-top: -65px;
   z-index: 10000 !important;
 }
+
+.lightGrayDivider-sm{
+  @apply w-full h-[0.5px] bg-gray-100
+}
+.lightGrayDivider{
+  @apply w-full h-[1px] bg-gray-100
+}

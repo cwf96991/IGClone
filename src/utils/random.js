@@ -49,6 +49,25 @@ async function getRandomdGif() {
 
   return result;
 }
+function mergeText(text1, text2) {
+  let textList = text1.split(" ");
+  let index = faker.datatype.number(textList.length - 1);
+  textList.splice(index, 0, text2);
+  return textList.join(" ");
+}
+function getRandomPostDesc() {
+  let tempDesc = mergeText(faker.lorem.paragraph(), randomEmoji());
+  for (let index = 0; index < faker.datatype.number(4); index++) {
+    tempDesc = mergeText(tempDesc, randomEmoji());
+  }
+  for (let index = 0; index < faker.datatype.number(3); index++) {
+    tempDesc = mergeText(tempDesc, `@${getRandomUsername()}`);
+  }
+  for (let index = 0; index < faker.datatype.number(5); index++) {
+    tempDesc = mergeText(tempDesc, getRandomHashTag());
+  }
+  return tempDesc;
+}
 function getRandomUser() {
   const user = faker.helpers.createCard();
   const isNew = faker.datatype.boolean();
@@ -114,6 +133,38 @@ function getRandomUserList() {
 function randomGifs() {
   return gifs[Math.floor(Math.random() * gifs.length)];
 }
+function getRandomComment(needReply, time) {
+  let wordCount = faker.datatype.number(20, { min: 5 });
+  let emoji = randomEmoji();
+  let words = faker.lorem.sentence(wordCount);
+  let text = mergeText(words, emoji);
+  let isLike = faker.datatype.boolean();
+  let isReply = faker.datatype.boolean();
+
+  let user = getRandomUser();
+  let postTime = faker.datatype.number(time, { min: 1 });
+  let replyCount = faker.datatype.number(3, { min: 0 });
+  let likeCount = faker.datatype.number(333);
+  let replyList = [];
+  if (needReply && isReply) {
+    for (let index = 0; index < replyCount; index++) {
+      replyList.push(getRandomComment(false, time));
+    }
+  }
+
+  let comment = {
+    text,
+    isLike,
+    isReply,
+    replyList,
+    user,
+    postTime,
+    likeCount,
+    isOwner:false
+  };
+
+  return comment;
+}
 async function getRandomPostList() {
   // isSameUser = isSameUser ?? false;
   // postCount = postCount ?? 20;
@@ -139,7 +190,14 @@ async function getRandomPostList() {
     post.isAddress = faker.datatype.boolean();
     post.address = faker.address.streetAddress(true);
     post.isbookmark = faker.datatype.boolean();
+    post.postDesc = getRandomPostDesc();
+    post.postHash = faker.finance.ethereumAddress();
     post.postTime = faker.datatype.number(23, { min: 1 });
+    let commentList = [];
+    for (let index = 0; index < post.postTime ; index++) {
+      commentList.push(getRandomComment(true, post.postTime));
+    }
+    post.commentList = commentList;
     list.push({ user: user, post: post });
   }
   return list;

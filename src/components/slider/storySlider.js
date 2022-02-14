@@ -13,7 +13,7 @@ const StorySlider = () => {
   }, []);
   return (
     <div className=" mt-8 relative ">
-      <Slider style="border px-[9px] border-gray-100 ">
+      <Slider style="border px-[9px] border-gray-100 bg-white">
         {userList.map((user, key) => {
           const { avatar, username, isNFT ,isClosedFD} = user;
           let style = isNFT ? "mask mask-hexagon" : "";
