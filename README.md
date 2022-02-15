@@ -12,6 +12,10 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 - Avatar and username hover pop up
 - Switch user (pc version)
 - Suggest user list
+- Post Comment
+- Reply and Like others comment
+- Placeholder post for loading effect
+- Double layer Modal
 
 ---
 
@@ -39,6 +43,15 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
   <summary>14 Feb 2022</summary>
   
 - Complete comment section in PC version
+
+</details>
+
+---
+<details>
+  <summary>15 Feb 2022</summary>
+  
+- Placeholder post for loading effect
+- Add more option modal on top of the post modal (double layer modal)
 
 </details>
 
