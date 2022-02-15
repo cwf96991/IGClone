@@ -30,7 +30,7 @@ const CommentSection = ({
   showCommentList,
   replyHandler,
 }) => {
-  const { imgList, postHash, commentList } = post;
+  const { imgList, postHash } = post;
   const PanelFooter = () => {
     return (
       <div className="flex flex-col">
