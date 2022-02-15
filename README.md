@@ -13,7 +13,36 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 - Switch user (pc version)
 - Suggest user list
 
+---
 
+### Pregress Log
+<details>
+  <summary>12 Feb 2022</summary>
+  
+  - Initialize project with NextJs stater
+  - Complete story slider
+  - Start building post
+</details>
+
+---
+<details>
+  <summary>13 Feb 2022</summary>
+
+- Complete basic UI of post
+- Complete user panel in PC version
+- Add basic SEO
+- Deploy to vercel 
+</details>
+
+---
+<details>
+  <summary>14 Feb 2022</summary>
+  
+- Complete comment section in PC version
+
+</details>
+
+---
 
 ### Requirements
 
