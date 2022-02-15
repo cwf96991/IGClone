@@ -1,15 +1,20 @@
+import Avatar from "../avatar";
 import {
+  MoreSvg,
   FavSvg,
   CommentSvg,
   MsgSvg,
   BookmarkSvg,
   BookmarkedSvg,
+  EmojiSvg,
+  VerifyIcon,
   FavedSvg,
 } from "../image";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ImgSlider } from "../slider";
 
 import EmojiTextPost from "./emojiTextPost";
+import MoreBtnWidget from "./moreBtnWidget";
 import {
   LikeSection,
   PostDescWidget,
@@ -74,71 +79,7 @@ const Post = ({ data, currentUser }) => {
       </div>
     );
   };
-  const CommentWidget = ({ children, id }) => {
-    return (
-      <CommentSection
-        post={post}
-        user={user}
-        id={id}
-        finalCommentList={finalCommentList}
-        showCommentList={showCommentList}
-        replyHandler={(index) => {
-          targetIndex.current = index;
-          let user = finalCommentList[index].user;
-          console.log(user.username);
-          setCommentInput(commentInput + ` @${user.username}`);
-        }}
-        headBar={
-          <UserMoreBar
-            user={user}
-            post={post}
-            isFollow={isFollow}
-            followCallback={() => {
-              setIsFollow(true);
-            }}
-          />
-        }
-        btnBar={<BtnListText />}
-        likeSection={
-          <LikeSection
-            fd={fd}
-            likedUser={likedUser}
-            isFdLiked={isFdLiked}
-            finalLikeCount={finalLikeCount}
-          />
-        }
-        userAvatar={
-          <div className="w-[40px] h-[40px]">
-            <AvatarWithPopUp
-              user={user}
-              isFollow={isFollow}
-              followCallback={() => {
-                setIsFollow(true);
-              }}
-            />
-          </div>
-        }
-        postDescWidget={
-          <PostDescWidget user={user} postDesc={postDesc} isShowVerify={true} />
-        }
-        postTime={<PostTimeWidget postTime={postTime} />}
-        emojiCommentBar={
-          <EmojiTextPost
-            callback={(input) => {
-              postCommentHandler(input);
-            }}
-            text={commentInput}
-            setText={(text) => {
-              setCommentInput(text);
-            }}
-          />
-        }
-      >
-        {children}
-      </CommentSection>
-    );
-  };
-  const BtnListText = () => {
+  const PopUpBtnList = () => {
     return (
       <div className="my-4 flex justify-between items-center">
         <div className="flex items-center">
@@ -146,7 +87,6 @@ const Post = ({ data, currentUser }) => {
           <div className="!mr-3 btnText">
             <CommentSvg />
           </div>
-
           <div className="!mr-3 btnText">
             <MsgSvg />
           </div>
@@ -161,11 +101,74 @@ const Post = ({ data, currentUser }) => {
         <div className="flex items-center">
           <FavWidget />
 
-          <CommentWidget id={"btnComment"}>
+          <CommentSection
+            post={post}
+            user={user}
+            id={"btnComment"}
+            finalCommentList={finalCommentList}
+            finalCommentCount={finalCommentCount}
+            showCommentList={[]}
+            replyHandler={(index) => {
+              targetIndex.current = index;
+              let user = finalCommentList[index].user;
+              console.log(user.username);
+              setCommentInput(commentInput + ` @${user.username}`);
+            }}
+            headBar={
+              <UserMoreBar
+                user={user}
+                post={post}
+                isFollow={isFollow}
+                followCallback={() => {
+                  setIsFollow(true);
+                }}
+              />
+            }
+            btnBar={<PopUpBtnList />}
+            likeSection={
+              <LikeSection
+                fd={fd}
+                likedUser={likedUser}
+                isFdLiked={isFdLiked}
+                finalLikeCount={finalLikeCount}
+              />
+            }
+            userAvatar={
+              <div className="w-[40px] h-[40px]">
+                <AvatarWithPopUp
+                  user={user}
+                  isFollow={isFollow}
+                  followCallback={() => {
+                    setIsFollow(true);
+                  }}
+                />
+              </div>
+            }
+            postDescWidget={
+              <PostDescWidget
+                user={user}
+                postDesc={postDesc}
+                isShowVerify={true}
+              />
+            }
+            postTime={<PostTimeWidget postTime={postTime} />}
+            emojiCommentBar={
+              <EmojiTextPost
+                callback={(input) => {
+                  postCommentHandler(input);
+                }}
+                text={commentInput}
+                setText={(text) => {
+                  setCommentInput(text);
+                }}
+              />
+            }
+          >
             <div className="!mr-3 btnText">
               <CommentSvg />
             </div>
-          </CommentWidget>
+          </CommentSection>
+
           <div className="!mr-3 btnText">
             <MsgSvg />
           </div>
@@ -200,7 +203,7 @@ const Post = ({ data, currentUser }) => {
   }
 
   return (
-    <div className="border-gray-100 mt-4 border bg-white shadow max-w-full md:max-w-[620px]">
+    <div className="border-gray-100 mt-4 border bg-white">
       <UserMoreBar
         user={user}
         post={post}
@@ -223,12 +226,75 @@ const Post = ({ data, currentUser }) => {
           isFdLiked={isFdLiked}
           finalLikeCount={finalLikeCount}
         />
+
         <PostDescWidget user={user} postDesc={postDesc} />
-        {/* <CommentWidget id={"textComment"}>
+        <CommentSection
+          post={post}
+          user={user}
+          id={"textComment"}
+          finalCommentList={finalCommentList}
+          finalCommentCount={finalCommentCount}
+          showCommentList={showCommentList}
+          replyHandler={(index) => {
+            targetIndex.current = index;
+            let user = finalCommentList[index].user;
+            console.log(user.username);
+            setCommentInput(commentInput + ` @${user.username}`);
+          }}
+          headBar={
+            <UserMoreBar
+              user={user}
+              post={post}
+              isFollow={isFollow}
+              followCallback={() => {
+                setIsFollow(true);
+              }}
+            />
+          }
+          btnBar={<BtnList />}
+          likeSection={
+            <LikeSection
+              fd={fd}
+              likedUser={likedUser}
+              isFdLiked={isFdLiked}
+              finalLikeCount={finalLikeCount}
+            />
+          }
+          userAvatar={
+            <div className="w-[40px] h-[40px]">
+              <AvatarWithPopUp
+                user={user}
+                isFollow={isFollow}
+                followCallback={() => {
+                  setIsFollow(true);
+                }}
+              />
+            </div>
+          }
+          postDescWidget={
+            <PostDescWidget
+              user={user}
+              postDesc={postDesc}
+              isShowVerify={true}
+            />
+          }
+          postTime={<PostTimeWidget postTime={postTime} />}
+          emojiCommentBar={
+            <EmojiTextPost
+              callback={(input) => {
+                postCommentHandler(input);
+              }}
+              text={commentInput}
+              setText={(text) => {
+                setCommentInput(text);
+              }}
+            />
+          }
+        >
           <div className="text-gray-300 text-sm cursor-pointer font-semibold">
             View all {finalCommentCount} comments
           </div>
-        </CommentWidget> */}
+        </CommentSection>
         <PostTimeWidget postTime={postTime} />
       </div>
       <hr className="mb-3 hidden md:flex" />

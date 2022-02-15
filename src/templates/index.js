@@ -21,7 +21,7 @@ const Index = () => {
       <div className="flex ">
         <div
           className={`${
-            isHideSidePanel ? "mx-auto" : "ml-auto"
+            isHideSidePanel ? "mx-auto" : "ml-auto "
           } flex flex-col max-w-full md:max-w-[620px] noScrollBar`}
         >
           <StorySlider />

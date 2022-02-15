@@ -16,6 +16,7 @@ const UserRowList = ({ likedUserList }) => {
           isfollow={index < limit ? isFollow : false}
           size={"44"}
           key={index}
+          isHide={true}
           followCallback={(output) => {
             setIsFollow(output);
           }}
@@ -25,17 +26,17 @@ const UserRowList = ({ likedUserList }) => {
           actionBtn={
             <div
               onClick={() => {
-                if (!isFollow) {
+                if (!(index < limit ? isFollow : false)) {
                   setIsFollow(true);
                 }
               }}
               className={`btnText !py-[5px] !px-[9px] font-bold ${
-                isFollow
+                (index < limit ? isFollow : false)
                   ? " !border !border-gray-100"
                   : "!bg-lightBlue !text-white"
               } !text-xs`}
             >
-              {isFollow ? "Following" : "Follow"}
+              {(index < limit ? isFollow : false) ? "Following" : "Follow"}
             </div>
           }
         />
@@ -46,7 +47,6 @@ const UserRowList = ({ likedUserList }) => {
 const LikeListModal = ({ id, children, likedUserList, getLikeList }) => {
   return (
     <ModalWrapper
-      width={"w-[600px] "}
       id={"likeListModal_" + id}
       content={
         <div className="flex flex-col ">
@@ -64,7 +64,7 @@ const LikeListModal = ({ id, children, likedUserList, getLikeList }) => {
           </div>
           <div className="lightGrayDivider-sm" />
 
-          <div className="max-h-[420px] noScrollBar !overflow-visible !overflow-y-scroll mt-2">
+          <div className="max-h-[360px] noScrollBar !overflow-visible !overflow-y-scroll mt-2">
             <UserRowList likedUserList={likedUserList} />
           </div>
         </div>

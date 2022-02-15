@@ -22,12 +22,9 @@ const Navbar = ({ user }) => {
   return (
     <div className="fixed w-screen flex z-10 bg-white py-2 border-b border border-gray-100">
       <div className="max-w-[620px] flex  justify-between items-center grow ml-auto">
-        <div
-          href="/"
-          className="text-3xl font-bold font-playball cursor-pointer"
-        >
-          CWFgram
-        </div>
+      <div onClick={()=>{
+          window.location = "/"
+        }} className="text-3xl font-bold font-playball cursor-pointer">CWFgram</div>
         <SearchBar />
       </div>
       <NavbarBtnList user={user} />

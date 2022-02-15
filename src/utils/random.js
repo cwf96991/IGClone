@@ -88,8 +88,10 @@ function getRandomUser() {
   user.isFollowing = faker.datatype.boolean();
   user.isVerify = faker.datatype.boolean();
   user.postCount = faker.datatype.number();
+  user.userId = faker.datatype.uuid();
   user.followerCount = faker.datatype.number();
   user.followingCount = faker.datatype.number();
+
   let tempImgList = [];
   for (let index = 0; index < 3; index++) {
     tempImgList.push(faker.image.image());
@@ -145,6 +147,8 @@ function getRandomComment(needReply, time) {
   let postTime = faker.datatype.number(time, { min: 1 });
   let replyCount = faker.datatype.number(3, { min: 0 });
   let likeCount = faker.datatype.number(333);
+  let commentId = faker.datatype.uuid();
+  
   let replyList = [];
   if (needReply && isReply) {
     for (let index = 0; index < replyCount; index++) {
@@ -156,6 +160,7 @@ function getRandomComment(needReply, time) {
     text,
     isLike,
     isReply,
+    commentId,
     replyList,
     user,
     postTime,
@@ -195,16 +200,17 @@ async function getRandomPostList() {
     post.postDesc = getRandomPostDesc();
     post.postHash = faker.finance.ethereumAddress();
     post.likedUser = getRandomUser();
+    post.postId = faker.datatype.uuid();
     post.postTime = faker.datatype.number(23, { min: 1 });
     let commentList = [];
     for (let index = 0; index < post.postTime; index++) {
       commentList.push(getRandomComment(true, post.postTime));
     }
     post.commentList = commentList;
-    console.log("commentList: ", commentList);
+    
     list.push({ user: user, post: post });
   }
-  console.log("return");
+  
   return list;
 }
 export {

@@ -294,40 +294,55 @@ const AvatarUsernameActionRow = ({
   descWidget,
   actionBtn,
   followCallback,
+  isHide,
   size,
 }) => {
   const { avatar, isNFT, username } = user;
   return (
     <div className="flex items-center justify-between mb-3 ">
       <div className="flex items-center ">
-        <UserInfoPopUp
-          user={user}
-          isFollow={isfollow}
-          isFollowOnly={true}
-          followCallback={() => {
-            followCallback(true);
-          }}
-        >
+        {isHide ?? false ? (
           <Avatar
             size={size ?? "32"}
             isHighlight={false}
             img={avatar}
             isNFT={isNFT}
           />
-        </UserInfoPopUp>
+        ) : (
+          <UserInfoPopUp
+            user={user}
+            isFollow={isfollow}
+            isFollowOnly={true}
+            isHide={isHide}
+            followCallback={() => {
+              followCallback(true);
+            }}
+          >
+            <Avatar
+              size={size ?? "32"}
+              isHighlight={false}
+              img={avatar}
+              isNFT={isNFT}
+            />
+          </UserInfoPopUp>
+        )}
 
         <div className="flex flex-row items-center justify-between grow">
           <div className="flex flex-col text-sm ml-4 grow">
-            <UserInfoPopUp
-              user={user}
-              isFollow={isfollow}
-              isFollowOnly={true}
-              followCallback={() => {
-                followCallback(true);
-              }}
-            >
+            {isHide ?? false ? (
               <div className="font-bold ">{username}</div>
-            </UserInfoPopUp>
+            ) : (
+              <UserInfoPopUp
+                user={user}
+                isFollow={isfollow}
+                isFollowOnly={true}
+                followCallback={() => {
+                  followCallback(true);
+                }}
+              >
+                <div className="font-bold ">{username}</div>
+              </UserInfoPopUp>
+            )}
 
             {descWidget}
           </div>

@@ -26,20 +26,26 @@ const ModalWrapper = (props) => {
       <input type="checkbox" id={props.id} className="modal-toggle" />
       <div
         ref={modalRef}
-        className="modal w-screen h-screen "
+        id={props.id}
+        className={`modal w-screen h-screen `}
         onClick={(event) => {
+          
           const element = event.target;
-          if (!element.classList.contains("modal")) {
+          console.log(element.classList)
+          console.log(element.id)
+          if (!element.classList.contains("modal")||element.id!=props.id) {
             return;
           }
           const modal = document.getElementById(props.id);
+          console.log(modal)
           modal.checked = false;
           enableBodyScroll(modalRef.current);
           if (props.onClose) props.onClose();
+          
         }}
       >
-        <div className={`${bgColor} rounded-lg p-0 ${width} ${height}`}>
-          <div className={``}>{props.content}</div>
+        <div className={`${bgColor} rounded-lg p-0 ${width} ${height} border-hidden`}>
+          <div className={`border-hidden`}>{props.content}</div>
         </div>
         {isCross && (
           <div

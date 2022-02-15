@@ -1,7 +1,9 @@
 import Avatar from "./avatar";
 import { BlueTickSvg } from "../components/image";
+import {useMobile768} from "../hook/useMobile"
 const SwitchAccountItem = ({ user, isSelected, ogUser, onClick }) => {
   const { avatar, isNFT, username } = user;
+  const isMobile = useMobile768()
   return (
     <div
       onClick={() => {

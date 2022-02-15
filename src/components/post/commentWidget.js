@@ -40,7 +40,7 @@ const CommentItem = ({
               {replyList != null && (
                 <div
                   onClick={() => {
-                    replyHandler(index);
+                    if (replyHandler != null) replyHandler(index);
                   }}
                   className="!text-gray-300 !text-2xs  font-extrabold !ml-3  btnText"
                 >
