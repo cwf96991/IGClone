@@ -8,7 +8,7 @@ import UserList from "../components/userPanel";
 const Index = () => {
   const isHideSidePanel = useMobile945();
   const [user, setUser] = useState({});
-  
+
   function fetchData() {
     let user = getRandomUser();
     setUser(user);
@@ -22,10 +22,10 @@ const Index = () => {
         <div
           className={`${
             isHideSidePanel ? "mx-auto" : "ml-auto"
-          } flex flex-col max-w-full md:max-w-[620px]`}
+          } flex flex-col max-w-full md:max-w-[620px] `}
         >
           <StorySlider />
-          <PostList currentUser ={user}/>
+          <PostList currentUser={user} />
         </div>
         {!isHideSidePanel && (
           <div className="w-[325px] mr-auto">

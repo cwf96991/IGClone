@@ -22,4 +22,10 @@ function abbreviateNumber(number) {
   return scaled.toFixed(1) + suffix;
 }
 
-export { truncateName, abbreviateNumber };
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  modal.checked = false;
+  clearAllBodyScrollLocks();
+}
+
+export { truncateName, abbreviateNumber, closeModal };

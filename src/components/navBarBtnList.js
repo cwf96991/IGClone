@@ -21,9 +21,7 @@ const NavbarBtnList = ({ user }) => {
       icon: <FavSvg />,
     },
     {
-      icon: (
-        <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />
-      ),
+      icon: <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />,
     },
   ];
   return (

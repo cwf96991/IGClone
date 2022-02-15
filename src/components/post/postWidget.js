@@ -2,37 +2,15 @@ import Avatar from "../avatar";
 import { VerifyIcon } from "../image";
 import MoreBtnWidget from "./moreBtnWidget";
 import { abbreviateNumber, truncateName } from "../../utils/function";
+import React, { useRef, useState, useEffect } from "react";
+import { useMobile768 } from "../../hook/useMobile";
 import PostDesc from "./postDesc";
-const LikeSection = ({ fd, isFdLiked, finalLikeCount }) => {
-  return (
-    <>
-      {isFdLiked ? (
-        <div className="flex items-center">
-          {fd.isMultiple ? (
-            <div className="-space-x-2 cursor-pointer translate-y-1">
-              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
-              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar2} />
-              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar3} />
-            </div>
-          ) : (
-            <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar} />
-          )}
-          <div className="font-bold text-sm inline ml-2">
-            <div className="font-normal inline">Liked by</div>
-            {` ${truncateName(fd.username)} `}
-            <div className="font-normal inline">and</div>
-            {` ${finalLikeCount} others`}
-          </div>
-        </div>
-      ) : (
-        <div className="font-bold text-sm">{finalLikeCount} likes</div>
-      )}
-    </>
-  );
-};
+
+import LikeSection from "./likeSection";
+
 const UserPostFollowerCol = ({ count, text, img }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-start">
       <div className="flex flex-col my-3 text-sm font-semibold">
         <div> {abbreviateNumber(count)}</div>
         <div className="text-gray-300">{text}</div>
@@ -73,7 +51,7 @@ const UserHoverPopUp = ({ user, isFollow, followCallback }) => {
           img={avatar}
           isNFT={isNFT}
         />
-        <div className="flex flex-col ml-2 font-semibold text-sm">
+        <div className="flex flex-col ml-2 font-semibold text-sm justify-start">
           <div className="flex items-center">
             <div className=" text-navyBlue cursor-pointer h-[16px]">
               {username}
@@ -143,14 +121,40 @@ const UserHoverPopUp = ({ user, isFollow, followCallback }) => {
   );
 };
 const UserInfoPopUp = (props) => {
-  let style = props.style ?? "";
+  let ref = useRef(null);
+  const [isDown, setIsDown] = useState(true);
+  const [isRight, setIsRight] = useState(true);
+  function onScroll() {
+    if (ref.current) {
+      let target = ref.current.getBoundingClientRect();
+      let isRight = window.innerWidth - target.left >= 398;
+      let isDown = window.innerHeight - target.bottom >= 357;
+      setIsRight(isRight);
+      setIsDown(isDown);
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  let style = isDown ? "" : "dropdown-top";
+  isRight = isRight ? "" : "dropdown-end";
   return (
-    <div className={`dropdown dropdown-hover ${style} `}>
+    <div className={`dropdown dropdown-hover ${style} ${isRight} `}>
       <div tabIndex="0">
-        <div className="cursor-pointer">{props.children}</div>
+        <div
+          onClick={() => {
+            onScroll();
+          }}
+          ref={ref}
+          className="cursor-pointer"
+        >
+          {props.children}
+        </div>
         <div
           tabIndex="0"
-          className=" shadow menu dropdown-content bg-white rounded-box w-[400px] border border-gray-100"
+          className=" shadow menu  dropdown-content bg-white rounded-box w-[400px] border border-gray-100"
         >
           <UserHoverPopUp
             user={props.user}
@@ -172,7 +176,7 @@ const PostDescWidget = ({ user, postDesc, isShowVerify }) => {
       <UserInfoPopUp user={user} style={"dropdown-top"}>
         <div className="hover:underline inline">{username}</div>
       </UserInfoPopUp>
-      {isVerify &&isShowVerify&& (
+      {isVerify && isShowVerify && (
         <div className="ml-1 -translate-y-[2px] inline">
           <VerifyIcon />
         </div>
@@ -183,7 +187,7 @@ const PostDescWidget = ({ user, postDesc, isShowVerify }) => {
     </div>
   );
 };
-const AvatarWithPopUp = ({ user, isFollow, followCallback, size ,mode}) => {
+const AvatarWithPopUp = ({ user, isFollow, followCallback, size, mode }) => {
   const { avatar, isNFT, isHighlight } = user;
   return (
     <UserInfoPopUp
@@ -222,6 +226,7 @@ const UserMoreBar = ({
     isAddress,
     address,
   } = post;
+  const isMobile = useMobile768();
   return (
     <div className="flex justify-between items-center my-2 mx-4 ">
       <div className="flex items-center">
@@ -241,7 +246,9 @@ const UserMoreBar = ({
                 followCallback();
               }}
             >
-              <div className=" text-black font-bold text-sm">{username}</div>
+              <div className=" text-black font-bold text-sm">
+                {isMobile ? truncateName(username) : username}
+              </div>
             </UserInfoPopUp>
 
             {isVerify && (
@@ -280,6 +287,56 @@ const PostTimeWidget = ({ postTime }) => {
     </div>
   );
 };
+
+const AvatarUsernameActionRow = ({
+  user,
+  isfollow,
+  descWidget,
+  actionBtn,
+  followCallback,
+  size,
+}) => {
+  const { avatar, isNFT, username } = user;
+  return (
+    <div className="flex items-center justify-between mb-3 ">
+      <div className="flex items-center ">
+        <UserInfoPopUp
+          user={user}
+          isFollow={isfollow}
+          isFollowOnly={true}
+          followCallback={() => {
+            followCallback(true);
+          }}
+        >
+          <Avatar
+            size={size ?? "32"}
+            isHighlight={false}
+            img={avatar}
+            isNFT={isNFT}
+          />
+        </UserInfoPopUp>
+
+        <div className="flex flex-row items-center justify-between grow">
+          <div className="flex flex-col text-sm ml-4 grow">
+            <UserInfoPopUp
+              user={user}
+              isFollow={isfollow}
+              isFollowOnly={true}
+              followCallback={() => {
+                followCallback(true);
+              }}
+            >
+              <div className="font-bold ">{username}</div>
+            </UserInfoPopUp>
+
+            {descWidget}
+          </div>
+        </div>
+      </div>
+      {actionBtn}
+    </div>
+  );
+};
 export {
   LikeSection,
   UserPostFollowerCol,
@@ -288,5 +345,6 @@ export {
   PostDescWidget,
   PostTimeWidget,
   UserInfoPopUp,
+  AvatarUsernameActionRow,
   UserMoreBar,
 };

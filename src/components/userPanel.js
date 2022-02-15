@@ -2,10 +2,8 @@ import Avatar from "./avatar";
 import { useState, useEffect, useRef } from "react";
 import { getRandomUser } from "../utils/random";
 import { truncateName } from "../utils/function";
-import { personalWebsite, footerList } from "../utils/constant";
 import ModalWrapper from "../components/modal/modalWrapper";
 import SuggestionSection from "./suggestionSection";
-import { BlueTickSvg } from "../components/image";
 import FooterSection from "./footerSection";
 import SwitchAccountWidget from "./switchAccountWidget";
 const UserPanel = ({ user, setUser }) => {

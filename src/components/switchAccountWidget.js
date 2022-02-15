@@ -5,10 +5,9 @@ const SwitchAccountItem = ({ user, isSelected, ogUser, onClick }) => {
   return (
     <div
       onClick={() => {
-       if (!isSelected) {
-           onClick();
-       }
-       
+        if (!isSelected) {
+          onClick();
+        }
       }}
       className="normal-case btn btn-lg btn-ghost hover:bg-transparent flex items-center justify-between w-full mb-4 py-[8px] px-[16px]"
     >
@@ -20,7 +19,7 @@ const SwitchAccountItem = ({ user, isSelected, ogUser, onClick }) => {
     </div>
   );
 };
-const SwitchAccountWidget = ({ user, extraAccount, onClick,closeModal }) => {
+const SwitchAccountWidget = ({ user, extraAccount, onClick, closeModal }) => {
   return (
     <div className="flex flex-col items-center ">
       <div className="font-bold py-[6px]">Switch accounts</div>

@@ -13,12 +13,16 @@ const PostList = ({ currentUser }) => {
     fetchData();
   }, []);
   return (
-    <>
+    <div className="max-w-full md:max-w-[620px] overflow-x-hidden p-0 m-0">
       <InfiniteScroll
-        dataLength={postList.length} //This is important field to render the next data
+        dataLength={5} //This is important field to render the next data
         next={async () => {
-          let list = await getRandomPostList();
-          SetPostList([...postList, ...list]);
+          try {
+            let list = await getRandomPostList();
+            SetPostList([...postList, ...list]);
+          } catch (e) {
+            console.log(e);
+          }
         }}
         hasMore={true}
         loader={<PostLoader />}
@@ -38,11 +42,15 @@ const PostList = ({ currentUser }) => {
         //   <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
         // }
       >
+        
         {postList.map((item, key) => {
           return <Post key={key} data={item} currentUser={currentUser} />;
         })}
       </InfiniteScroll>
-    </>
+      {/* {postList != null && (
+        <Post data={postList[0]} currentUser={currentUser} />
+      )} */}
+    </div>
   );
 };
 

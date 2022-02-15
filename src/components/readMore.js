@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import useMobile from "../hook/useMobile";
 import NewlineText from "./newlineText";
 const ReadMore = ({ children, textLimit }) => {
   const text = children;
@@ -7,7 +6,6 @@ const ReadMore = ({ children, textLimit }) => {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-//   const isMobile = useMobile();
   textLimit = 70;
   return (
     <div className="inline">

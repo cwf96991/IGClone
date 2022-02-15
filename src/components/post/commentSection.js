@@ -1,6 +1,5 @@
 import ModalWrapper from "../modal/modalWrapper";
 import { ImgSlider } from "../slider";
-import React, { useState, useEffect, useRef } from "react";
 import { CommentItem, CommentListWidget } from "./commentWidget";
 const ImgSliderWidget = ({ imgList }) => {
   return (
@@ -17,8 +16,6 @@ const ImgSliderWidget = ({ imgList }) => {
 };
 const CommentSection = ({
   post,
-
-  finalCommentCount,
   headBar,
   btnBar,
   likeSection,
@@ -29,6 +26,7 @@ const CommentSection = ({
   finalCommentList,
   showCommentList,
   replyHandler,
+  children,
 }) => {
   const { imgList, postHash } = post;
   const PanelFooter = () => {
@@ -83,9 +81,7 @@ const CommentSection = ({
         </div>
       }
     >
-      <div className="text-gray-300 text-sm cursor-pointer font-semibold">
-        View all {finalCommentCount} comments
-      </div>
+      {children}
       {showCommentList != null && showCommentList.length > 0 && (
         <CommentListWidget
           list={showCommentList}

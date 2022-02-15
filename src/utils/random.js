@@ -160,7 +160,7 @@ function getRandomComment(needReply, time) {
     user,
     postTime,
     likeCount,
-    isOwner:false
+    isOwner: false,
   };
 
   return comment;
@@ -171,6 +171,7 @@ async function getRandomPostList() {
   let list = [];
   for (let index = 0; index < 5; index++) {
     const user = getRandomUser();
+
     let post = {};
     post.isfav = faker.datatype.boolean();
     let tempImgList = [];
@@ -183,6 +184,7 @@ async function getRandomPostList() {
         tempImgList.push(url);
       }
     }
+
     post.imgList = tempImgList;
     post.commentCount = faker.datatype.number(1000);
     post.likeCount = faker.datatype.number();
@@ -192,14 +194,17 @@ async function getRandomPostList() {
     post.isbookmark = faker.datatype.boolean();
     post.postDesc = getRandomPostDesc();
     post.postHash = faker.finance.ethereumAddress();
+    post.likedUser = getRandomUser();
     post.postTime = faker.datatype.number(23, { min: 1 });
     let commentList = [];
-    for (let index = 0; index < post.postTime ; index++) {
+    for (let index = 0; index < post.postTime; index++) {
       commentList.push(getRandomComment(true, post.postTime));
     }
     post.commentList = commentList;
+    console.log("commentList: ", commentList);
     list.push({ user: user, post: post });
   }
+  console.log("return");
   return list;
 }
 export {

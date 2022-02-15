@@ -1,48 +1,27 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { getRandomUser } from "../utils/random";
-import Avatar from "./avatar";
 import { truncateName } from "../utils/function";
-import { UserInfoPopUp } from "./post/postWidget";
+import { AvatarUsernameActionRow } from "./post/postWidget";
+
 const SuggestItem = ({ user }) => {
-  const { avatar, isNFT, username,  isNew, follower, extraFollower } =
-    user;
+  const { isNew, follower, extraFollower } = user;
   const [isFollow, setIsFollow] = useState(false);
   return (
-    <div className="flex items-center justify-between mb-3">
-      <div className="flex items-center w-[325px]">
-        <UserInfoPopUp
-          user={user}
-          isFollow={isFollow}
-          isFollowOnly={true}
-          followCallback={() => {
-            setIsFollow(true);
-          }}
-        >
-          <Avatar size={"32"} isHighlight={false} img={avatar} isNFT={isNFT} />
-        </UserInfoPopUp>
-
-        <div className="flex flex-row items-center justify-between grow">
-          <div className="flex flex-col text-sm ml-4 grow">
-            <UserInfoPopUp
-              user={user}
-              isFollow={isFollow}
-              isFollowOnly={true}
-              followCallback={() => {
-                setIsFollow(true);
-              }}
-            >
-              <div className="font-bold ">{username}</div>
-            </UserInfoPopUp>
-
-            <div className="text-gray-300 text-xs font-bold">
-              {isNew
-                ? "New to CWFgram"
-                : `Followed by ${truncateName(
-                    follower
-                  )} + ${extraFollower} more`}
-            </div>
+    <div className="w-[325px]">
+      <AvatarUsernameActionRow
+        user={user}
+        isfollow={isFollow}
+        descWidget={
+          <div className="text-gray-300 text-xs font-bold">
+            {isNew
+              ? "New to CWFgram"
+              : `Followed by ${truncateName(follower)} + ${extraFollower} more`}
           </div>
-
+        }
+        followCallback={(output) => {
+          setIsFollow(output);
+        }}
+        actionBtn={
           <div
             onClick={() => {
               if (!isFollow) {
@@ -55,8 +34,8 @@ const SuggestItem = ({ user }) => {
           >
             {isFollow ? "Following" : "Follow"}
           </div>
-        </div>
-      </div>
+        }
+      />
     </div>
   );
 };

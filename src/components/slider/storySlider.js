@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { getRandomUserList } from "../../utils/random";
 import Slider from "./slider";
 import {truncateName} from "../../utils/function"

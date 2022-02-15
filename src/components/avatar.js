@@ -9,6 +9,8 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
     size = "!w-[20px] !h-[20px]";
   }else if (size=="40"){
     size = "!w-[40px] !h-[40px]";
+  }else if (size=="44"){
+    size = "!w-[44px] !h-[44px]";
   }
   return isHighlight ? (
     <div className="avatar carousel-item cursor-pointer">

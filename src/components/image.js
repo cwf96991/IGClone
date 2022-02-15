@@ -218,8 +218,8 @@ const RightArrow = () => {
   );
 };
 
-const MoreSvg = ({ size,color }) => {
-  color = color??"fill-black"
+const MoreSvg = ({ size, color }) => {
+  color = color ?? "fill-black";
   return (
     <svg
       aria-label="More Options"
@@ -235,7 +235,10 @@ const MoreSvg = ({ size,color }) => {
     </svg>
   );
 };
-const CommentSvg = () => {
+const CommentSvg = ({ isLoad }) => {
+  isLoad = isLoad ?? false;
+  let fill = isLoad ? "fill-slate-200" : "fill-black";
+  let stroke = isLoad ? "stroke-slate-200" : "stroke-black";
   return (
     <svg
       aria-label="Comment"
@@ -243,7 +246,7 @@ const CommentSvg = () => {
       role="img"
       viewBox="0 0 24 24"
       width="24"
-      className="fill-black group hover:fill-gray-300"
+      className={`${fill} group hover:fill-gray-300`}
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -251,14 +254,17 @@ const CommentSvg = () => {
       <path
         d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z"
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className={`${stroke} group-hover:stroke-gray-300`}
         strokeLinejoin="round"
         strokeWidth="2"
       ></path>
     </svg>
   );
 };
-const MsgSvg = () => {
+const MsgSvg = ({ isLoad }) => {
+  isLoad = isLoad ?? false;
+  let fill = isLoad ? "fill-slate-200" : "fill-black";
+  let stroke = isLoad ? "stroke-slate-200" : "stroke-black";
   return (
     <svg
       aria-label="Share Post"
@@ -266,14 +272,14 @@ const MsgSvg = () => {
       role="img"
       viewBox="0 0 24 24"
       width="24"
-      className="fill-black group hover:fill-gray-300"
+      className={`${fill} group hover:fill-gray-300`}
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <line
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className={`${stroke} group-hover:stroke-gray-300`}
         strokeLinejoin="round"
         strokeWidth="2"
         x1="22"
@@ -284,7 +290,7 @@ const MsgSvg = () => {
       <polygon
         fill="none"
         points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-        className="stroke-black group-hover:stroke-gray-300"
+        className={`${stroke} group-hover:stroke-gray-300`}
         strokeLinejoin="round"
         strokeWidth="2"
       ></polygon>
@@ -315,11 +321,13 @@ const BookmarkSvg = () => {
     </svg>
   );
 };
-const BookmarkedSvg = () => {
+const BookmarkedSvg = ({ isLoad }) => {
+  isLoad = isLoad ?? false;
+  let fill = isLoad ? "fill-slate-200" : "fill-black";
   return (
     <svg
       aria-label="Remove"
-      className="fill-black group hover:fill-gray-300"
+      className={`${fill} group hover:fill-gray-300`}
       height="24"
       role="img"
       viewBox="0 0 24 24"
@@ -329,12 +337,12 @@ const BookmarkedSvg = () => {
     </svg>
   );
 };
-const FavedSvg = ({ size }) => {
+const FavedSvg = ({ size, color }) => {
+  color = color ?? "fill-[#ed4956]";
   return (
     <svg
       aria-label="Unlike"
-      color="#ed4956"
-      fill="#ed4956"
+      className={color}
       width={size ?? "24"}
       height={size ?? "24"}
       role="img"
@@ -386,13 +394,12 @@ const VerifyIcon = ({ size }) => {
   );
 };
 
-const CrossSvg = () => {
+const CrossSvg = ({ color }) => {
+  color = color ?? "fill-white";
   return (
     <svg
       aria-label="Close"
-      class="_8-yf5 "
-      color="#ffffff"
-      fill="#ffffff"
+      className={color}
       height="24"
       role="img"
       viewBox="0 0 24 24"
@@ -404,14 +411,14 @@ const CrossSvg = () => {
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-width="3"
+        stroke-width="2"
       ></polyline>
       <line
         fill="none"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-width="3"
+        stroke-width="2"
         x1="20.649"
         x2="3.354"
         y1="20.649"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { FavSvg, FavedSvg, MoreSvg } from "../image";
 import { AvatarWithPopUp, PostDescWidget } from "./postWidget";
 const CommentItem = ({
