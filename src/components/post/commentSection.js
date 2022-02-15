@@ -26,7 +26,7 @@ const CommentSection = ({
   finalCommentList,
   showCommentList,
   replyHandler,
-  children,
+  children,id
 }) => {
   const { imgList, postHash } = post;
   const PanelFooter = () => {
@@ -41,14 +41,14 @@ const CommentSection = ({
   };
   const CommentPanel = () => {
     return (
-      <div className="max-w-[618px] min-w-[405px] hidden md:flex min-h-[450px] max-h-[953px]">
+      <div className=" max-w-[618px] min-w-[405px] hidden md:flex min-h-[450px] max-h-[953px]">
         <div className="flex flex-col w-full ">
           <div className="flex flex-col ">
             <div>{headBar}</div>
             <div className="lightGrayDivider-sm" />
           </div>
 
-          <div className="grow  pt-4 mx-4 overflow-y-auto  ">
+          <div className="grow  pt-4 mx-4 overflow-y-auto noScrollBar ">
             <CommentItem
               userAvatar={userAvatar}
               postDescWidget={postDescWidget}
@@ -65,7 +65,7 @@ const CommentSection = ({
   };
   return (
     <ModalWrapper
-      id={`commentModal_${postHash}`}
+      id={`commentModal_${postHash}_${id}`}
       width={"!w-[80%] max-w-[1380px]"}
       height={"min-h-[450px] max-h-[953px] "}
       onClose={() => {

@@ -74,54 +74,12 @@ const Post = ({ data, currentUser }) => {
       </div>
     );
   };
-  const BtnList = () => {
-    return (
-      <div className="my-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <FavWidget />
-          <CommentWidget>
-            <div className="!mr-3 btnText">
-              <CommentSvg />
-            </div>
-          </CommentWidget>
-
-          <div className="!mr-3 btnText">
-            <MsgSvg />
-          </div>
-        </div>
-        <BookmarkWidget />
-      </div>
-    );
-  };
-  function postCommentHandler(input) {
-    let comment = {};
-    comment.text = input;
-    comment.isLike = false;
-    comment.isReply = false;
-    comment.replyList = [];
-    comment.user = currentUser;
-    comment.postTime = 0;
-    comment.likeCount = 0;
-    comment.isOwner = true;
-    if (input.includes("@") && targetIndex.current != null) {
-      let index = targetIndex.current;
-      let replyList = finalCommentList[index].replyList;
-      replyList.push(comment);
-      let newCommentList = finalCommentList;
-      newCommentList[index].replyList = replyList;
-      setFinalCommentList(newCommentList);
-    } else {
-      setFinalCommentList([...finalCommentList, comment]);
-    }
-
-    setShowCommentList([...showCommentList, comment]);
-    setFinalCommentCount(finalCommentCount + 1);
-  }
-  const CommentWidget = ({ children }) => {
+  const CommentWidget = ({ children, id }) => {
     return (
       <CommentSection
         post={post}
         user={user}
+        id={id}
         finalCommentList={finalCommentList}
         showCommentList={showCommentList}
         replyHandler={(index) => {
@@ -140,7 +98,7 @@ const Post = ({ data, currentUser }) => {
             }}
           />
         }
-        btnBar={<BtnList />}
+        btnBar={<BtnListText />}
         likeSection={
           <LikeSection
             fd={fd}
@@ -180,6 +138,67 @@ const Post = ({ data, currentUser }) => {
       </CommentSection>
     );
   };
+  const BtnListText = () => {
+    return (
+      <div className="my-4 flex justify-between items-center">
+        <div className="flex items-center">
+          <FavWidget />
+          <div className="!mr-3 btnText">
+            <CommentSvg />
+          </div>
+
+          <div className="!mr-3 btnText">
+            <MsgSvg />
+          </div>
+        </div>
+        <BookmarkWidget />
+      </div>
+    );
+  };
+  const BtnList = () => {
+    return (
+      <div className="my-4 flex justify-between items-center">
+        <div className="flex items-center">
+          <FavWidget />
+
+          <CommentWidget id={"btnComment"}>
+            <div className="!mr-3 btnText">
+              <CommentSvg />
+            </div>
+          </CommentWidget>
+          <div className="!mr-3 btnText">
+            <MsgSvg />
+          </div>
+        </div>
+        <BookmarkWidget />
+      </div>
+    );
+  };
+  function postCommentHandler(input) {
+    let comment = {};
+    comment.text = input;
+    comment.isLike = false;
+    comment.isReply = false;
+    comment.replyList = [];
+    comment.user = currentUser;
+    comment.postTime = 0;
+    comment.likeCount = 0;
+    comment.isOwner = true;
+    if (input.includes("@") && targetIndex.current != null) {
+      let index = targetIndex.current;
+      let replyList = finalCommentList[index].replyList;
+      replyList.push(comment);
+      let newCommentList = finalCommentList;
+      newCommentList[index].replyList = replyList;
+      setFinalCommentList(newCommentList);
+    } else {
+      setFinalCommentList([...finalCommentList, comment]);
+    }
+
+    setShowCommentList([...showCommentList, comment]);
+    setFinalCommentCount(finalCommentCount + 1);
+  }
+
   return (
     <div className="border-gray-100 mt-4 border bg-white shadow max-w-full md:max-w-[620px]">
       <UserMoreBar
@@ -205,11 +224,11 @@ const Post = ({ data, currentUser }) => {
           finalLikeCount={finalLikeCount}
         />
         <PostDescWidget user={user} postDesc={postDesc} />
-        <CommentWidget>
+        {/* <CommentWidget id={"textComment"}>
           <div className="text-gray-300 text-sm cursor-pointer font-semibold">
             View all {finalCommentCount} comments
           </div>
-        </CommentWidget>
+        </CommentWidget> */}
         <PostTimeWidget postTime={postTime} />
       </div>
       <hr className="mb-3 hidden md:flex" />

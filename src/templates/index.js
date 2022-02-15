@@ -22,7 +22,7 @@ const Index = () => {
         <div
           className={`${
             isHideSidePanel ? "mx-auto" : "ml-auto"
-          } flex flex-col max-w-full md:max-w-[620px] `}
+          } flex flex-col max-w-full md:max-w-[620px] noScrollBar`}
         >
           <StorySlider />
           <PostList currentUser={user} />
