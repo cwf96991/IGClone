@@ -10,9 +10,9 @@ import {
   VerifyIcon,
   FavedSvg,
 } from "../image";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 import { ImgSlider } from "../slider";
-
+import { faker } from "@faker-js/faker";
 import EmojiTextPost from "./emojiTextPost";
 import MoreBtnWidget from "./moreBtnWidget";
 import {
@@ -50,6 +50,7 @@ const Post = ({ data, currentUser }) => {
   const [isFollow, setIsFollow] = useState(isFollowing);
   const [isFav, setIsFav] = useState(isfav);
   const [isBookmark, setIsBookmark] = useState(isbookmark);
+  const forceUpdate = useReducer(() => ({}))[1];
   const FavWidget = () => {
     return (
       <div
@@ -95,6 +96,71 @@ const Post = ({ data, currentUser }) => {
       </div>
     );
   };
+  
+  function postCommentHandler(input) {
+    let comment = {};
+    comment.text = input;
+    comment.isLike = false;
+    comment.isReply = false;
+    comment.replyList = [];
+    comment.user = currentUser;
+    comment.postTime = 0;
+    comment.likeCount = 0;
+    comment.isOwner = true;
+    comment.commentId = faker.datatype.uuid();
+    if (input.includes("@") && targetIndex.current != null) {
+      let index = targetIndex.current;
+      let replyList = finalCommentList[index].replyList;
+      comment.parentId = finalCommentList[index].commentId;
+      replyList.push(comment);
+      let newCommentList = finalCommentList;
+      newCommentList[index].replyList = replyList;
+      setFinalCommentList(newCommentList);
+    } else {
+      setFinalCommentList([...finalCommentList, comment]);
+    }
+
+    setShowCommentList([...showCommentList, comment]);
+    setFinalCommentCount(finalCommentCount + 1);
+  }
+  function replyCommentHandler(index){
+    targetIndex.current = index;
+    let user = finalCommentList[index].user;
+    console.log(user.username);
+    setCommentInput(commentInput + ` @${user.username}`);
+  }
+  function deleteCommentHandler(index) {
+    try {
+     
+      let comment = finalCommentList[index];
+
+      let newCommentList = finalCommentList;
+      newCommentList.splice(index, 1);
+
+      setFinalCommentList(newCommentList);
+
+      let newShowCommentList = showCommentList;
+      const target = newShowCommentList.indexOf(comment);
+      if (target > -1) {
+        newShowCommentList.splice(target, 1); // 2nd parameter means remove one item only
+      }
+
+      for (let index = 0; index < newShowCommentList.length; index++) {
+        const element = newShowCommentList[index];
+        if (element.parentId == comment.commentId) {
+          target = newShowCommentList.indexOf(element);
+          if (target > -1) {
+            newShowCommentList.splice(target, 1); // 2nd parameter means remove one item only
+          }
+        }
+      }
+      setShowCommentList(newShowCommentList);
+
+      forceUpdate();
+    } catch (e) {
+      console.log(e);
+    }
+  }
   const BtnList = () => {
     return (
       <div className="my-4 flex justify-between items-center">
@@ -109,10 +175,10 @@ const Post = ({ data, currentUser }) => {
             finalCommentCount={finalCommentCount}
             showCommentList={[]}
             replyHandler={(index) => {
-              targetIndex.current = index;
-              let user = finalCommentList[index].user;
-              console.log(user.username);
-              setCommentInput(commentInput + ` @${user.username}`);
+              replyCommentHandler(index)
+            }}
+            deleteHandler={(index) => {
+              deleteCommentHandler(index);
             }}
             headBar={
               <UserMoreBar
@@ -177,31 +243,6 @@ const Post = ({ data, currentUser }) => {
       </div>
     );
   };
-  function postCommentHandler(input) {
-    let comment = {};
-    comment.text = input;
-    comment.isLike = false;
-    comment.isReply = false;
-    comment.replyList = [];
-    comment.user = currentUser;
-    comment.postTime = 0;
-    comment.likeCount = 0;
-    comment.isOwner = true;
-    if (input.includes("@") && targetIndex.current != null) {
-      let index = targetIndex.current;
-      let replyList = finalCommentList[index].replyList;
-      replyList.push(comment);
-      let newCommentList = finalCommentList;
-      newCommentList[index].replyList = replyList;
-      setFinalCommentList(newCommentList);
-    } else {
-      setFinalCommentList([...finalCommentList, comment]);
-    }
-
-    setShowCommentList([...showCommentList, comment]);
-    setFinalCommentCount(finalCommentCount + 1);
-  }
-
   return (
     <div className="border-gray-100 mt-4 border bg-white">
       <UserMoreBar
@@ -236,10 +277,10 @@ const Post = ({ data, currentUser }) => {
           finalCommentCount={finalCommentCount}
           showCommentList={showCommentList}
           replyHandler={(index) => {
-            targetIndex.current = index;
-            let user = finalCommentList[index].user;
-            console.log(user.username);
-            setCommentInput(commentInput + ` @${user.username}`);
+            replyCommentHandler(index)
+          }}
+          deleteHandler={(index) => {
+            deleteCommentHandler(index);
           }}
           headBar={
             <UserMoreBar

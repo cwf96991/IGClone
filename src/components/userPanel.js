@@ -6,6 +6,7 @@ import ModalWrapper from "../components/modal/modalWrapper";
 import SuggestionSection from "./suggestionSection";
 import FooterSection from "./footerSection";
 import SwitchAccountWidget from "./switchAccountWidget";
+import truncateUsername from "./username"
 const UserPanel = ({ user, setUser }) => {
   const { avatar, isNFT, username, name, isNew, follower, extraFollower } =
     user;
@@ -41,7 +42,7 @@ const UserPanel = ({ user, setUser }) => {
           <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} />
           <div className="flex flex-row items-center justify-between grow">
             <div className="flex flex-col text-sm ml-4 grow">
-              <div className="font-bold ">{truncateName(username)}</div>
+              <div className="font-bold ">{(username)}</div>
               <div>{name}</div>
             </div>
 

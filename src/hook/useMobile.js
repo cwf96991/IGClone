@@ -22,5 +22,16 @@ const useMobile768 = () => {
   const [isMobile, setIsMobile] = useState(false);
   return isMobile;
 };
+const useHeight953 = () => {
+  const handleResize = () => {
+    setIsMobile(window.innerHeight > 953);
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+  }, []);
+  const [isMobile, setIsMobile] = useState(false);
+  return isMobile;
+};
 
-export { useMobile945,useMobile768 };
+export { useMobile945,useMobile768,useHeight953 };

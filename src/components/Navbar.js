@@ -1,7 +1,10 @@
 import { SearchSvg, CloseSvg } from "./image";
-
+import { useState, useEffect, useContext } from "react";
 import NavbarBtnList from "./navBarBtnList";
+import { UserContext } from "../components/UserContext";
+
 const SearchBar = () => {
+  useEffect(() => {});
   return (
     <div className="md:flex relative items-center hidden">
       <input
@@ -18,16 +21,23 @@ const SearchBar = () => {
     </div>
   );
 };
-const Navbar = ({ user }) => {
+const Navbar = ({}) => {
+  const user = useContext(UserContext);
+  
   return (
     <div className="fixed w-screen flex z-10 bg-white py-2 border-b border border-gray-100">
       <div className="max-w-[620px] flex  justify-between items-center grow ml-auto">
-      <div onClick={()=>{
-          window.location = "/"
-        }} className="text-3xl font-bold font-playball cursor-pointer">CWFgram</div>
+        <div
+          onClick={() => {
+            window.location = "/";
+          }}
+          className="text-3xl font-bold font-playball cursor-pointer"
+        >
+          CWFgram
+        </div>
         <SearchBar />
       </div>
-      <NavbarBtnList user={user} />
+      <NavbarBtnList user={user.userContext} />
     </div>
   );
 };

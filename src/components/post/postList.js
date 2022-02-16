@@ -42,7 +42,6 @@ const PostList = ({ currentUser }) => {
         //   <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
         // }
       >
-        
         {postList.map((item, key) => {
           return <Post key={key} data={item} currentUser={currentUser} />;
         })}

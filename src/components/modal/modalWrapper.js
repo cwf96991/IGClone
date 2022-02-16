@@ -7,8 +7,8 @@ const ModalWrapper = (props) => {
   let width = props.width ?? "w-[400px]";
   let height = props.height ?? "";
   let isCross = props.isCross ?? false;
-  const modalRef = useRef(null);
-
+  const modalRef = props.ref?? useRef(null);
+  let zIndex = props.zIndex ?? ""
   return (
     <div className={props.style}>
       <div
@@ -27,25 +27,22 @@ const ModalWrapper = (props) => {
       <div
         ref={modalRef}
         id={props.id}
-        className={`modal w-screen h-screen `}
+        className={`modal w-screen h-screen ${zIndex}`}
         onClick={(event) => {
-          
           const element = event.target;
-          console.log(element.classList)
-          console.log(element.id)
-          if (!element.classList.contains("modal")||element.id!=props.id) {
+
+          if (!element.classList.contains("modal") || element.id != props.id) {
             return;
           }
           const modal = document.getElementById(props.id);
-          console.log(modal)
+
           modal.checked = false;
           enableBodyScroll(modalRef.current);
           if (props.onClose) props.onClose();
-          
         }}
       >
-        <div className={`${bgColor} rounded-lg p-0 ${width} ${height} border-hidden`}>
-          <div className={`border-hidden`}>{props.content}</div>
+        <div className={`${bgColor} rounded-lg p-0 ${width} ${height} `}>
+          {props.content}
         </div>
         {isCross && (
           <div

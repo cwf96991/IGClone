@@ -5,7 +5,8 @@ import { abbreviateNumber, truncateName } from "../../utils/function";
 import React, { useRef, useState, useEffect } from "react";
 import { useMobile768 } from "../../hook/useMobile";
 import PostDesc from "./postDesc";
-
+import { Img } from "react-image";
+import ImageWidget from "../imageWidget";
 import LikeSection from "./likeSection";
 
 const UserPostFollowerCol = ({ count, text, img }) => {
@@ -16,9 +17,14 @@ const UserPostFollowerCol = ({ count, text, img }) => {
         <div className="text-gray-300">{text}</div>
       </div>
       <div className="lightGrayDivider" />
-      <img
-        src={img}
-        className="!w-full object-cover object-center !aspect-square !block cursor-pointer hover:opacity-80"
+      <ImageWidget
+        img={img}
+        placeholder={
+          <div className="w-full   aspect-square  bg-slate-200 animate-pulse"></div>
+        }
+        style={
+          "!w-full object-cover object-center !aspect-square !block cursor-pointer hover:opacity-80"
+        }
       />
     </div>
   );

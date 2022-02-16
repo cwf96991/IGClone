@@ -1,23 +1,19 @@
 import Base from "./base";
 import { StorySlider } from "../components/slider";
 import { useMobile945 } from "../hook/useMobile";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { getRandomUser } from "../utils/random";
 import PostList from "../components/post";
 import UserList from "../components/userPanel";
+import { UserContext } from "../components/UserContext";
+
 const Index = () => {
   const isHideSidePanel = useMobile945();
-  const [user, setUser] = useState({});
-
-  function fetchData() {
-    let user = getRandomUser();
-    setUser(user);
-  }
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // const [user, setUser] = useState({});
+  const userInfo = useContext(UserContext);
+  console.log(userInfo.userContext);
   return (
-    <Base user={user}>
+    <Base>
       <div className="flex ">
         <div
           className={`${
@@ -25,14 +21,14 @@ const Index = () => {
           } flex flex-col max-w-full md:max-w-[620px] noScrollBar`}
         >
           <StorySlider />
-          <PostList currentUser={user} />
+          <PostList currentUser={userInfo.userContext} />
         </div>
         {!isHideSidePanel && (
           <div className="w-[325px] mr-auto">
             <UserList
-              user={user}
+              user={userInfo.userContext}
               setUser={(user) => {
-                setUser(user);
+                userInfo.setUserByDispatch({ type: "switch", value: user });
               }}
             />
           </div>

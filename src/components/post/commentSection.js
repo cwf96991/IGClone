@@ -3,9 +3,8 @@ import { ImgSlider } from "../slider";
 import { AvatarWithPopUp, PostDescWidget } from "./postWidget";
 import { FavSvg, FavedSvg, MoreSvg } from "../image";
 import React, { useState, useEffect, useRef } from "react";
-
-const basicOptionStyle =
-  "text-center font-bold text-sm px-[8px] py-[4px] h-[40px] border border-y-[0.5px] border-gray-100 flex justify-center items-center";
+import OptionListModal from "../modal/optionListModal";
+import { useHeight953 } from "../../hook/useMobile";
 const CommentSection = ({
   post,
   user,
@@ -20,12 +19,14 @@ const CommentSection = ({
   finalCommentList,
   showCommentList,
   replyHandler,
+  deleteHandler,
   id,
   children,
 }) => {
   const { imgList, postHash, commentList } = post;
   const { username, avatar, isNFT, isHighlight, isFollowing, fd, isVerify } =
     user;
+  const isHeight953 = useHeight953();
   const CommentItem = ({
     userAvatar,
     postDescWidget,
@@ -42,25 +43,33 @@ const CommentSection = ({
     const [liked, setLiked] = useState(isLike);
     const [finalLikeCount, setFinalLikeCount] = useState(likeCount);
     const [isExpandReply, setIsExpandReply] = useState(false);
+    function closeModal() {
+      const modal = document.getElementById(
+        `more_${postTime}_${commentId}_${parentModalId}`
+      );
+      modal.checked = false;
+    }
     const moreOptionOwnList = [
       {
         text: "Report",
         isRed: true,
         handler: () => {
-          console.log("hihi");
+          console.log("Report");
+          closeModal();
         },
       },
       {
         text: "Delete",
         isRed: true,
         handler: () => {
-          console.log("hihi");
+          deleteHandler(index);
+          closeModal();
         },
       },
       {
         text: "Cancel",
         handler: () => {
-          console.log("hihi");
+          closeModal();
         },
       },
     ];
@@ -69,13 +78,14 @@ const CommentSection = ({
         text: "Report",
         isRed: true,
         handler: () => {
-          console.log("hihi");
+          console.log("Report");
+          closeModal();
         },
       },
       {
         text: "Cancel",
         handler: () => {
-          console.log("hihi");
+          closeModal();
         },
       },
     ];
@@ -112,32 +122,11 @@ const CommentSection = ({
                 )}
                 <ModalWrapper
                   id={`more_${postTime}_${commentId}_${parentModalId}`}
-                  
                   content={
-                    <div className="flex flex-col border-hidden	">
-                      {(isOwner ? moreOptionOwnList : moreOptionList).map(
-                        (option, index) => {
-                          const { text, isRed, handler } = option;
-                          return (
-                            <div
-                              key={index}
-                              className={`${
-                                isRed ? "text-[#ED4956]" : ""
-                              } ${basicOptionStyle}`}
-                              onClick={() => {
-                                // handler();
-                                const modal = document.getElementById(
-                                  `more_${postTime}_${commentId}_${parentModalId}`
-                                );
-                                modal.checked = false;
-                              }}
-                            >
-                              {text}
-                            </div>
-                          );
-                        }
-                      )}
-                    </div>
+                    <OptionListModal
+                      id={`more_${postTime}_${commentId}_${parentModalId}`}
+                      optionList={isOwner ? moreOptionOwnList : moreOptionList}
+                    />
                   }
                 >
                   <div className="cursor-pointer group-hover:flex hidden ml-3 translate-y-[1px]">
@@ -176,7 +165,7 @@ const CommentSection = ({
               }
               setLiked(!liked);
             }}
-            className="inline cursor-pointer w-[20px]  absolute top-[10px] right-[0px]"
+            className=" cursor-pointer w-[20px]  absolute top-[10px] right-[0px]"
           >
             {liked ? <FavedSvg size={"12"} /> : <FavSvg size={"12"} />}
           </div>
@@ -250,12 +239,16 @@ const CommentSection = ({
               />
             </div>
           </div>
-          <div className="max-w-[618px] min-w-[405px] hidden md:flex">
+          <div className="max-w-[618px] min-w-[405px] hidden md:flex min-h-[450px] !max-h-[953px]">
             <div className="flex flex-col w-full ">
               <div className="">{headBar}</div>
               <div className="lightGrayDivider-sm" />
 
-              <div className="grow flex flex-col pt-4 mx-4 overflow-y-auto noScrollBar overflow-hidden !max-h-[calc(100vh-308px)]">
+              <div
+                className={`grow flex flex-col pt-4 mx-4 overflow-y-auto noScrollBar overflow-hidden ${
+                  isHeight953 ? "!max-h-[723px]" : "!max-h-[calc(90vh-229px)]"
+                } `}
+              >
                 <CommentItem
                   userAvatar={userAvatar}
                   postDescWidget={postDescWidget}
