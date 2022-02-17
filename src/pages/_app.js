@@ -4,8 +4,10 @@ import "../styles/global.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
-import UserStore from "../store/userStore"
+import UserStore from "../store/userStore";
+
 const MyApp = ({ Component, pageProps }) => {
+  
   return (
     <NextIntlProvider messages={pageProps.messages}>
       <UserStore>

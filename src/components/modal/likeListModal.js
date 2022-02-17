@@ -1,7 +1,6 @@
 import ModalWrapper from "./modalWrapper";
 import { CrossSvg } from "../image";
 import { useState } from "react";
-
 import { AvatarUsernameActionRow } from "../post/postWidget";
 import faker from "@faker-js/faker";
 import { closeModal } from "../../utils/function";
@@ -10,7 +9,7 @@ const UserRowList = ({ likedUserList }) => {
   return likedUserList.map((user, index) => {
     const [isFollow, setIsFollow] = useState(user.isFollowing);
     return (
-      <div className="h-[60px] py-[8px] mx-[16px]">
+      <div className="h-[60px] py-[8px] mx-[16px]" key={index}>
         <AvatarUsernameActionRow
           user={user}
           isfollow={index < limit ? isFollow : false}
@@ -45,9 +44,10 @@ const UserRowList = ({ likedUserList }) => {
   });
 };
 const LikeListModal = ({ id, children, likedUserList, getLikeList }) => {
+  let nouce = faker.datatype.number();
   return (
     <ModalWrapper
-      id={"likeListModal_" + id}
+      id={"likeListModal_" + id + nouce}
       content={
         <div className="flex flex-col ">
           <div className="flex justify-between items-center !mr-2">
@@ -55,7 +55,7 @@ const LikeListModal = ({ id, children, likedUserList, getLikeList }) => {
             <div className="my-2">Likes</div>
             <div
               onClick={() => {
-                closeModal("likeListModal_" + id);
+                closeModal("likeListModal_" + id + nouce);
               }}
               className=" cursor-pointer btnText"
             >

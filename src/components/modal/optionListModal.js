@@ -21,8 +21,8 @@ const OptionListModal = ({ optionList, id,ref }) => {
                   handler();
                 } else {
                   closeModal(id);
-                  if (ref){
-                    enableBodyScroll(ref.current);
+                  if (modalRef){
+                    enableBodyScroll(modalRef.current);
                   }
                 }
               }}

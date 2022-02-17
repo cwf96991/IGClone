@@ -38,6 +38,7 @@ const Post = ({ data, currentUser }) => {
     likedUser,
     isAddress,
     address,
+    postId,
   } = post;
   const { username, avatar, isNFT, isHighlight, isFollowing, fd, isVerify } =
     user;
@@ -96,7 +97,7 @@ const Post = ({ data, currentUser }) => {
       </div>
     );
   };
-  
+
   function postCommentHandler(input) {
     let comment = {};
     comment.text = input;
@@ -123,7 +124,7 @@ const Post = ({ data, currentUser }) => {
     setShowCommentList([...showCommentList, comment]);
     setFinalCommentCount(finalCommentCount + 1);
   }
-  function replyCommentHandler(index){
+  function replyCommentHandler(index) {
     targetIndex.current = index;
     let user = finalCommentList[index].user;
     console.log(user.username);
@@ -131,7 +132,6 @@ const Post = ({ data, currentUser }) => {
   }
   function deleteCommentHandler(index) {
     try {
-     
       let comment = finalCommentList[index];
 
       let newCommentList = finalCommentList;
@@ -161,6 +161,17 @@ const Post = ({ data, currentUser }) => {
       console.log(e);
     }
   }
+  const LikeWidget = () => {
+    return (
+      <LikeSection
+        fd={fd}
+        postId={postId}
+        likedUser={likedUser}
+        isFdLiked={isFdLiked}
+        finalLikeCount={finalLikeCount}
+      />
+    );
+  };
   const BtnList = () => {
     return (
       <div className="my-4 flex justify-between items-center">
@@ -175,7 +186,7 @@ const Post = ({ data, currentUser }) => {
             finalCommentCount={finalCommentCount}
             showCommentList={[]}
             replyHandler={(index) => {
-              replyCommentHandler(index)
+              replyCommentHandler(index);
             }}
             deleteHandler={(index) => {
               deleteCommentHandler(index);
@@ -192,12 +203,7 @@ const Post = ({ data, currentUser }) => {
             }
             btnBar={<PopUpBtnList />}
             likeSection={
-              <LikeSection
-                fd={fd}
-                likedUser={likedUser}
-                isFdLiked={isFdLiked}
-                finalLikeCount={finalLikeCount}
-              />
+             <LikeWidget/>
             }
             userAvatar={
               <div className="w-[40px] h-[40px]">
@@ -261,12 +267,7 @@ const Post = ({ data, currentUser }) => {
 
       <div className="flex flex-col  mx-4">
         <BtnList />
-        <LikeSection
-          fd={fd}
-          likedUser={likedUser}
-          isFdLiked={isFdLiked}
-          finalLikeCount={finalLikeCount}
-        />
+        <LikeWidget/>
 
         <PostDescWidget user={user} postDesc={postDesc} />
         <CommentSection
@@ -277,7 +278,7 @@ const Post = ({ data, currentUser }) => {
           finalCommentCount={finalCommentCount}
           showCommentList={showCommentList}
           replyHandler={(index) => {
-            replyCommentHandler(index)
+            replyCommentHandler(index);
           }}
           deleteHandler={(index) => {
             deleteCommentHandler(index);
@@ -294,12 +295,7 @@ const Post = ({ data, currentUser }) => {
           }
           btnBar={<BtnList />}
           likeSection={
-            <LikeSection
-              fd={fd}
-              likedUser={likedUser}
-              isFdLiked={isFdLiked}
-              finalLikeCount={finalLikeCount}
-            />
+            <LikeWidget/>
           }
           userAvatar={
             <div className="w-[40px] h-[40px]">

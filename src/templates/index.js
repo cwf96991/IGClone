@@ -11,7 +11,6 @@ const Index = () => {
   const isHideSidePanel = useMobile945();
   // const [user, setUser] = useState({});
   const userInfo = useContext(UserContext);
-  console.log(userInfo.userContext);
   return (
     <Base>
       <div className="flex ">

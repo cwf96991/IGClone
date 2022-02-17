@@ -23,10 +23,10 @@ const MoreBtnWidget = () => {
     <ModalWrapper
       id={"moreModal"}
       zIndex={"z-[1000]"}
-      ref={ref}
+      modalRef={ref}
       content={
         <OptionListModal
-          ref={ref}
+        modalRef={ref}
           id={"moreModal"}
           optionList={moreOptionList}
         />

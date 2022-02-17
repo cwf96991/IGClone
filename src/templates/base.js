@@ -3,9 +3,19 @@ import Navbar from "../components/Navbar";
 // import { AnimationOnScroll } from "react-animation-on-scroll";
 // import { Footer } from "./Footer";
 import { AppConfig } from "../utils/AppConfig";
+import { UserContext } from "../components/UserContext";
+import useUser from "../hook/useUser";
+import { useEffect, useContext } from "react";
 
 const Basic = (props) => {
   const title = props?.title === undefined ? "" : `${props?.title} | `;
+  const userInfo = useContext(UserContext);
+  const user = useUser();
+  useEffect(() => {
+    if (user) {
+      userInfo.setUserByDispatch({ type: "switch", value: user });
+    }
+  }, [user]);
   return (
     <div className="antialiased text-black  font-sans bg-[#fafafa] flex flex-col w-screen ">
       <Meta
@@ -15,7 +25,7 @@ const Basic = (props) => {
         canonical={AppConfig.url}
         ogDescription={AppConfig.ogDescription}
       />
-      <Navbar user={props.user}/>
+      <Navbar user={props.user} />
 
       <div className="mt-[65px]">{props.children}</div>
       {/* <div>

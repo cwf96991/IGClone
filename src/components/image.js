@@ -409,14 +409,14 @@ const CrossSvg = ({ color }) => {
         fill="none"
         points="20.643 3.357 12 12 3.353 20.647"
         stroke="currentColor"
-        stroke-linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
       ></polyline>
       <line
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
         x1="20.649"

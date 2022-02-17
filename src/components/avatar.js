@@ -12,6 +12,8 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
     size = "!w-[40px] !h-[40px]";
   } else if (size == "44") {
     size = "!w-[44px] !h-[44px]";
+  }else if (size == "24") {
+    size = "!w-[24px] !h-[24px]";
   }
   return isHighlight ? (
     <div className="avatar carousel-item cursor-pointer">
@@ -36,7 +38,9 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
       <ImageWidget
         img={img}
         placeholder={
-          <div className={`rounded-full bg-slate-200 animate-pulse ${size} ${isNFT}`} />
+          <div
+            className={`rounded-full bg-slate-200 animate-pulse ${size} ${isNFT}`}
+          />
         }
         style={`rounded-full ${size} ${isNFT}`}
       />

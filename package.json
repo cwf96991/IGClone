@@ -46,6 +46,7 @@
     "react-draggable": "^4.4.4",
     "react-easy-linkify": "^1.0.8",
     "react-image": "^4.0.3",
+    "react-img-placeholder": "^0.1.5",
     "react-infinite-scroll-component": "^6.1.0",
     "react-show-more-text": "^1.5.2",
     "react-spinkit": "^3.0.0",
