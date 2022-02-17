@@ -19,7 +19,7 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 
 ---
 
-### Pregress Log
+### Progress Log
 <details>
   <summary>12 Feb 2022</summary>
   
