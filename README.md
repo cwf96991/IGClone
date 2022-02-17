@@ -57,6 +57,16 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 
 ---
 
+<details>
+  <summary>16 Feb 2022</summary>
+  
+- Add userStore 
+- Complete delete comment function
+
+</details>
+
+---
+
 ### Requirements
 
 - Node.js and npm
