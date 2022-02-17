@@ -67,6 +67,18 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 
 ---
 
+<details>
+  <summary>17 Feb 2022</summary>
+  
+- Complete Inbox Main Page 
+- Add newPostModal
+- Add FavouriteModal
+- Start working on Explore Page
+
+</details>
+
+---
+
 ### Requirements
 
 - Node.js and npm
