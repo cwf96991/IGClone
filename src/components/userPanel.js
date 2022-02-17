@@ -2,20 +2,17 @@ import Avatar from "./avatar";
 import { useState, useEffect, useRef } from "react";
 import { getRandomUser } from "../utils/random";
 import { truncateName } from "../utils/function";
-import ModalWrapper from "../components/modal/modalWrapper";
+import ModalWrapper from "./modal/modalWrapper";
 import SuggestionSection from "./suggestionSection";
 import FooterSection from "./footerSection";
 import SwitchAccountWidget from "./switchAccountWidget";
-import truncateUsername from "./username"
+import truncateUsername from "./username";
 const UserPanel = ({ user, setUser }) => {
   const { avatar, isNFT, username, name, isNew, follower, extraFollower } =
     user;
   const [isShowModel, setIsShowModel] = useState(false);
-  const [extraAccount, setExtraAccount] = useState();
   const ref = useRef(null);
-  useEffect(() => {
-    setExtraAccount(getRandomUser());
-  }, []);
+  
   useEffect(() => {
     if (ref.current) {
       if (ref.current.classList.contains("relative")) {
@@ -35,28 +32,21 @@ const UserPanel = ({ user, setUser }) => {
   return (
     <div
       ref={ref}
-      className={`mt-8  ml-6 ${isShowModel ? "relative" : "fixed"}  w-full`}
+      className={`mt-8  pl-6 ${isShowModel ? "relative" : "fixed"}  `}
     >
-      <div className="flex items-center justify-between ">
-        <div className="flex items-center w-[325px]">
+      <div className="flex items-center justify-between !w-[325px]">
+        <div className="flex items-center !w-[325px]">
           <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} />
           <div className="flex flex-row items-center justify-between grow">
-            <div className="flex flex-col text-sm ml-4 grow">
-              <div className="font-bold ">{(username)}</div>
-              <div>{name}</div>
+            <div className="flex flex-col text-sm ml-4 grow font-bold ">
+              <div className="">{username}</div>
+              <div className="text-gray-300 ">{name}</div>
             </div>
 
             <ModalWrapper
               id={"switchModal"}
               content={
                 <SwitchAccountWidget
-                  user={user}
-                  extraAccount={extraAccount}
-                  onClick={() => {
-                    closeModal();
-                    setUser(extraAccount);
-                    setExtraAccount(user);
-                  }}
                   closeModal={() => {
                     closeModal();
                   }}

@@ -1,7 +1,8 @@
 import { clearAllBodyScrollLocks } from "body-scroll-lock";
 
-const truncateName = (name) => {
-  return name ?? "".length > 10 ? name.slice(0, 9) + "..." : name;
+const truncateName = (name, limit) => {
+  limit = limit ?? 10;
+  return (name ?? "").length > limit ? name.slice(0, limit - 1) + "..." : name;
 };
 
 var SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];

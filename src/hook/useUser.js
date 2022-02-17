@@ -6,13 +6,21 @@ function useUser() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (localStorage.getItem("cwfUser") === null) {
-        let user = getRandomUser();
-
+        let user1 = getRandomUser();
+        let user2 = getRandomUser();
+        let user = {};
+        user.user = user1;
+        user.extraUser = user2;
         localStorage.setItem("cwfUser", JSON.stringify(user));
       }
     }
-    let user = JSON.parse(localStorage.getItem("cwfUser")) ?? getRandomUser();
-    setUser(user);
+    let user1 = getRandomUser();
+    let user2 = getRandomUser();
+    let tempUser = {};
+    tempUser.user = user1;
+    tempUser.extraUser = user2;
+    let finalUser = JSON.parse(localStorage.getItem("cwfUser")) ?? tempUser;
+    setUser(finalUser);
   }, []);
   return user;
 }

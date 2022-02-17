@@ -1,15 +1,22 @@
 import Avatar from "./avatar";
 import { BlueTickSvg } from "../components/image";
-import {useMobile768} from "../hook/useMobile"
-const SwitchAccountItem = ({ user, isSelected, ogUser, onClick }) => {
+import { useMobile768 } from "../hook/useMobile";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
+import ClipLoader from "react-spinners/ClipLoader";
+
+const SwitchAccountItem = ({ user, isSelected, onClick }) => {
   const { avatar, isNFT, username } = user;
-  const isMobile = useMobile768()
+  // const isMobile = useMobile768()
+  const [isLoad, setIsLoad] = useState(false);
   return (
     <div
       onClick={() => {
-        if (!isSelected) {
-          onClick();
+        if (!(isSelected ?? true)) {
+          setIsLoad(true);
         }
+        onClick();
+        setIsLoad(false);
       }}
       className="normal-case btn btn-lg btn-ghost hover:bg-transparent flex items-center justify-between w-full mb-4 py-[8px] px-[16px]"
     >
@@ -17,28 +24,48 @@ const SwitchAccountItem = ({ user, isSelected, ogUser, onClick }) => {
         <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} />
         <div className="font-bold text-sm ml-4">{username}</div>
       </div>
-      {(isSelected ?? true) && <BlueTickSvg />}
+      {isSelected ?? true ? (
+        <BlueTickSvg />
+      ) : (
+        <ClipLoader name="circle" loading={isLoad ?? false} size={24} />
+      )}
     </div>
   );
 };
-const SwitchAccountWidget = ({ user, extraAccount, onClick, closeModal }) => {
+const SwitchAccountWidget = ({ closeModal }) => {
+  const userInfo = useContext(UserContext).userContext;
+  const userStore = useContext(UserContext);
+
   return (
     <div className="flex flex-col items-center ">
       <div className="font-bold py-[6px]">Switch accounts</div>
       <div className="lightGrayDivider" />
-      <SwitchAccountItem
-        user={user}
-        onClick={() => {
-          onClick();
-        }}
-      />
-      {extraAccount && (
+      {userInfo.user && (
         <SwitchAccountItem
-          user={extraAccount}
-          isSelected={false}
-          ogUser={user}
+          user={userInfo.user}
           onClick={() => {
-            onClick();
+            closeModal();
+          }}
+        />
+      )}
+      {userInfo.extraUser && (
+        <SwitchAccountItem
+          user={userInfo.extraUser}
+          isSelected={false}
+          ogUser={userInfo.user}
+          onClick={() => {
+            let user = userInfo.user;
+            let extraUser = userInfo.extraUser;
+            let tempUser = user;
+            user = extraUser;
+            extraUser = tempUser;
+
+            userStore.setUserByDispatch({
+              type: "switch",
+              value: { user, extraUser },
+            });
+
+            closeModal();
           }}
         />
       )}

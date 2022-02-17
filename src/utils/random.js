@@ -91,7 +91,9 @@ function getRandomUser() {
   user.userId = faker.datatype.uuid();
   user.followerCount = faker.datatype.number();
   user.followingCount = faker.datatype.number();
-
+  user.isActive = faker.datatype.boolean();
+  user.isTag = faker.datatype.boolean();
+  user.lastActiveTime = faker.datatype.number(23, { min: 1 });
   let tempImgList = [];
   for (let index = 0; index < 3; index++) {
     tempImgList.push(faker.image.image());
@@ -148,7 +150,7 @@ function getRandomComment(needReply, time) {
   let replyCount = faker.datatype.number(3, { min: 0 });
   let likeCount = faker.datatype.number(333);
   let commentId = faker.datatype.uuid();
-  
+
   let replyList = [];
   if (needReply && isReply) {
     for (let index = 0; index < replyCount; index++) {
@@ -207,10 +209,10 @@ async function getRandomPostList() {
       commentList.push(getRandomComment(true, post.postTime));
     }
     post.commentList = commentList;
-    
+
     list.push({ user: user, post: post });
   }
-  
+
   return list;
 }
 export {

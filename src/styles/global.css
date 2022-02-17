@@ -71,3 +71,18 @@ a:hover {
 .infinite-scroll-component{
   @apply noScrollBar
 }
+
+.h-fullScreen{
+  height: calc(100vh - 63px) !important;
+}
+
+.max-h-fullScreen{
+  max-height: calc(100vh - 155px) !important;
+}
+
+input[type="file"] {
+    display: none;
+}
+.drop-area{
+@apply hover:bg-white border-hidden
+}

@@ -43,7 +43,7 @@ const Slider = (props) => {
           onClick={() => {
             ref.current.scrollLeft -= ref.current.offsetWidth;
           }}
-          className="absolute left-2 text-white  top-1/2 -translate-y-1/2 bg-transparent border-transparent drop-shadow-2xl rounded-full p-0 m-0 w-[24px] h-[24px]"
+          className="absolute left-2 text-white  top-1/2 -translate-y-1/2 bg-transparent border-transparent drop-shadow-black  rounded-full p-0 m-0 w-[24px] h-[24px]"
         >
           <LeftArrow />
         </button>
@@ -53,7 +53,7 @@ const Slider = (props) => {
           onClick={() => {
             ref.current.scrollLeft += ref.current.offsetWidth;
           }}
-          className="absolute right-2 text-white  top-1/2 -translate-y-1/2 bg-transparent border-transparent drop-shadow-2xl rounded-full p-0 m-0 w-[24px] h-[24px]"
+          className="absolute right-2 text-white  top-1/2 -translate-y-1/2 bg-transparent border-transparent drop-shadow-black  rounded-full p-0 m-0 w-[24px] h-[24px]"
         >
           <RightArrow />
         </button>

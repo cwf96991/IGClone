@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const useMobile945 = () => {
   const handleResize = () => {
-    setIsMobile(window.innerWidth < 945);
+    setIsMobile(window.innerWidth < 1020);
   };
   useEffect(() => {
     handleResize();
@@ -34,4 +34,4 @@ const useHeight953 = () => {
   return isMobile;
 };
 
-export { useMobile945,useMobile768,useHeight953 };
+export { useMobile945, useMobile768, useHeight953 };

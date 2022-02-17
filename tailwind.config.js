@@ -10,8 +10,10 @@ module.exports = {
       sm: "0.875rem",
 
       base: "1rem",
+      16: "16px",
       lg: "1.125rem",
       xl: "1.25rem",
+      22: "22px",
       "2xl": "1.5rem",
       "3xl": "1.875rem",
       "4xl": "2.25rem",
@@ -45,6 +47,10 @@ module.exports = {
         },
         navyBlue: "#00376B",
         lightBlue: "#0095F6",
+      },
+      dropShadow: {
+        black: "0 0px 3px rgba(0, 0, 0, 0.3)",
+        top: "3px 3px 3px 3px rgba(0,0,0, 0.3)",
       },
       fontFamily: {
         playball: ['"Playball"', "cursive"],

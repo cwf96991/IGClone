@@ -302,8 +302,11 @@ const AvatarUsernameActionRow = ({
   followCallback,
   isHide,
   size,
+  isTruncateName,
+  textLimit,
 }) => {
   const { avatar, isNFT, username } = user;
+  isTruncateName = isTruncateName ?? false;
   return (
     <div className="flex items-center justify-between mb-3 ">
       <div className="flex items-center ">
@@ -336,7 +339,9 @@ const AvatarUsernameActionRow = ({
         <div className="flex flex-row items-center justify-between grow">
           <div className="flex flex-col text-sm ml-4 grow">
             {isHide ?? false ? (
-              <div className="font-bold ">{username}</div>
+              <div className="font-bold ">
+                {isTruncateName ? truncateName(username, textLimit) : username}
+              </div>
             ) : (
               <UserInfoPopUp
                 user={user}
@@ -346,7 +351,11 @@ const AvatarUsernameActionRow = ({
                   followCallback(true);
                 }}
               >
-                <div className="font-bold ">{username}</div>
+                <div className="font-bold ">
+                  {isTruncateName
+                    ? truncateName(username, textLimit)
+                    : username}
+                </div>
               </UserInfoPopUp>
             )}
 

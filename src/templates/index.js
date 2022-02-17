@@ -20,16 +20,16 @@ const Index = () => {
           } flex flex-col max-w-full md:max-w-[620px] noScrollBar`}
         >
           <StorySlider />
-          <PostList currentUser={userInfo.userContext} />
+          <PostList currentUser={userInfo.userContext.user} />
         </div>
         {!isHideSidePanel && (
           <div className="w-[325px] mr-auto">
-            <UserList
-              user={userInfo.userContext}
-              setUser={(user) => {
-                userInfo.setUserByDispatch({ type: "switch", value: user });
-              }}
-            />
+            {userInfo.userContext.user && (
+              <UserList
+                user={userInfo.userContext.user}
+                
+              />
+            )}
           </div>
         )}
       </div>

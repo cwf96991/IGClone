@@ -4,7 +4,7 @@ import NavbarBtnList from "./navBarBtnList";
 import { UserContext } from "../components/UserContext";
 
 const SearchBar = () => {
-  useEffect(() => {});
+
   return (
     <div className="md:flex relative items-center hidden">
       <input
@@ -23,7 +23,6 @@ const SearchBar = () => {
 };
 const Navbar = ({}) => {
   const user = useContext(UserContext);
-  
   return (
     <div className="fixed w-screen flex z-10 bg-white py-2 border-b border border-gray-100">
       <div className="max-w-[620px] flex  justify-between items-center grow ml-auto">
@@ -37,7 +36,7 @@ const Navbar = ({}) => {
         </div>
         <SearchBar />
       </div>
-      <NavbarBtnList user={user.userContext} />
+      {user.userContext.user && <NavbarBtnList user={user.userContext.user} />}
     </div>
   );
 };

@@ -27,7 +27,7 @@ const Basic = (props) => {
       />
       <Navbar user={props.user} />
 
-      <div className="mt-[65px]">{props.children}</div>
+      <div className="mt-[63px]">{props.children}</div>
       {/* <div>
         footer
       </div> */}
