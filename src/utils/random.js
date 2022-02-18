@@ -1,8 +1,16 @@
-import { emojis, gifs } from "./constant";
+import { emojis, gifs, videos, videosPlaceholder } from "./constant";
 import { faker } from "@faker-js/faker";
 import axios from "axios";
 function randomEmoji() {
   return emojis[Math.floor(Math.random() * emojis.length)];
+}
+function randomVideo() {
+  let index = Math.floor(Math.random() * videos.length);
+
+  return {
+    video: videos[index],
+    placeholder: videosPlaceholder[index],
+  };
 }
 function getRandomUsername(fixedName) {
   const name = faker.name.findName();
@@ -172,23 +180,30 @@ function getRandomComment(needReply, time) {
 
   return comment;
 }
-async function getRandomPostList() {
-  // isSameUser = isSameUser ?? false;
-  // postCount = postCount ?? 20;
+async function getRandomPostList(isVideo, count) {
+  isVideo = isVideo ?? false;
+  count = count ?? 5;
   let list = [];
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < count; index++) {
     const user = getRandomUser();
 
     let post = {};
     post.isfav = faker.datatype.boolean();
+    post.isVideo = isVideo;
     let tempImgList = [];
-    for (let index = 0; index < faker.mersenne.rand(1, 10); index++) {
-      if (faker.datatype.boolean()) {
-        tempImgList.push(faker.image.image());
-      } else {
-        // let url = randomGifs();
-        let url = await getRandomdGif();
-        tempImgList.push(url);
+    if (isVideo) {
+      let url = randomVideo();
+      post.video = url;
+      post.viewCount = faker.datatype.number();
+    } else {
+      for (let index = 0; index < faker.mersenne.rand(1, 10); index++) {
+        if (faker.datatype.boolean()) {
+          tempImgList.push(faker.image.image());
+        } else {
+          // let url = randomGifs();
+          let url = await getRandomdGif();
+          tempImgList.push(url);
+        }
       }
     }
 
@@ -204,6 +219,7 @@ async function getRandomPostList() {
     post.likedUser = getRandomUser();
     post.postId = faker.datatype.uuid();
     post.postTime = faker.datatype.number(23, { min: 1 });
+
     let commentList = [];
     for (let index = 0; index < post.postTime; index++) {
       commentList.push(getRandomComment(true, post.postTime));
@@ -215,6 +231,28 @@ async function getRandomPostList() {
 
   return list;
 }
+async function getRandomPostWall(page, isReverse) {
+  let postWallList = [];
+  for (var i = 0; i < page; i++) {
+    let imagePost = await getRandomPostList(false, 1);
+    let videoPost = await getRandomPostList(true, 1);
+    let imagePost2 = await getRandomPostList(false, 1);
+    let restImagePost = await getRandomPostList(false, 6);
+    if (isReverse) {
+      postWallList.push(...imagePost);
+      postWallList.push(...videoPost);
+    } else {
+      postWallList.push(...videoPost);
+      postWallList.push(...imagePost);
+    }
+
+    postWallList.push(...imagePost2);
+
+    postWallList.push(...restImagePost);
+  }
+  console.log(postWallList);
+  return postWallList;
+}
 export {
   getRandomPostList,
   getRandomUserList,
@@ -223,4 +261,5 @@ export {
   randomEmoji,
   getRandomUsername,
   getRandomHashTag,
+  getRandomPostWall,
 };

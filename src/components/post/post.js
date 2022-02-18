@@ -250,7 +250,7 @@ const Post = ({ data, currentUser }) => {
     );
   };
   return (
-    <div className="border-gray-100 mt-4 border bg-white">
+    <div className="border-gray-100 md:border-[0.5px] border-0 mt-4  bg-white">
       <UserMoreBar
         user={user}
         post={post}

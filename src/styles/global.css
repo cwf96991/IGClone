@@ -44,7 +44,7 @@ a:hover {
   @apply cursor-pointer btn btn-sm normal-case btn-ghost hover:bg-transparent p-0 m-0;
 }
 .bigBtn {
-  @apply cursor-pointer btn btn-lg normal-case btn-ghost hover:bg-transparent ;
+  @apply cursor-pointer btn btn-lg normal-case btn-ghost hover:bg-transparent;
 }
 .react-input-emoji--input {
   @apply hidden;
@@ -61,28 +61,32 @@ a:hover {
   z-index: 10000 !important;
 }
 
-.lightGrayDivider-sm{
-  @apply w-full h-[0.5px] bg-gray-100
+.lightGrayDivider-sm {
+  @apply w-full h-[0.5px] bg-gray-100;
 }
-.lightGrayDivider{
-  @apply w-full h-[1px] bg-gray-100
-}
-
-.infinite-scroll-component{
-  @apply noScrollBar
+.lightGrayDivider {
+  @apply w-full h-[1px] bg-gray-100;
 }
 
-.h-fullScreen{
+.infinite-scroll-component {
+  @apply noScrollBar;
+}
+
+.h-fullScreen {
   height: calc(100vh - 63px) !important;
 }
 
-.max-h-fullScreen{
+.max-h-fullScreen {
   max-height: calc(100vh - 155px) !important;
 }
 
 input[type="file"] {
-    display: none;
+  display: none;
 }
-.drop-area{
-@apply hover:bg-white border-hidden
+.drop-area {
+  @apply hover:bg-white border-hidden;
+}
+
+.cKFCzz {
+  @apply hidden;
 }

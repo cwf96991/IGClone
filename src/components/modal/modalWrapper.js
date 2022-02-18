@@ -8,7 +8,7 @@ const ModalWrapper = (props) => {
   let height = props.height ?? "";
   let isCross = props.isCross ?? false;
   let style = props.style??""
-  const modalRef = useRef(null);
+  const modalRef = props.modalRef?? useRef(null);
 
   return (
     <div className={style}>

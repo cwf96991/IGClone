@@ -14,16 +14,22 @@ import {
 import Avatar from "./avatar";
 import NewPostModal from "./modal/newPostModal";
 import FavModal from "./modal/favModal";
+import ProfileModal from "./modal/profileModal";
 import React, { useEffect, useState, useRef } from "react";
 import { getRandomUser } from "../utils/random";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 const NavbarBtnList = ({ user }) => {
   const newPostModalRef = useRef(null);
+
   const favModalRef = useRef(null);
   const favModalContextRef = useRef(null);
+  const favArrowRef = useRef(null);
+  const profileModalRef = useRef(null);
+  const profileContextRef = useRef(null);
+  const profileArrowRef = useRef(null);
   const favBtn = useRef(null);
   const profileBtn = useRef(null);
-  const favArrowRef = useRef(null);
+
   const [focus, setFocus] = useState("");
   const [prevFocus, setPrevFocus] = useState("");
   const [favUserList, setFavUserList] = useState([]);
@@ -104,7 +110,30 @@ const NavbarBtnList = ({ user }) => {
       ),
       focusString: "profile",
       handler: () => {
+        let bottom = profileBtn.current.getBoundingClientRect().bottom;
+        let arrowRight = profileBtn.current.getBoundingClientRect().right;
+        let right = profileBtn.current.getBoundingClientRect().right;
+        setPrevFocus(focus);
         setFocus("profile");
+        const modal = document.getElementById("profileModal");
+
+        console.log("bottom", bottom);
+        console.log("right", window.innerWidth - right + 16);
+
+        console.log(profileContextRef.current.style);
+        profileContextRef.current.style.top = `${bottom + 20}px`;
+
+        profileContextRef.current.style.right = `${
+          window.innerWidth - right
+        }px`;
+
+        profileArrowRef.current.style.top = `${bottom + 10}px`;
+        profileArrowRef.current.style.right = `${
+          window.innerWidth - arrowRight + 12
+        }px`;
+
+        modal.checked = true;
+        disableBodyScroll(profileModalRef.current);
       },
       unSelectedIcon: (
         <div className="translate-y-[1px]">
@@ -142,7 +171,7 @@ const NavbarBtnList = ({ user }) => {
         return focusString != "profile" ? (
           <div
             key={index}
-            className="w-[24px] btnText h-[24px] cursor-pointer !ml-4"
+            className="w-[24px] btnText h-[24px] cursor-pointer !mr-4"
           >
             {link ? (
               <a href={link} className="hover:border-0">
@@ -163,7 +192,7 @@ const NavbarBtnList = ({ user }) => {
           <div
             ref={profileBtn}
             key={index}
-            className=" btnText cursor-pointer !ml-4 w-[25px] h-[25px]"
+            className=" btnText cursor-pointer !mr-4 w-[25px] h-[25px]"
           >
             <div
               onClick={() => {
@@ -186,6 +215,14 @@ const NavbarBtnList = ({ user }) => {
         contentRef={favModalContextRef}
         arrowRef={favArrowRef}
         userList={favUserList}
+        onClose={() => {
+          closeModal();
+        }}
+      />
+      <ProfileModal
+        modalRef={profileModalRef}
+        contentRef={profileContextRef}
+        arrowRef={profileArrowRef}
         onClose={() => {
           closeModal();
         }}

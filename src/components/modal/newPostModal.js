@@ -1,6 +1,6 @@
-import { CrossSvg, ImageVideoSvg,ImageVideoActiveSvg } from "../image";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { FileUploader, } from "react-drag-drop-files";
+import { CrossSvg, ImageVideoSvg, ImageVideoActiveSvg } from "../image";
+import { enableBodyScroll } from "body-scroll-lock";
+import { FileUploader } from "react-drag-drop-files";
 import { useState } from "react";
 const fileTypes = ["JPG", "PNG", "GIF", "MP4"];
 
@@ -8,6 +8,10 @@ const NewPostModal = ({ modalRef, onClose }) => {
   const [file, setFile] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
   const handleChange = (file) => {
+    setFile(file);
+    console.log(file);
+  };
+  const handleError = (error) => {
     setFile(file);
     console.log(file);
   };
@@ -43,7 +47,8 @@ const NewPostModal = ({ modalRef, onClose }) => {
               <div className="lightGrayDivider"></div>
               <FileUploader
                 handleChange={handleChange}
-                hoverTitle=""
+                hoverTitle=" "
+                onTypeError={handleError}
                 classes="drop-area"
                 name="file"
                 types={fileTypes}
@@ -52,10 +57,7 @@ const NewPostModal = ({ modalRef, onClose }) => {
                   setIsDrag(dragging);
                 }}
               >
-                <div
-                 
-                  className=" flex flex-col  w-[433px] h-[433px] items-center justify-center "
-                >
+                <div className=" flex flex-col  w-[433px] h-[433px] items-center justify-center ">
                   <div className="">
                     {isDrag ? <ImageVideoActiveSvg /> : <ImageVideoSvg />}
                   </div>

@@ -1,9 +1,8 @@
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { enableBodyScroll } from "body-scroll-lock";
 import Avatar from "../avatar";
 import { ArrowRight } from "../image";
 
-const FavModal = ({ modalRef, onClose, contentRef, arrowRef ,userList }) => {
-    
+const FavModal = ({ modalRef, onClose, contentRef, arrowRef, userList }) => {
   const FollowRequestRow = () => {
     return (
       <div className="flex justify-between items-center mx-4 my-3">
@@ -95,7 +94,7 @@ const FavModal = ({ modalRef, onClose, contentRef, arrowRef ,userList }) => {
           ref={contentRef}
           className={`bg-white rounded-lg p-0 w-[500px] min-h-[362px] noScrollBar overflow-y-auto border-hidden fixed top-0 right-0 drop-shadow-black `}
         >
-          {userList.length!=0 && (
+          {userList.length != 0 && (
             <div className={`border-hidden`}>
               <div className="flex flex-col">
                 <FollowRequestRow />

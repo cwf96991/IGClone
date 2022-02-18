@@ -30,8 +30,8 @@ const UnHomeSvg = () => {
         d="M9.005 16.545a2.997 2.997 0 012.997-2.997h0A2.997 2.997 0 0115 16.545V22h7V11.543L12 2 2 11.543V22h7.005z"
         fill="none"
         className="stroke-black hover:stroke-gray-300"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinejoin="round"
+        strokeWidth="2"
       ></path>
     </svg>
   );
@@ -358,10 +358,10 @@ const MoreSvg = ({ size, color }) => {
     </svg>
   );
 };
-const CommentSvg = ({ isLoad }) => {
+const CommentSvg = ({ isLoad, fill, stroke }) => {
   isLoad = isLoad ?? false;
-  let fill = isLoad ? "fill-slate-200" : "fill-black";
-  let stroke = isLoad ? "stroke-slate-200" : "stroke-black";
+  fill = fill ?? isLoad ? "fill-slate-200" : "fill-black";
+  stroke = stroke ?? isLoad ? "stroke-slate-200" : "stroke-black";
   return (
     <svg
       aria-label="Comment"
@@ -378,6 +378,29 @@ const CommentSvg = ({ isLoad }) => {
         d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z"
         fill="none"
         className={`${stroke} group-hover:stroke-gray-300`}
+        strokeLinejoin="round"
+        strokeWidth="2"
+      ></path>
+    </svg>
+  );
+};
+const CommentFillSvg = () => {
+  return (
+    <svg
+      aria-label="Comment"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+      className={`fill-white`}
+      xmlSpace="preserve"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <path
+        d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z"
+        fill="white"
+        className={`stroke-white`}
         strokeLinejoin="round"
         strokeWidth="2"
       ></path>
@@ -420,14 +443,14 @@ const MsgSvg = ({ isLoad, size, isIgnore }) => {
     </svg>
   );
 };
-const BookmarkSvg = () => {
+const BookmarkSvg = ({ size }) => {
   return (
     <svg
       aria-label="Save"
-      height="24"
+      height={size ?? "24"}
       role="img"
       viewBox="0 0 24 24"
-      width="24"
+      width={size ?? "24"}
       className="fill-black group hover:fill-gray-300"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
@@ -475,10 +498,38 @@ const FavedSvg = ({ size, color }) => {
     </svg>
   );
 };
+// const PlayBtnSvg = () => {
+//   return (
+//     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+//       <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z" />
+//     </svg>
+//   );
+// };
 const PlayBtnSvg = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-      <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z" />
+    <svg
+      aria-label="Video"
+      className="fill-white"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M5.888 22.5a3.46 3.46 0 01-1.721-.46l-.003-.002a3.451 3.451 0 01-1.72-2.982V4.943a3.445 3.445 0 015.163-2.987l12.226 7.059a3.444 3.444 0 01-.001 5.967l-12.22 7.056a3.462 3.462 0 01-1.724.462z"></path>
+    </svg>
+  );
+};
+const StackSvg = () => {
+  return (
+    <svg
+      aria-label="Carousel"
+      className="fill-white"
+      height="28"
+      role="img"
+      viewBox="0 0 48 48"
+      width="28"
+    >
+      <path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h13.4c5.7 0 10.3-4.6 10.3-10.3V18.5c0-1.6-.7-3.1-1.8-4.1-.5-.4-1.2 0-1.2.6z"></path>
     </svg>
   );
 };
@@ -566,24 +617,24 @@ const NewMsgSvg = () => {
         d="M12.202 3.203H5.25a3 3 0 00-3 3V18.75a3 3 0 003 3h12.547a3 3 0 003-3v-6.952"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
       ></path>
       <path
         d="M10.002 17.226H6.774v-3.228L18.607 2.165a1.417 1.417 0 012.004 0l1.224 1.225a1.417 1.417 0 010 2.004z"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
       ></path>
       <line
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         x1="16.848"
         x2="20.076"
         y1="3.924"
@@ -612,7 +663,6 @@ const ImageVideoSvg = () => {
   return (
     <svg
       aria-label="Icon to represent media such as images or videos"
-      class="_8-yf5 "
       color="#262626"
       fill="#262626"
       height="77"
@@ -660,9 +710,95 @@ const ImageVideoActiveSvg = () => {
     </svg>
   );
 };
+const ProfileSvg = () => {
+  return (
+    <svg
+      aria-label="Profile"
+      className="fill-black"
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <circle
+        cx="12.004"
+        cy="12.004"
+        fill="none"
+        r="10.5"
+        className="stroke-black"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="2"
+      ></circle>
+      <path
+        d="M18.793 20.014a6.08 6.08 0 00-1.778-2.447 3.991 3.991 0 00-2.386-.791H9.38a3.994 3.994 0 00-2.386.791 6.09 6.09 0 00-1.779 2.447"
+        fill="none"
+        className="stroke-black"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="2"
+      ></path>
+      <circle
+        cx="12.006"
+        cy="9.718"
+        fill="none"
+        r="4.109"
+        className="stroke-black"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="2"
+      ></circle>
+    </svg>
+  );
+};
+const SettingSvg = () => {
+  return (
+    <svg
+      aria-label="Settings"
+      className="fill-black"
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        fill="none"
+        r="8.635"
+        className="stroke-black"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      ></circle>
+      <path
+        d="M14.232 3.656a1.269 1.269 0 01-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 01-.796.66m-.001 16.688a1.269 1.269 0 01.796.66l.505.996h1.862l.505-.996a1.269 1.269 0 01.796-.66M3.656 9.768a1.269 1.269 0 01-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 01.66.796m16.688-.001a1.269 1.269 0 01.66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 01-.66-.796M7.678 4.522a1.269 1.269 0 01-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 01-.096 1.03m11.8 11.799a1.269 1.269 0 011.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 01.096-1.03m-14.956.001a1.269 1.269 0 01.096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 011.03.096m11.799-11.8a1.269 1.269 0 01-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 01-1.03-.096"
+        fill="none"
+        className="stroke-black"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      ></path>
+    </svg>
+  );
+};
+const SwitchSvg = () => {
+  return (
+    <svg
+      aria-label="Switch accounts"
+      className="fill-black"
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path d="M8 8.363a1 1 0 00-1-1H4.31a8.977 8.977 0 0114.054-1.727 1 1 0 101.414-1.414A11.003 11.003 0 003 5.672V3.363a1 1 0 10-2 0v5a1 1 0 001 1h5a1 1 0 001-1zm14 6.274h-5a1 1 0 000 2h2.69a8.977 8.977 0 01-14.054 1.727 1 1 0 00-1.414 1.414A11.004 11.004 0 0021 18.33v2.307a1 1 0 002 0v-5a1 1 0 00-1-1z"></path>
+    </svg>
+  );
+};
 export {
   CloseSvg,
   PlayBtnSvg,
+  StackSvg,
   EmojiSvg,
   HomeSvg,
   UnHomeSvg,
@@ -679,15 +815,19 @@ export {
   ArrowRight,
   FavSvg,
   UnFavSvg,
+  ProfileSvg,
   FavedSvg,
   SearchSvg,
   MoreSvg,
   VerifyIcon,
   CommentSvg,
+  CommentFillSvg,
   CrossSvg,
   NewMsgSvg,
   MsgSvg,
   BookmarkSvg,
+  SwitchSvg,
+  SettingSvg,
   BookmarkedSvg,
   ImageVideoSvg,
   ImageVideoActiveSvg,

@@ -24,7 +24,7 @@ const SearchBar = () => {
 const Navbar = ({}) => {
   const user = useContext(UserContext);
   return (
-    <div className="fixed w-screen flex z-10 bg-white py-2 border-b border border-gray-100">
+    <div className="fixed w-screen flex z-10 bg-white py-2 border-b cborder-gray-100 px-5 md:px-0">
       <div className="max-w-[620px] flex  justify-between items-center grow ml-auto">
         <div
           onClick={() => {

@@ -48,9 +48,11 @@
     "react-easy-linkify": "^1.0.8",
     "react-image": "^4.0.3",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-player": "^2.9.0",
     "react-show-more-text": "^1.5.2",
     "react-spinners": "^0.11.0",
     "styled-jsx-plugin-postcss": "^4.0.1",
+    "video-react": "^0.15.0",
     "web3": "^1.6.1",
     "web3modal": "^1.9.4"
   },
