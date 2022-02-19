@@ -79,6 +79,25 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 
 ---
 
+<details>
+  <summary>18 Feb 2022</summary>
+  
+- Working on Explore Page 
+
+</details>
+
+---
+
+<details>
+  <summary>19 Feb 2022</summary>
+  
+- Complete Explore Page
+- Working on Add New Post Modal 
+
+</details>
+
+---
+
 ### Requirements
 
 - Node.js and npm
