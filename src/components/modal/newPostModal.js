@@ -1,24 +1,39 @@
-import { CrossSvg, ImageVideoSvg, ImageVideoActiveSvg } from "../image";
+import {
+  CrossSvg,
+  ImageVideoSvg,
+  ImageVideoActiveSvg,
+  UploadErrorSvg,
+} from "../image";
 import { enableBodyScroll } from "body-scroll-lock";
 import { FileUploader } from "react-drag-drop-files";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const fileTypes = ["JPG", "PNG", "GIF", "MP4"];
 
 const NewPostModal = ({ modalRef, onClose }) => {
   const [file, setFile] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [uploadUrl, setUploadUrl] = useState(null);
   const handleChange = (file) => {
     setFile(file);
-    console.log(file);
-  };
-  const handleError = (error) => {
-    setFile(file);
-    console.log(file);
-  };
+    let fileName = file.name;
+    let list = fileName.split(".");
+    let extension = list[list.length - 1];
 
+    setIsError(!fileTypes.includes(extension.toUpperCase()));
+  };
+  useEffect(() => {
+    if (file && !isError) {
+      var urlCreator = window.URL || window.webkitURL;
+      var imageUrl = urlCreator.createObjectURL(file);
+
+      setUploadUrl(imageUrl);
+    }
+  }, [file]);
   return (
     <>
       <input type="checkbox" id={"newPostModal"} className="modal-toggle" />
+
       <div
         ref={modalRef}
         id={"newPostModal"}
@@ -37,43 +52,63 @@ const NewPostModal = ({ modalRef, onClose }) => {
         }}
       >
         <div
-          className={`bg-white rounded-lg p-0 h-[476px] w-[433px] border-hidden`}
+          className={`bg-white rounded-lg p-0 w-[541px]  h-[584px] border-hidden`}
         >
           <div className={`border-hidden`}>
             <div className="flex flex-col ">
               <div className="my-[9px] text-16 font-bold mx-auto">
-                Create new post
+                {isError ? "File couldn't be uploaded" : "Create new post"}
               </div>
               <div className="lightGrayDivider"></div>
-              <FileUploader
-                handleChange={handleChange}
-                hoverTitle=" "
-                onTypeError={handleError}
-                classes="drop-area"
-                name="file"
-                types={fileTypes}
-                onDraggingStateChange={(dragging) => {
-                  console.log(dragging);
-                  setIsDrag(dragging);
-                }}
-              >
-                <div className=" flex flex-col  w-[433px] h-[433px] items-center justify-center ">
-                  <div className="">
-                    {isDrag ? <ImageVideoActiveSvg /> : <ImageVideoSvg />}
-                  </div>
-                  <div className="text-22 my-4">
-                    Drag photos and videos here
-                  </div>
-                  <label>
-                    <input type="file" />
-                    <div
-                      className={`btnText !py-[5px] !px-[9px] font-bold !bg-lightBlue !text-white !text-sm `}
-                    >
-                      Select From Computer
-                    </div>
-                  </label>
+              {uploadUrl != null && !isError ? (
+                <div className="w-[541px] h-[541px]">
+                  <img src={uploadUrl} className="w-full h-auto" />
                 </div>
-              </FileUploader>
+              ) : (
+                <FileUploader
+                  handleChange={handleChange}
+                  hoverTitle=" "
+                  classes="drop-area"
+                  name="file"
+                  // types={fileTypes}
+                  onDraggingStateChange={(dragging) => {
+                    setIsDrag(dragging);
+                  }}
+                >
+                  <div className=" flex flex-col   w-[541px] h-[541px] items-center justify-center mx-auto my-auto">
+                    <div className="">
+                      {isError ? (
+                        <UploadErrorSvg />
+                      ) : isDrag ? (
+                        <ImageVideoActiveSvg />
+                      ) : (
+                        <ImageVideoSvg />
+                      )}
+                    </div>
+                    <div className="text-22 mt-4">
+                      {isError
+                        ? "This file is not supported"
+                        : "Drag photos and videos here"}
+                    </div>
+                    {isError && (
+                      <div className="text-gray-300 text-sm font-medium">
+                        <div className="font-bold inline">{file.name}</div>
+                        {` could not be uploaded.`}
+                      </div>
+                    )}
+                    <label>
+                      <input type="file" />
+                      <div
+                        className={`btnText !py-[5px] !px-[9px] font-bold !bg-lightBlue !text-white !text-sm !mt-4`}
+                      >
+                        {isError
+                          ? "Select Other Files"
+                          : "Select From Computer"}
+                      </div>
+                    </label>
+                  </div>
+                </FileUploader>
+              )}
             </div>
           </div>
         </div>
