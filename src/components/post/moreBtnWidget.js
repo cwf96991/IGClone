@@ -17,17 +17,17 @@ const moreOptionList = [
   { text: "Cancel" },
 ];
 
-const MoreBtnWidget = () => {
+const MoreBtnWidget = ({ id }) => {
   const ref = useRef(null);
   return (
     <ModalWrapper
-      id={"moreModal"}
+      id={`moreModal_${id}`}
       zIndex={"z-[1000]"}
       modalRef={ref}
       content={
         <OptionListModal
-        modalRef={ref}
-          id={"moreModal"}
+          modalRef={ref}
+          id={`moreModal_${id}`}
           optionList={moreOptionList}
         />
       }

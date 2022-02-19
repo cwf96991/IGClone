@@ -1,10 +1,9 @@
 import { SearchSvg, CloseSvg } from "./image";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import NavbarBtnList from "./navBarBtnList";
 import { UserContext } from "../components/UserContext";
-
+import NavbarBtnPlaceholder from "./navBarBtnPlaceholder";
 const SearchBar = () => {
-
   return (
     <div className="md:flex relative items-center hidden">
       <input
@@ -24,7 +23,7 @@ const SearchBar = () => {
 const Navbar = ({}) => {
   const user = useContext(UserContext);
   return (
-    <div className="fixed w-screen flex z-10 bg-white py-2 border-b cborder-gray-100 px-5 md:px-0">
+    <div className="fixed w-screen flex z-10 bg-white py-2 border-b cborder-gray-100 px-5 lg:px-0">
       <div className="max-w-[620px] flex  justify-between items-center grow ml-auto">
         <div
           onClick={() => {
@@ -36,7 +35,11 @@ const Navbar = ({}) => {
         </div>
         <SearchBar />
       </div>
-      {user.userContext.user && <NavbarBtnList user={user.userContext.user} />}
+      {user.userContext.user ? (
+        <NavbarBtnList user={user.userContext.user} />
+      ) : (
+        <NavbarBtnPlaceholder />
+      )}
     </div>
   );
 };

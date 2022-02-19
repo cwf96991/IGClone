@@ -55,6 +55,29 @@ module.exports = {
       fontFamily: {
         playball: ['"Playball"', "cursive"],
       },
+      animation: {
+        boundceInFadeOut: "bounceIn 2s ",
+      },
+      keyframes: {
+        bounceIn: {
+          "0%, 100%": {
+          opacity: 0,
+          transform: 'scale(0)'
+        },
+        "30%": {
+          opacity: 1,
+          transform: 'scale(1.1)'
+        },
+        "50%": {
+          opacity: .8,
+          transform: 'scale(1)'
+        },
+        "65%": {
+          opacity: .8,
+          transform: 'scale(1)'
+        },
+       }
+      },
     },
   },
   variants: {},

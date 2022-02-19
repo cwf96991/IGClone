@@ -9,7 +9,6 @@ import {
   UnExploreSvg,
   FavSvg,
   UnFavSvg,
-  CrossSvg,
 } from "./image";
 import Avatar from "./avatar";
 import NewPostModal from "./modal/newPostModal";
@@ -17,7 +16,7 @@ import FavModal from "./modal/favModal";
 import ProfileModal from "./modal/profileModal";
 import React, { useEffect, useState, useRef } from "react";
 import { getRandomUser } from "../utils/random";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { disableBodyScroll } from "body-scroll-lock";
 const NavbarBtnList = ({ user }) => {
   const newPostModalRef = useRef(null);
 
@@ -85,9 +84,6 @@ const NavbarBtnList = ({ user }) => {
         setFocus("favourite");
         const modal = document.getElementById("favModal");
 
-        console.log("bottom", bottom);
-        console.log("right", window.innerWidth - right);
-        console.log(favModalContextRef.current.style);
         favModalContextRef.current.style.top = `${bottom + 20}px`;
 
         favModalContextRef.current.style.right = `${
@@ -117,10 +113,6 @@ const NavbarBtnList = ({ user }) => {
         setFocus("profile");
         const modal = document.getElementById("profileModal");
 
-        console.log("bottom", bottom);
-        console.log("right", window.innerWidth - right + 16);
-
-        console.log(profileContextRef.current.style);
         profileContextRef.current.style.top = `${bottom + 20}px`;
 
         profileContextRef.current.style.right = `${

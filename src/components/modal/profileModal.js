@@ -1,6 +1,6 @@
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { ProfileSvg, BookmarkSvg, SettingSvg, SwitchSvg } from "../image";
-import {  useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { UserContext } from "../UserContext";
 import ModalWrapper from "./modalWrapper";
 import SwitchAccountWidget from "../switchAccountWidget";
@@ -28,7 +28,7 @@ const ProfileModal = ({ modalRef, onClose, contentRef, arrowRef }) => {
       icon: <SettingSvg />,
       text: "Settings",
       handler: () => {
-        location.href = `/${userInfo.username}`;
+        location.href = `/accounts/edit/`;
       },
     },
     {
@@ -44,7 +44,6 @@ const ProfileModal = ({ modalRef, onClose, contentRef, arrowRef }) => {
 
         modal2.checked = true;
         disableBodyScroll(switchModalRef.current);
-        
       },
     },
     {

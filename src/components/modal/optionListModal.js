@@ -1,11 +1,10 @@
-
 const basicOptionStyle =
   "text-center font-bold text-sm  border-none  cursor-pointer px-[8px] py-[4px] h-[40px] flex justify-center items-center";
 function closeModal(id) {
   const modal = document.getElementById(id);
   modal.checked = false;
 }
-const OptionListModal = ({ optionList, id,ref }) => {
+const OptionListModal = ({ optionList, id, modalRef }) => {
   return (
     <div className="flex flex-col ">
       {optionList.map((option, index) => {
@@ -21,7 +20,7 @@ const OptionListModal = ({ optionList, id,ref }) => {
                   handler();
                 } else {
                   closeModal(id);
-                  if (modalRef){
+                  if (modalRef) {
                     enableBodyScroll(modalRef.current);
                   }
                 }

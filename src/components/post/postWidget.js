@@ -5,9 +5,19 @@ import { abbreviateNumber, truncateName } from "../../utils/function";
 import React, { useRef, useState, useEffect } from "react";
 import { useMobile768 } from "../../hook/useMobile";
 import PostDesc from "./postDesc";
-import { Img } from "react-image";
 import ImageWidget from "../imageWidget";
+import PostVideo from "./postVideo";
 import LikeSection from "./likeSection";
+import { ImgSlider } from "../slider";
+import {
+  UnFavSvg,
+  FavedSvg,
+  BookmarkSvg,
+  BookmarkedSvg,
+  CommentSvg,
+  MsgSvg,
+  WhiteFavSvg,
+} from "../image";
 
 const UserPostFollowerCol = ({ count, text, img }) => {
   return (
@@ -220,18 +230,8 @@ const UserMoreBar = ({
   isHideAddress,
 }) => {
   isHideAddress = isHideAddress ?? false;
-  const { username, avatar, isNFT, isHighlight, isFollowing, isVerify } = user;
-  const {
-    imgList,
-    isfav,
-    isbookmark,
-    commentCount,
-    likeCount,
-    postTime,
-    isFdLiked,
-    isAddress,
-    address,
-  } = post;
+  const { username, isVerify } = user;
+  const { isAddress, address, postId } = post;
   const isMobile = useMobile768();
   return (
     <div className="flex justify-between items-center my-2 mx-4 ">
@@ -282,7 +282,7 @@ const UserMoreBar = ({
           </div>
         )}
       </div>
-      <MoreBtnWidget />
+      <MoreBtnWidget id={postId} />
     </div>
   );
 };
@@ -367,8 +367,86 @@ const AvatarUsernameActionRow = ({
     </div>
   );
 };
+const FavBtnWidget = ({ onClick, isFav }) => {
+  return (
+    <div
+      onClick={(e) => {
+        onClick();
+      }}
+      className="!mr-3 btnText"
+    >
+      {isFav ? <FavedSvg /> : <UnFavSvg />}
+    </div>
+  );
+};
+const BookmarkBtnWidget = ({ onClick, isBookmark }) => {
+  return (
+    <div
+      onClick={() => {
+        onClick();
+      }}
+      className="!mr-3 btnText"
+    >
+      {isBookmark ? <BookmarkedSvg /> : <BookmarkSvg />}
+    </div>
+  );
+};
+const PopUpBtnListWidget = ({
+  onFavClick,
+  isFav,
+  onBookmarkClick,
+  isBookmark,
+}) => {
+  return (
+    <div className="my-4 flex justify-between items-center">
+      <div className="flex items-center">
+        <FavBtnWidget onClick={onFavClick} isFav={isFav} />
+        <div className="!mr-3 btnText">
+          <CommentSvg />
+        </div>
+        <div className="!mr-3 btnText">
+          <MsgSvg />
+        </div>
+      </div>
+      <BookmarkBtnWidget isBookmark={isBookmark} onClick={onBookmarkClick} />
+    </div>
+  );
+};
+const PostMediaWidget = ({ post, likeHandler, imgStyle, style, height }) => {
+  const { imgList, isVideo, video } = post;
+  const [isLike, setIsLike] = useState(false);
+  style = style ?? "max-w-full md:max-w-[620px] ";
+  return (
+    <div className={style}>
+      {isVideo ? (
+        <PostVideo video={video} height={height} />
+      ) : (
+        imgList && (
+          <div
+            onDoubleClick={() => {
+              likeHandler();
+              setIsLike(true);
+              setTimeout(() => {
+                setIsLike(false);
+              }, 1000);
+            }}
+            className="relative "
+          >
+            <ImgSlider imgList={imgList} imgStyle={imgStyle} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animation-boundceInFadeOut">
+              {isLike && <WhiteFavSvg size={"80"} style="opacity-80" />}
+            </div>
+          </div>
+        )
+      )}
+    </div>
+  );
+};
 export {
   LikeSection,
+  FavBtnWidget,
+  BookmarkBtnWidget,
+  PopUpBtnListWidget,
   UserPostFollowerCol,
   UserHoverPopUp,
   AvatarWithPopUp,
@@ -376,5 +454,6 @@ export {
   PostTimeWidget,
   UserInfoPopUp,
   AvatarUsernameActionRow,
+  PostMediaWidget,
   UserMoreBar,
 };

@@ -1,6 +1,6 @@
-import { FavedSvg, CommentSvg, PlayBtnSvg, CommentFillSvg } from "../image";
-const PostHover = ({ children, post, tagWidget }) => {
-  const { commentCount, likeCount, isVideo, viewCount } = post;
+import { FavedSvg, PlayBtnSvg, CommentFillSvg } from "../image";
+const PostHover = ({ children, post, tagWidget, likeCount, commentCount }) => {
+  const { isVideo, viewCount } = post;
   return (
     <div className="group relative cursor-pointer">
       <div className="absolute w-full h-full bg-black opacity-50 hidden group-hover:flex"></div>

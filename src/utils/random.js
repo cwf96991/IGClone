@@ -101,7 +101,7 @@ function getRandomUser() {
   user.followingCount = faker.datatype.number();
   user.isActive = faker.datatype.boolean();
   user.isTag = faker.datatype.boolean();
-  user.lastActiveTime = faker.datatype.number(23, { min: 1 });
+  user.lastActiveTime = faker.datatype.number(23, { min: 0 });
   let tempImgList = [];
   for (let index = 0; index < 3; index++) {
     tempImgList.push(faker.image.image());
@@ -181,7 +181,7 @@ function getRandomComment(needReply, time) {
   return comment;
 }
 async function getRandomPostList(isVideo, count) {
-  isVideo = isVideo ?? false;
+  isVideo = isVideo ?? faker.datatype.boolean();
   count = count ?? 5;
   let list = [];
   for (let index = 0; index < count; index++) {
@@ -250,7 +250,7 @@ async function getRandomPostWall(page, isReverse) {
 
     postWallList.push(...restImagePost);
   }
-  console.log(postWallList);
+
   return postWallList;
 }
 export {

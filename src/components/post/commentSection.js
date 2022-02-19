@@ -1,32 +1,98 @@
 import ModalWrapper from "../modal/modalWrapper";
-import { ImgSlider } from "../slider";
-import { AvatarWithPopUp, PostDescWidget } from "./postWidget";
-import { FavSvg, FavedSvg, MoreSvg } from "../image";
-import React, { useState, useEffect, useRef } from "react";
+import {
+  UserMoreBar,
+  AvatarWithPopUp,
+  PostDescWidget,
+  PostTimeWidget,
+  LikeSection,
+  PopUpBtnListWidget,
+  PostMediaWidget,
+} from "./postWidget";
+import { UnFavSvg, FavedSvg, MoreSvg } from "../image";
+import EmojiTextPost from "./emojiTextPost";
+import { postCommentFunc, deleteCommentFunc } from "../../utils/postFunc";
+import React, { useState, useRef, useContext, useReducer } from "react";
 import OptionListModal from "../modal/optionListModal";
 import { useHeight953 } from "../../hook/useMobile";
+import { UserContext } from "../../components/UserContext";
+
 const CommentSection = ({
   post,
   user,
-  finalCommentCount,
-  headBar,
-  btnBar,
-  likeSection,
-  userAvatar,
-  postDescWidget,
-  postTime,
-  emojiCommentBar,
-  finalCommentList,
-  showCommentList,
-  replyHandler,
-  deleteHandler,
   id,
+  commentList,
+  setCommentList,
+  commentCount,
+  setCommentCount,
+  showCommentList,
+  setShowCommentList,
+  isFollow,
+  followHandler,
+  setCommentInput,
+  commentInput,
+  isFav,
+  onFavClick,
+  finalLikeCount,
+  setFinalLikeCount,
+  bookmark,
+  onBookmarkClick,
   children,
 }) => {
-  const { imgList, postHash, commentList } = post;
-  const { username, avatar, isNFT, isHighlight, isFollowing, fd, isVerify } =
-    user;
+  const {
+    imgList,
+    postHash,
+    postDesc,
+    postTime,
+    postId,
+    likedUser,
+    isFdLiked,
+  } = post;
+  const { fd } = user;
   const isHeight953 = useHeight953();
+  const [textInput, setTextInput] = useState(commentInput);
+  const [isLike, setIsLike] = useState(isFav);
+  const [likeCount, setLikeCount] = useState(finalLikeCount);
+  const [isBookmark, setIsBookmark] = useState(bookmark);
+  const targetIndex = useRef(null);
+  const [finalshowCommentList, setFinalShowCommentList] =
+    useState(showCommentList);
+  const [finalCommentList, setFinalCommentList] = useState(commentList);
+  const [finalCommentCount, setFinalCommentCount] = useState(commentCount);
+  const user1 = useContext(UserContext);
+  const forceUpdate = useReducer(() => ({}))[1];
+  function updateData() {
+    setCommentInput(textInput);
+    setFinalLikeCount(likeCount);
+    onFavClick(isLike);
+    onBookmarkClick(isBookmark);
+    setCommentList(finalCommentList);
+    setCommentCount(finalCommentCount);
+    setShowCommentList(finalshowCommentList);
+  }
+  function postCommentHandler(input) {
+    postCommentFunc(
+      input,
+      targetIndex.current,
+      finalCommentList,
+      setFinalCommentList,
+      finalshowCommentList,
+      setFinalShowCommentList,
+      finalCommentCount,
+      setFinalCommentCount,
+      user1.userContext.user
+    );
+    setTextInput("");
+  }
+  function deleteCommentHandler(index) {
+    deleteCommentFunc(
+      index,
+      finalCommentList,
+      setFinalCommentList,
+      finalshowCommentList,
+      setFinalShowCommentList,
+      forceUpdate
+    );
+  }
   const CommentItem = ({
     userAvatar,
     postDescWidget,
@@ -43,6 +109,7 @@ const CommentSection = ({
     const [liked, setLiked] = useState(isLike);
     const [finalLikeCount, setFinalLikeCount] = useState(likeCount);
     const [isExpandReply, setIsExpandReply] = useState(false);
+
     function closeModal() {
       const modal = document.getElementById(
         `more_${postTime}_${commentId}_${parentModalId}`
@@ -62,7 +129,7 @@ const CommentSection = ({
         text: "Delete",
         isRed: true,
         handler: () => {
-          deleteHandler(index);
+          deleteCommentHandler(index);
           closeModal();
         },
       },
@@ -103,7 +170,7 @@ const CommentSection = ({
             {!isHideBtnList && (
               <div className="flex items-baseline my-2">
                 <div className="text-gray-300 text-2xs  font-semibold ">
-                  {postTime == 0 ? "now" : `${postTime} h`}{" "}
+                  {postTime == 0 ? "now" : `${postTime} h`}
                 </div>
                 {finalLikeCount != 0 && finalLikeCount != null && (
                   <div className="text-gray-300 text-2xs cursor-pointer font-extrabold ml-3">{`${finalLikeCount}like${
@@ -113,7 +180,9 @@ const CommentSection = ({
                 {replyList != null && (
                   <div
                     onClick={() => {
-                      replyHandler(index);
+                      targetIndex.current = index;
+                      let user = finalCommentList[index].user;
+                      setTextInput(textInput + ` @${user.username}`);
                     }}
                     className="!text-gray-300 !text-2xs  font-extrabold !ml-3  btnText"
                   >
@@ -167,7 +236,7 @@ const CommentSection = ({
             }}
             className=" cursor-pointer w-[20px]  absolute top-[10px] right-[0px]"
           >
-            {liked ? <FavedSvg size={"12"} /> : <FavSvg size={"12"} />}
+            {liked ? <FavedSvg size={"12"} /> : <UnFavSvg size={"12"} />}
           </div>
         )}
       </div>
@@ -178,7 +247,6 @@ const CommentSection = ({
       const {
         text,
         isLike,
-        isReply,
         replyList,
         user,
         postTime,
@@ -217,6 +285,7 @@ const CommentSection = ({
       );
     });
   };
+
   return (
     <ModalWrapper
       id={`commentModal_${postHash}_${id}`}
@@ -224,6 +293,7 @@ const CommentSection = ({
       height={"min-h-[450px] max-h-[953px] "}
       onClose={() => {
         window.history.replaceState(window.history.state, "", "/");
+        updateData();
       }}
       onClick={() => {
         window.history.replaceState(window.history.state, "", `/p/${postHash}`);
@@ -231,17 +301,38 @@ const CommentSection = ({
       content={
         <div className="flex ">
           <div className="grow bg-black min-h-[450px] max-h-[953px]">
-            <div className="relative top-1/2 -translate-y-1/2">
-              <ImgSlider
+            <div className="relative top-1/2 -translate-y-1/2 overflow-hidden">
+              {/* <ImgSlider
                 imgList={imgList}
                 isInside={true}
                 imgStyle={"w-full h-auto"}
+              /> */}
+              <PostMediaWidget
+                post={post}
+                height={"100%"}
+                style={`min-h-[450px] ${
+                  isHeight953 ? "!max-h-[953px]" : "!max-h-[90vh]"
+                } `}
+                imgStyle={"w-full h-auto"}
+                likeHandler={() => {
+                  if (!isLike) {
+                    setIsLike(true);
+                    setLikeCount(likeCount + 1);
+                  }
+                }}
               />
             </div>
           </div>
           <div className="max-w-[618px] min-w-[405px] hidden md:flex min-h-[450px] !max-h-[953px]">
             <div className="flex flex-col w-full ">
-              <div className="">{headBar}</div>
+              <UserMoreBar
+                user={user}
+                post={post}
+                isFollow={isFollow}
+                followCallback={() => {
+                  followHandler();
+                }}
+              />
               <div className="lightGrayDivider-sm" />
 
               <div
@@ -250,9 +341,25 @@ const CommentSection = ({
                 } `}
               >
                 <CommentItem
-                  userAvatar={userAvatar}
-                  postDescWidget={postDescWidget}
-                  postTime={post.postTime}
+                  userAvatar={
+                    <div className="w-[40px] h-[40px]">
+                      <AvatarWithPopUp
+                        user={user}
+                        isFollow={isFollow}
+                        followCallback={() => {
+                          followHandler();
+                        }}
+                      />
+                    </div>
+                  }
+                  postDescWidget={
+                    <PostDescWidget
+                      user={user}
+                      postDesc={postDesc}
+                      isShowVerify={true}
+                    />
+                  }
+                  postTime={postTime}
                 />
                 <CommentListWidget
                   list={finalCommentList}
@@ -261,10 +368,46 @@ const CommentSection = ({
               </div>
 
               <div className="flex flex-col">
-                <div className="mx-4">{btnBar}</div>
-                <div className="mx-4">{likeSection}</div>
-                <div className="mx-4">{postTime}</div>
-                <div>{emojiCommentBar}</div>
+                <div className="mx-4">
+                  <PopUpBtnListWidget
+                    onFavClick={() => {
+                      if (isLike) {
+                        setLikeCount(likeCount - 1);
+                      } else {
+                        setLikeCount(likeCount + 1);
+                      }
+                      setIsLike(!isLike);
+                    }}
+                    isFav={isLike}
+                    onBookmarkClick={() => {
+                      setIsBookmark(!isBookmark);
+                    }}
+                    isBookmark={isBookmark}
+                  />
+                </div>
+                <div className="mx-4">
+                  <LikeSection
+                    fd={fd}
+                    postId={postId}
+                    likedUser={likedUser}
+                    isFdLiked={isFdLiked}
+                    finalLikeCount={likeCount}
+                  />
+                </div>
+                <div className="mx-4">
+                  <PostTimeWidget postTime={postTime} />
+                </div>
+                <div>
+                  <EmojiTextPost
+                    callback={(input) => {
+                      postCommentHandler(input);
+                    }}
+                    text={textInput}
+                    setText={(text) => {
+                      setTextInput(text);
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>

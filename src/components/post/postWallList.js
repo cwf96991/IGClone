@@ -1,13 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import Post from "./post";
+import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import PostLoader from "./postLoader";
 import { getRandomPostWall } from "../../utils/random";
-import { StackSvg, PlayBtnSvg } from "../image";
 import { PostWallLoader, PostWallLoader2 } from "./postWallLoader";
-import PostHover from "./postHover";
-const imgBaseStyle = "object-cover object-center ";
-const imgStyle = "!w-full !aspect-square !block";
+import PostWallItem from "./postWallItem";
 
 const PostWallet = ({ currentUser }) => {
   const [postList, SetPostList] = useState([]);
@@ -39,60 +34,7 @@ const PostWallet = ({ currentUser }) => {
         <div className="grid grid-cols-3 grid-rows-2 gap-1 md:gap-4 mb-4">
           {postList.map((data, index) => {
             const { user, post } = data;
-            const {
-              imgList,
-              isfav,
-              isbookmark,
-              commentCount,
-              likeCount,
-              postTime,
-              isFdLiked,
-              postDesc,
-              commentList,
-              likedUser,
-              isAddress,
-              address,
-              postId,
-              isVideo,
-              video,
-            } = post;
-            return (
-              //   <div key={index}>
-              isVideo ? (
-                <div className={`row-span-2 col-span-2 `}>
-                  <PostHover
-                    post={post}
-                    tagWidget={
-                      <div className="absolute right-[15px] top-[15px] group group-hover:opacity-50">
-                        <PlayBtnSvg />
-                      </div>
-                    }
-                  >
-                    <img
-                      src={video.placeholder}
-                      className={`${imgBaseStyle} ${imgStyle} `}
-                    />
-                  </PostHover>
-                </div>
-              ) : (
-                <PostHover
-                  post={post}
-                  tagWidget={
-                    imgList.length > 1 && (
-                      <div className="absolute right-[15px] top-[15px] group group-hover:opacity-50">
-                        <StackSvg />
-                      </div>
-                    )
-                  }
-                >
-                  <img
-                    src={imgList[0]}
-                    className={`${imgBaseStyle} ${imgStyle} `}
-                  />
-                </PostHover>
-              )
-              //   </div>
-            );
+            return <PostWallItem post={post} key={index} user={user} />;
           })}
         </div>
       </InfiniteScroll>

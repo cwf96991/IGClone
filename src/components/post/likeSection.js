@@ -5,7 +5,7 @@ import Avatar from "../avatar";
 import { UserInfoPopUp } from "./postWidget";
 import LikeListModal from "../modal/likeListModal";
 
-const LikeSection = ({ fd, isFdLiked, finalLikeCount, likedUser,postId }) => {
+const LikeSection = ({ fd, isFdLiked, finalLikeCount, likedUser, postId }) => {
   const [likedUserList, setLikedUserList] = useState([]);
   function getRandomLikeList() {
     let list = [];
@@ -56,20 +56,18 @@ const LikeSection = ({ fd, isFdLiked, finalLikeCount, likedUser,postId }) => {
             <div className="font-normal inline">and</div>
             <LikeListModal
               id={postId}
-             
               likedUserList={likedUserList}
               getLikeList={() => {
                 getRandomLikeList();
               }}
             >
-              {` ${finalLikeCount} others `}
+              {` ${finalLikeCount - 1} others `}
             </LikeListModal>
           </div>
         </div>
       ) : (
         <LikeListModal
           id={postId}
-          
           likedUserList={likedUserList}
           getLikeList={() => {
             getRandomLikeList();
