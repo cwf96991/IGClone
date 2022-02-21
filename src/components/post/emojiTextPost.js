@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
-const EmojiTextPost = ({ callback, setText, text }) => {
+const EmojiTextPost = ({
+  callback,
+  setText,
+  text,
+  centerWidget,
+  trailingWidget,
+  size,
+  color,
+  emojiHandler,
+}) => {
+  color = color ?? "fill-black";
   const [showEmojis, setShowEmojis] = useState(false);
   useEffect(() => {
     function checkClickOutside(event) {
@@ -12,6 +22,9 @@ const EmojiTextPost = ({ callback, setText, text }) => {
         element.classList.contains("react-input-emoji--button--icon")
       ) {
         return;
+      }
+      if (emojiHandler) {
+        emojiHandler(false);
       }
 
       setShowEmojis(false);
@@ -40,16 +53,19 @@ const EmojiTextPost = ({ callback, setText, text }) => {
         <div
           onClick={() => {
             setShowEmojis(!showEmojis);
+            if (emojiHandler) {
+              emojiHandler(!showEmojis);
+            }
           }}
           className="btnText react-input-emoji--button--icon relative"
         >
           <svg
             aria-label="Emoji"
-            className="fill-black group hover:fill-gray-300 react-input-emoji--button--icon"
-            height="24"
+            className={`${color} group hover:fill-gray-300 react-input-emoji--button--icon`}
+            height={size ?? "24"}
             role="img"
             viewBox="0 0 24 24"
-            width="24"
+            width={size ?? "24"}
           >
             <path
               className="react-input-emoji--button--icon"
@@ -57,27 +73,31 @@ const EmojiTextPost = ({ callback, setText, text }) => {
             ></path>
           </svg>
         </div>
-        <input
-          type="text"
-          value={text}
-          className="grow text-black  focus:outline-none  placeholder-gray-300 ml-4 font-semibold text-sm"
-          placeholder="Add a comment..."
-          onChange={(e) => setText(e.target.value)}
-        />
+        {centerWidget ?? (
+          <input
+            type="text"
+            value={text}
+            className="grow text-black  focus:outline-none  placeholder-gray-300 ml-4 font-semibold text-sm"
+            placeholder="Add a comment..."
+            onChange={(e) => setText(e.target.value)}
+          />
+        )}
       </div>
-      <div
-        onClick={() => {
-          if (text.length != 0) {
-            callback(text);
-            setText("");
-          }
-        }}
-        className={`btnText font-bold text-sm !text-lightBlue ${
-          text.length != 0 ? "" : "opacity-30"
-        }`}
-      >
-        Post
-      </div>
+      {trailingWidget ?? (
+        <div
+          onClick={() => {
+            if (text.length != 0) {
+              callback(text);
+              setText("");
+            }
+          }}
+          className={`btnText font-bold text-sm !text-lightBlue ${
+            text.length != 0 ? "" : "opacity-30"
+          }`}
+        >
+          Post
+        </div>
+      )}
     </div>
   );
 };

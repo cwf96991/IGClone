@@ -7,12 +7,15 @@ import {
 import { enableBodyScroll } from "body-scroll-lock";
 import { FileUploader } from "react-drag-drop-files";
 import { useState, useEffect } from "react";
+import NewPostDiscardModal from "./newPostDiscardModal";
+import { Header, Content } from "./newPostModalWidget";
 const fileTypes = ["JPG", "PNG", "GIF", "MP4"];
 
 const NewPostModal = ({ modalRef, onClose }) => {
   const [file, setFile] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [step, setStep] = useState(1);
   const [uploadUrl, setUploadUrl] = useState(null);
   const handleChange = (file) => {
     setFile(file);
@@ -22,14 +25,23 @@ const NewPostModal = ({ modalRef, onClose }) => {
 
     setIsError(!fileTypes.includes(extension.toUpperCase()));
   };
+  const handleDrag = (dragging) => {
+    setIsDrag(dragging);
+  };
   useEffect(() => {
     if (file && !isError) {
       var urlCreator = window.URL || window.webkitURL;
       var imageUrl = urlCreator.createObjectURL(file);
 
       setUploadUrl(imageUrl);
+      setStep(2);
     }
   }, [file]);
+  function openDiscardModal() {
+    const modal = document.getElementById("newPostModal_discard");
+
+    modal.checked = true;
+  }
   return (
     <>
       <input type="checkbox" id={"newPostModal"} className="modal-toggle" />
@@ -44,86 +56,75 @@ const NewPostModal = ({ modalRef, onClose }) => {
           if (!element.classList.contains("modal")) {
             return;
           }
-          const modal = document.getElementById("newPostModal");
-
-          modal.checked = false;
-          enableBodyScroll(modalRef.current);
-          onClose();
+          openDiscardModal();
         }}
       >
         <div
-          className={`bg-white rounded-lg p-0 w-[541px]  h-[584px] border-hidden`}
+          className={`bg-white rounded-lg p-0 ${
+            step >= 3 ? "max-w-[917px]" : "max-w-[541px] mx-20"
+          }   max-h-[584px] min-w-[348px] min-h-[391px] border-hidden `}
         >
           <div className={`border-hidden`}>
             <div className="flex flex-col ">
-              <div className="my-[9px] text-16 font-bold mx-auto">
-                {isError ? "File couldn't be uploaded" : "Create new post"}
-              </div>
+              <Header
+                isError={isError}
+                step={step}
+                onBack={() => {
+                  if (step != 1) {
+                    if (step == 2) {
+                      setFile(null);
+                      setUploadUrl(null);
+                    }
+                    setStep(step - 1);
+                  }
+                }}
+                onNext={() => {
+                  if (step == 4) {
+                    setFile(null);
+                    setStep(1);
+                    setUploadUrl(null);
+                    const modal = document.getElementById("newPostModal");
+                    modal.checked = false;
+                    enableBodyScroll(modalRef.current);
+                    onClose();
+                    return;
+                  }
+                  if (step != 1) {
+                    setStep(step + 1);
+                  }
+                }}
+              />
               <div className="lightGrayDivider"></div>
-              {uploadUrl != null && !isError ? (
-                <div className="w-[541px] h-[541px]">
-                  <img src={uploadUrl} className="w-full h-auto" />
-                </div>
-              ) : (
-                <FileUploader
-                  handleChange={handleChange}
-                  hoverTitle=" "
-                  classes="drop-area"
-                  name="file"
-                  // types={fileTypes}
-                  onDraggingStateChange={(dragging) => {
-                    setIsDrag(dragging);
-                  }}
-                >
-                  <div className=" flex flex-col   w-[541px] h-[541px] items-center justify-center mx-auto my-auto">
-                    <div className="">
-                      {isError ? (
-                        <UploadErrorSvg />
-                      ) : isDrag ? (
-                        <ImageVideoActiveSvg />
-                      ) : (
-                        <ImageVideoSvg />
-                      )}
-                    </div>
-                    <div className="text-22 mt-4">
-                      {isError
-                        ? "This file is not supported"
-                        : "Drag photos and videos here"}
-                    </div>
-                    {isError && (
-                      <div className="text-gray-300 text-sm font-medium">
-                        <div className="font-bold inline">{file.name}</div>
-                        {` could not be uploaded.`}
-                      </div>
-                    )}
-                    <label>
-                      <input type="file" />
-                      <div
-                        className={`btnText !py-[5px] !px-[9px] font-bold !bg-lightBlue !text-white !text-sm !mt-4`}
-                      >
-                        {isError
-                          ? "Select Other Files"
-                          : "Select From Computer"}
-                      </div>
-                    </label>
-                  </div>
-                </FileUploader>
-              )}
+              <Content
+                uploadUrl={uploadUrl}
+                isError={isError}
+                isDrag={isDrag}
+                step={step}
+                handleChange={handleChange}
+                handleDrag={handleDrag}
+                openDiscardModal={openDiscardModal}
+              />
             </div>
           </div>
         </div>
         <div
           onClick={() => {
-            const modal = document.getElementById("newPostModal");
-            modal.checked = false;
-            enableBodyScroll(modalRef.current);
-            onClose();
+            openDiscardModal();
           }}
           className="fixed top-4 right-4 w-[24px] h-[24px] cursor-pointer"
         >
           <CrossSvg color="stroke-white" />
         </div>
       </div>
+      <NewPostDiscardModal
+        onDiscard={() => {
+          setFile(null);
+          setStep(1);
+          setUploadUrl(null);
+          enableBodyScroll(modalRef.current);
+          onClose();
+        }}
+      />
     </>
   );
 };

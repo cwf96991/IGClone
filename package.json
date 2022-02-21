@@ -41,6 +41,7 @@
     "next": "^12.0.7",
     "next-intl": "^2.3.4",
     "next-seo": "^4.28.1",
+    "rc-slider": "^9.7.5",
     "react": "^17.0.2",
     "react-blockies": "^1.4.1",
     "react-dom": "^17.0.2",
@@ -54,6 +55,8 @@
     "react-spinners": "^0.11.0",
     "styled-jsx-plugin-postcss": "^4.0.1",
     "video-react": "^0.15.0",
+    "web-photo-filter": "^3.1.1",
+    "web-photo-filter-react": "^1.1.0",
     "web3": "^1.6.1",
     "web3modal": "^1.9.4"
   },

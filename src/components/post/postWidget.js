@@ -168,7 +168,7 @@ const UserInfoPopUp = (props) => {
         >
           {props.children}
         </div>
-        <div
+        <ul
           tabIndex="0"
           className=" shadow menu  dropdown-content bg-white rounded-box w-[400px] border border-gray-100"
         >
@@ -179,7 +179,7 @@ const UserInfoPopUp = (props) => {
               props.followCallback();
             }}
           />
-        </div>
+        </ul>
       </div>
     </div>
   );

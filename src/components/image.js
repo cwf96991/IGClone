@@ -529,15 +529,15 @@ const PlayBtnSvg = ({ size, style }) => {
     </svg>
   );
 };
-const StackSvg = () => {
+const StackSvg = ({ size }) => {
   return (
     <svg
       aria-label="Carousel"
       className="fill-white"
-      height="28"
+      height={size ?? "28"}
       role="img"
       viewBox="0 0 48 48"
-      width="28"
+      width={size ?? "28"}
     >
       <path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h13.4c5.7 0 10.3-4.6 10.3-10.3V18.5c0-1.6-.7-3.1-1.8-4.1-.5-.4-1.2 0-1.2.6z"></path>
     </svg>
@@ -652,17 +652,17 @@ const NewMsgSvg = () => {
     </svg>
   );
 };
-const ArrowDownSvg = () => {
+const ArrowDownSvg = ({ size }) => {
   return (
     <svg
       aria-label="Down Chevron Icon"
       className="rotate-180"
       color="#262626"
       fill="#262626"
-      height="20"
+      height={size ?? "20"}
       role="img"
       viewBox="0 0 24 24"
-      width="20"
+      width={size ?? "20"}
     >
       <path d="M21 17.502a.997.997 0 01-.707-.293L12 8.913l-8.293 8.296a1 1 0 11-1.414-1.414l9-9.004a1.03 1.03 0 011.414 0l9 9.004A1 1 0 0121 17.502z"></path>
     </svg>
@@ -854,6 +854,201 @@ const UploadErrorSvg = () => {
     </svg>
   );
 };
+
+const BackBtnSvg = () => {
+  return (
+    <svg
+      aria-label="Back"
+      color="#262626"
+      fill="#262626"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <line
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        x1="2.909"
+        x2="22.001"
+        y1="12.004"
+        y2="12.004"
+      ></line>
+      <polyline
+        fill="none"
+        points="9.276 4.726 2.001 12.004 9.276 19.274"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      ></polyline>
+    </svg>
+  );
+};
+const SelectCropSvg = ({ color }) => {
+  color = color ?? "fill-white";
+  return (
+    <svg
+      aria-label="Select Crop"
+      className={color}
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path d="M10 20H4v-6a1 1 0 00-2 0v7a1 1 0 001 1h7a1 1 0 000-2zM20.999 2H14a1 1 0 000 2h5.999v6a1 1 0 002 0V3a1 1 0 00-1-1z"></path>
+    </svg>
+  );
+};
+
+const ZoomSvg = ({ color }) => {
+  color = color ?? "fill-white";
+  return (
+    <svg
+      aria-label="Select Zoom"
+      className={color}
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path d="M22.707 21.293l-4.825-4.825a9.519 9.519 0 10-1.414 1.414l4.825 4.825a1 1 0 001.414-1.414zM10.5 18.001a7.5 7.5 0 117.5-7.5 7.509 7.509 0 01-7.5 7.5zm3.5-8.5h-2.5v-2.5a1 1 0 10-2 0v2.5H7a1 1 0 100 2h2.5v2.5a1 1 0 002 0v-2.5H14a1 1 0 000-2z"></path>
+    </svg>
+  );
+};
+const GallerySvg = ({ color }) => {
+  color = color ?? "fill-white";
+  return (
+    <svg
+      aria-label="Open Media Gallery"
+      className={color}
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path
+        d="M19 15V5a4.004 4.004 0 00-4-4H5a4.004 4.004 0 00-4 4v10a4.004 4.004 0 004 4h10a4.004 4.004 0 004-4zM3 15V5a2.002 2.002 0 012-2h10a2.002 2.002 0 012 2v10a2.002 2.002 0 01-2 2H5a2.002 2.002 0 01-2-2zm18.862-8.773A.501.501 0 0021 6.57v8.431a6 6 0 01-6 6H6.58a.504.504 0 00-.35.863A3.944 3.944 0 009 23h6a8 8 0 008-8V9a3.95 3.95 0 00-1.138-2.773z"
+        fill-rule="evenodd"
+      ></path>
+    </svg>
+  );
+};
+const OriginalSvg = ({ color, stroke }) => {
+  color = color ?? "fill-white";
+  stroke = stroke ?? "stroke-white";
+  return (
+    <svg
+      aria-label="Photo outline icon"
+      className={color}
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path
+        d="M6.549 5.013A1.557 1.557 0 108.106 6.57a1.557 1.557 0 00-1.557-1.557z"
+        fill-rule="evenodd"
+      ></path>
+      <path
+        d="M2 18.605l3.901-3.9a.908.908 0 011.284 0l2.807 2.806a.908.908 0 001.283 0l5.534-5.534a.908.908 0 011.283 0l3.905 3.905"
+        fill="none"
+        className={stroke}
+        stroke-linejoin="round"
+        stroke-width="2"
+      ></path>
+      <path
+        d="M18.44 2.004A3.56 3.56 0 0122 5.564h0v12.873a3.56 3.56 0 01-3.56 3.56H5.568a3.56 3.56 0 01-3.56-3.56V5.563a3.56 3.56 0 013.56-3.56z"
+        fill="none"
+        className={stroke}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      ></path>
+    </svg>
+  );
+};
+const SquareSvg = ({ color }) => {
+  color = color ?? "fill-white";
+  return (
+    <svg
+      aria-label="Crop square icon"
+      className={color}
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M19 23H5a4.004 4.004 0 01-4-4V5a4.004 4.004 0 014-4h14a4.004 4.004 0 014 4v14a4.004 4.004 0 01-4 4zM5 3a2.002 2.002 0 00-2 2v14a2.002 2.002 0 002 2h14a2.002 2.002 0 002-2V5a2.002 2.002 0 00-2-2z"></path>
+    </svg>
+  );
+};
+
+const PortraitSvg = ({ color }) => {
+  color = color ?? "fill-white";
+  return (
+    <svg
+      aria-label="Crop portrait icon"
+      className={color}
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M16 23H8a4.004 4.004 0 01-4-4V5a4.004 4.004 0 014-4h8a4.004 4.004 0 014 4v14a4.004 4.004 0 01-4 4zM8 3a2.002 2.002 0 00-2 2v14a2.002 2.002 0 002 2h8a2.002 2.002 0 002-2V5a2.002 2.002 0 00-2-2z"></path>
+    </svg>
+  );
+};
+const LandscapeSvg = ({ color }) => {
+  color = color ?? "fill-white";
+  return (
+    <svg
+      aria-label="Crop landscape icon"
+      className={color}
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M19 20H5a4.004 4.004 0 01-4-4V8a4.004 4.004 0 014-4h14a4.004 4.004 0 014 4v8a4.004 4.004 0 01-4 4zM5 6a2.002 2.002 0 00-2 2v8a2.002 2.002 0 002 2h14a2.002 2.002 0 002-2V8a2.002 2.002 0 00-2-2z"></path>
+    </svg>
+  );
+};
+
+const PlusSvg = () => {
+  return (
+    <svg
+      aria-label="Plus icon"
+      class="fill-gray-300"
+      height="22"
+      role="img"
+      viewBox="0 0 24 24"
+      width="22"
+    >
+      <path d="M21 11.3h-8.2V3c0-.4-.3-.8-.8-.8s-.8.4-.8.8v8.2H3c-.4 0-.8.3-.8.8s.3.8.8.8h8.2V21c0 .4.3.8.8.8s.8-.3.8-.8v-8.2H21c.4 0 .8-.3.8-.8s-.4-.7-.8-.7z"></path>
+    </svg>
+  );
+};
+
+const LocationPinSvg = () => {
+  return (
+    <svg
+      aria-label="Add Location"
+      class="_8-yf5 "
+      color="#8e8e8e"
+      fill="#8e8e8e"
+      height="16"
+      role="img"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path d="M12.053 8.105a1.604 1.604 0 101.604 1.604 1.604 1.604 0 00-1.604-1.604zm0-7.105a8.684 8.684 0 00-8.708 8.66c0 5.699 6.14 11.495 8.108 13.123a.939.939 0 001.2 0c1.969-1.628 8.109-7.424 8.109-13.123A8.684 8.684 0 0012.053 1zm0 19.662C9.29 18.198 5.345 13.645 5.345 9.66a6.709 6.709 0 0113.417 0c0 3.985-3.944 8.538-6.709 11.002z"></path>
+    </svg>
+  );
+};
 export {
   CloseSvg,
   PlayBtnSvg,
@@ -894,4 +1089,14 @@ export {
   MuteSvg,
   UnMuteSvg,
   UploadErrorSvg,
+  BackBtnSvg,
+  SelectCropSvg,
+  ZoomSvg,
+  GallerySvg,
+  OriginalSvg,
+  SquareSvg,
+  PortraitSvg,
+  LandscapeSvg,
+  PlusSvg,
+  LocationPinSvg,
 };

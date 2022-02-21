@@ -31,7 +31,7 @@ const PostVideo = ({ video, height }) => {
         onClick={(e) => {
           setIsMute(!isMute);
         }}
-        className="absolute right-4 bottom-4 bg-[#262626] rounded-full p-2 cursor-pointer"
+        className="absolute right-4 bottom-4 svgBgBtn"
       >
         {isMute ? <UnMuteSvg /> : <MuteSvg />}
       </div>

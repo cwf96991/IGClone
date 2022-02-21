@@ -47,6 +47,7 @@ module.exports = {
         },
         navyBlue: "#00376B",
         lightBlue: "#0095F6",
+        lightBlack: "#262626"
       },
       dropShadow: {
         black: "0 0px 3px rgba(0, 0, 0, 0.3)",
