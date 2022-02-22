@@ -12,12 +12,12 @@ const Index = () => {
   // const [user, setUser] = useState({});
   const userInfo = useContext(UserContext);
   return (
-    <Base>
+    <Base showHeader={true}>
       <div className="flex ">
         <div
           className={`${
             isHideSidePanel ? "mx-auto" : "ml-auto "
-          } flex flex-col max-w-full md:max-w-[620px] noScrollBar`}
+          } flex flex-col max-w-full md:max-w-[620px] noScrollBar noScrollBarMobile`}
         >
           <StorySlider />
           <PostList currentUser={userInfo.userContext.user} />
@@ -25,10 +25,7 @@ const Index = () => {
         {!isHideSidePanel && (
           <div className="w-[325px] mr-auto">
             {userInfo.userContext.user && (
-              <UserList
-                user={userInfo.userContext.user}
-                
-              />
+              <UserList user={userInfo.userContext.user} />
             )}
           </div>
         )}

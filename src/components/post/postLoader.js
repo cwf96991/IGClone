@@ -61,7 +61,7 @@ const EmojiSvg = () => {
 };
 const PostLoader = () => {
   return (
-    <div className="border-gray-100 mt-4 border bg-white shadow flex animate-pulse flex-col max-w-full md:max-w-[620px] ">
+    <div className="border-gray-100 mt-4 md:border bgWhite shadow flex animate-pulse flex-col max-w-full md:max-w-[620px] ">
       <div className="flex justify-between items-center my-2 mx-4 ">
         <UserInfo />
         <MoreWidget />

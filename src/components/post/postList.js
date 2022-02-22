@@ -13,7 +13,7 @@ const PostList = ({ currentUser }) => {
     fetchData();
   }, []);
   return (
-    <div className="max-w-full md:max-w-[620px] overflow-x-hidden p-0 m-0 noScrollBar">
+    <div className="max-w-full md:max-w-[620px] overflow-x-hidden p-0 m-0 noScrollBar noScrollBarMobile">
       <InfiniteScroll
         dataLength={postList.length} //This is important field to render the next data
         next={async () => {

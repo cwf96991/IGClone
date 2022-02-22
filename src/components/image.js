@@ -7,7 +7,7 @@ const HomeSvg = () => {
       role="img"
       viewBox="0 0 24 24"
       width="24"
-      className="fill-black hover:fill-gray-300"
+      className="fillBlack hover:fill-gray-300"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -20,7 +20,7 @@ const UnHomeSvg = () => {
   return (
     <svg
       aria-label="Home"
-      className="fill-black hover:fill-gray-300"
+      className="fillBlack hover:fill-gray-300"
       height="24"
       role="img"
       viewBox="0 0 24 24"
@@ -29,18 +29,19 @@ const UnHomeSvg = () => {
       <path
         d="M9.005 16.545a2.997 2.997 0 012.997-2.997h0A2.997 2.997 0 0115 16.545V22h7V11.543L12 2 2 11.543V22h7.005z"
         fill="none"
-        className="stroke-black hover:stroke-gray-300"
+        className="strokeBlack hover:stroke-gray-300"
         strokeLinejoin="round"
         strokeWidth="2"
       ></path>
     </svg>
   );
 };
-const MessengerSvg = () => {
+const MessengerSvg = (color) => {
+  color = color ?? "fillBlack";
   return (
     <svg
       aria-label="Messenger"
-      className="fill-black hover:fill-gray-300 group"
+      className={`${color} hover:fill-gray-300 group`}
       height="24"
       role="img"
       viewBox="0 0 24 24"
@@ -50,7 +51,9 @@ const MessengerSvg = () => {
     </svg>
   );
 };
-const UnMessengerSvg = () => {
+const UnMessengerSvg = ({ color, stroke }) => {
+  color = color ?? "fillBlack";
+  stroke = stroke ?? "strokeBlack";
   return (
     <svg
       aria-label="Messenger"
@@ -58,7 +61,7 @@ const UnMessengerSvg = () => {
       role="img"
       viewBox="0 0 24 24"
       width="24"
-      className="fill-black hover:fill-gray-300 group"
+      className={`${color}  hover:fill-gray-300 group`}
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -66,7 +69,7 @@ const UnMessengerSvg = () => {
       <path
         d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z"
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className={`${stroke} group-hover:stroke-gray-300`}
         strokeMiterlimit="10"
         strokeWidth="1.739"
       ></path>
@@ -93,7 +96,7 @@ const NewPostSvg = () => {
       <path
         d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z"
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -131,7 +134,7 @@ const UnNewPostSvg = () => {
       role="img"
       viewBox="0 0 24 24"
       width="24"
-      className="stroke-black hover:stroke-gray-300 group"
+      className="strokeBlack hover:stroke-gray-300 group"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -139,14 +142,14 @@ const UnNewPostSvg = () => {
       <path
         d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z"
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
       ></path>
       <line
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -157,7 +160,7 @@ const UnNewPostSvg = () => {
       ></line>
       <line
         fill="none"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -173,7 +176,7 @@ const ExploreSvg = () => {
   return (
     <svg
       aria-label="Find people"
-      className="fill-black hover:fill-gray-300"
+      className="fillBlack hover:fill-gray-300"
       height="24"
       role="img"
       viewBox="0 0 24 24"
@@ -191,7 +194,7 @@ const UnExploreSvg = () => {
       role="img"
       viewBox="0 0 24 24"
       width="24"
-      className="stroke-black hover:stroke-gray-300 group"
+      className="strokeBlack hover:stroke-gray-300 group"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -199,14 +202,14 @@ const UnExploreSvg = () => {
       <polygon
         fill="none"
         points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
       ></polygon>
       <polygon
         fillRule="evenodd"
-        className="fill-black group-hover:fill-gray-300"
+        className="fillBlack group-hover:fill-gray-300"
         points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056"
       ></polygon>
       <circle
@@ -214,7 +217,7 @@ const UnExploreSvg = () => {
         cy="12.005"
         fill="none"
         r="10.5"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -227,7 +230,7 @@ const FavSvg = ({ size }) => {
   return (
     <svg
       aria-label="Activity Feed"
-      className="fill-black hover:fill-gray-300"
+      className="fillBlack hover:fill-gray-300"
       height={size ?? "24"}
       role="img"
       viewBox="0 0 48 48"
@@ -252,7 +255,8 @@ const WhiteFavSvg = ({ size, style }) => {
     </svg>
   );
 };
-const UnFavSvg = ({ size }) => {
+const UnFavSvg = ({ size, color }) => {
+  color = color ?? "fillBlack";
   return (
     <svg
       aria-label="Activity Feed"
@@ -260,7 +264,7 @@ const UnFavSvg = ({ size }) => {
       role="img"
       viewBox="0 0 24 24"
       width={size ?? "24"}
-      className="fill-black hover:fill-gray-300"
+      className={`${color} hover:fill-gray-300`}
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -269,28 +273,29 @@ const UnFavSvg = ({ size }) => {
     </svg>
   );
 };
-const SearchSvg = () => {
+const SearchSvg = ({ size, stroke, color }) => {
+  stroke = stroke ?? "stroke-[#8e8e8e]";
+  color = color ?? "fill-[#8e8e8e]";
   return (
     <svg
       aria-label="Search"
-      color="#8e8e8e"
-      fill="#8e8e8e"
-      height="16"
+      className={color}
+      height={size ?? "16"}
       role="img"
       viewBox="0 0 24 24"
-      width="16"
+      width={size ?? "16"}
     >
       <path
         d="M19 10.5A8.5 8.5 0 1110.5 2a8.5 8.5 0 018.5 8.5z"
         fill="none"
-        stroke="currentColor"
+        className={stroke}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
       ></path>
       <line
         fill="none"
-        stroke="currentColor"
+        className={stroke}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -357,7 +362,7 @@ const ArrowRight = () => {
   );
 };
 const MoreSvg = ({ size, color }) => {
-  color = color ?? "fill-black";
+  color = color ?? "fillBlack";
   return (
     <svg
       aria-label="More Options"
@@ -375,8 +380,8 @@ const MoreSvg = ({ size, color }) => {
 };
 const CommentSvg = ({ isLoad, fill, stroke }) => {
   isLoad = isLoad ?? false;
-  fill = fill ?? isLoad ? "fill-slate-200" : "fill-black";
-  stroke = stroke ?? isLoad ? "stroke-slate-200" : "stroke-black";
+  fill = fill ?? isLoad ? "fill-slate-200" : "fillBlack";
+  stroke = stroke ?? isLoad ? "stroke-slate-200" : "strokeBlack";
   return (
     <svg
       aria-label="Comment"
@@ -424,8 +429,8 @@ const CommentFillSvg = () => {
 };
 const MsgSvg = ({ isLoad, size, isIgnore }) => {
   isLoad = isLoad ?? false;
-  let fill = isLoad ? "fill-slate-200" : "fill-black";
-  let stroke = isLoad ? "stroke-slate-200" : "stroke-black";
+  let fill = isLoad ? "fill-slate-200" : "fillBlack";
+  let stroke = isLoad ? "stroke-slate-200" : "strokeBlack";
   return (
     <svg
       aria-label="Share Post"
@@ -466,7 +471,7 @@ const BookmarkSvg = ({ size }) => {
       role="img"
       viewBox="0 0 24 24"
       width={size ?? "24"}
-      className="fill-black group hover:fill-gray-300"
+      className="fillBlack group hover:fill-gray-300"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -474,7 +479,7 @@ const BookmarkSvg = ({ size }) => {
       <polygon
         fill="none"
         points="20 21 12 13.44 4 21 4 3 20 3 20 21"
-        className="stroke-black group-hover:stroke-gray-300"
+        className="strokeBlack group-hover:stroke-gray-300"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -484,7 +489,7 @@ const BookmarkSvg = ({ size }) => {
 };
 const BookmarkedSvg = ({ isLoad }) => {
   isLoad = isLoad ?? false;
-  let fill = isLoad ? "fill-slate-200" : "fill-black";
+  let fill = isLoad ? "fill-slate-200" : "fillBlack";
   return (
     <svg
       aria-label="Remove"
@@ -547,7 +552,7 @@ const EmojiSvg = () => {
   return (
     <svg
       aria-label="Emoji"
-      className="fill-black group hover:fill-gray-300 react-input-emoji--button--icon"
+      className="fillBlack group hover:fill-gray-300 react-input-emoji--button--icon"
       height="24"
       role="img"
       viewBox="0 0 24 24"
@@ -579,7 +584,7 @@ const VerifyIcon = ({ size }) => {
 };
 
 const CrossSvg = ({ color, size }) => {
-  color = color ?? "stroke-black";
+  color = color ?? "strokeBlack";
   return (
     <svg
       aria-label="Close"
@@ -723,7 +728,7 @@ const ProfileSvg = () => {
   return (
     <svg
       aria-label="Profile"
-      className="fill-black"
+      className="fillBlack"
       height="16"
       role="img"
       viewBox="0 0 24 24"
@@ -734,7 +739,7 @@ const ProfileSvg = () => {
         cy="12.004"
         fill="none"
         r="10.5"
-        className="stroke-black"
+        className="strokeBlack"
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -742,7 +747,7 @@ const ProfileSvg = () => {
       <path
         d="M18.793 20.014a6.08 6.08 0 00-1.778-2.447 3.991 3.991 0 00-2.386-.791H9.38a3.994 3.994 0 00-2.386.791 6.09 6.09 0 00-1.779 2.447"
         fill="none"
-        className="stroke-black"
+        className="strokeBlack"
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -752,7 +757,7 @@ const ProfileSvg = () => {
         cy="9.718"
         fill="none"
         r="4.109"
-        className="stroke-black"
+        className="strokeBlack"
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -764,7 +769,7 @@ const SettingSvg = () => {
   return (
     <svg
       aria-label="Settings"
-      className="fill-black"
+      className="fillBlack"
       height="16"
       role="img"
       viewBox="0 0 24 24"
@@ -775,7 +780,7 @@ const SettingSvg = () => {
         cy="12"
         fill="none"
         r="8.635"
-        className="stroke-black"
+        className="strokeBlack"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -783,7 +788,7 @@ const SettingSvg = () => {
       <path
         d="M14.232 3.656a1.269 1.269 0 01-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 01-.796.66m-.001 16.688a1.269 1.269 0 01.796.66l.505.996h1.862l.505-.996a1.269 1.269 0 01.796-.66M3.656 9.768a1.269 1.269 0 01-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 01.66.796m16.688-.001a1.269 1.269 0 01.66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 01-.66-.796M7.678 4.522a1.269 1.269 0 01-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 01-.096 1.03m11.8 11.799a1.269 1.269 0 011.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 01.096-1.03m-14.956.001a1.269 1.269 0 01.096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 011.03.096m11.799-11.8a1.269 1.269 0 01-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 01-1.03-.096"
         fill="none"
-        className="stroke-black"
+        className="strokeBlack"
         strokeLinejoin="round"
         strokeWidth="2"
       ></path>
@@ -794,7 +799,7 @@ const SwitchSvg = () => {
   return (
     <svg
       aria-label="Switch accounts"
-      className="fill-black"
+      className="fillBlack"
       height="16"
       role="img"
       viewBox="0 0 24 24"

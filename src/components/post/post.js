@@ -94,21 +94,21 @@ const Post = ({ data, currentUser }) => {
     );
     setCommentInput("");
   }
-  function replyCommentHandler(index) {
-    targetIndex.current = index;
-    let user = finalCommentList[index].user;
-    changeCommentInput(commentInput + ` @${user.username}`);
-  }
-  function deleteCommentHandler(index) {
-    deleteCommentFunc(
-      index,
-      finalCommentList,
-      setFinalCommentList,
-      showCommentList,
-      setShowCommentList,
-      forceUpdate
-    );
-  }
+  // function replyCommentHandler(index) {
+  //   targetIndex.current = index;
+  //   let user = finalCommentList[index].user;
+  //   changeCommentInput(commentInput + ` @${user.username}`);
+  // }
+  // function deleteCommentHandler(index) {
+  //   deleteCommentFunc(
+  //     index,
+  //     finalCommentList,
+  //     setFinalCommentList,
+  //     showCommentList,
+  //     setShowCommentList,
+  //     forceUpdate
+  //   );
+  // }
   const PostPopUpWrapper = ({ isShowComment, id, children }) => {
     isShowComment = isShowComment ?? false;
     return (
@@ -174,13 +174,13 @@ const Post = ({ data, currentUser }) => {
     );
   };
   return (
-    <div className="border-gray-100 md:border-[0.5px] border-0 mt-4  bg-white">
+    <div className="border-gray-100 md:border-[0.5px] border-0 mt-4 bgWhite">
       <UserMoreBar
         user={user}
         post={post}
         isFollow={isFollow}
         followCallback={() => {
-          setIsFollow(true);
+          setIsFollow(!isFollow);
         }}
       />
       <PostMediaWidget

@@ -14,7 +14,7 @@ LinkifyCore.PluginManager.enableMention();
 LinkifyCore.PluginManager.enableHashtag();
 LinkifyCore.PluginManager.enableTicket();
 
-const PostDesc = ({ desc ,isExpanded}) => {
+const PostDesc = ({ desc, isExpanded }) => {
   return (
     <div className="font-normal inline ml-1  ">
       <ShowMoreText
@@ -23,7 +23,7 @@ const PostDesc = ({ desc ,isExpanded}) => {
         less=""
         className="inline"
         anchorClass="showMoreText"
-        expanded={isExpanded??false}
+        expanded={isExpanded ?? false}
         truncatedEndingComponent={"... "}
       >
         <Linkify

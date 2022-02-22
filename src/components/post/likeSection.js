@@ -39,7 +39,7 @@ const LikeSection = ({ fd, isFdLiked, finalLikeCount, likedUser, postId }) => {
               img={likedUser.avatar}
             />
           )}
-          <div className="font-bold text-sm inline ml-2">
+          <div className="font-bold text-sm inline ml-2 textBlack">
             <div className="font-normal inline ">Liked by</div>
             <div className="mx-1 inline">
               <UserInfoPopUp
@@ -73,7 +73,7 @@ const LikeSection = ({ fd, isFdLiked, finalLikeCount, likedUser, postId }) => {
             getRandomLikeList();
           }}
         >
-          <div className="font-bold text-sm">{finalLikeCount} likes</div>
+          <div className="font-bold text-sm textBlack">{finalLikeCount} likes</div>
         </LikeListModal>
       )}
     </>

@@ -14,7 +14,7 @@ const StorySlider = () => {
   }, []);
   return (
     <div className="  md:mt-8 relative ">
-      <Slider style="border px-[9px] border-gray-100  border-t-0 md:border-[0.5px] bg-white">
+      <Slider style="md:border px-[9px] border-black md:border-gray-100  border-t-0 md:border-[0.5px] bg-black md:bg-white">
         {userList.map((user, key) => {
           const { avatar, username, isNFT, isClosedFD } = user;
           let style = isNFT ? "mask mask-hexagon" : "";
@@ -41,7 +41,7 @@ const StorySlider = () => {
                   </div>
                 </div>
               </div>
-              <div className="text-sm">{truncateName(username)}</div>
+              <div className="text-sm text-white md:text-black">{truncateName(username)}</div>
             </div>
           );
         })}

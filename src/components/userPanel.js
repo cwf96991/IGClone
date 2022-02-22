@@ -35,7 +35,7 @@ const UserPanel = ({ user, setUser }) => {
       className={`mt-8  pl-6 ${isShowModel ? "relative" : "fixed"}  `}
     >
       <div className="flex items-center justify-between !w-[325px]">
-        <div className="flex items-center !w-[325px]">
+        <div className="flex items-center !w-[325px] mt-4">
           <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} />
           <div className="flex flex-row items-center justify-between grow">
             <div className="flex flex-col text-sm ml-4 grow font-bold ">

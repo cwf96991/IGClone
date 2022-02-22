@@ -138,6 +138,7 @@ const UserHoverPopUp = ({ user, isFollow, followCallback }) => {
 };
 const UserInfoPopUp = (props) => {
   let ref = useRef(null);
+  const isMobile = useMobile768();
   const [isDown, setIsDown] = useState(true);
   const [isRight, setIsRight] = useState(true);
   function onScroll() {
@@ -156,7 +157,9 @@ const UserInfoPopUp = (props) => {
   }, []);
   let style = isDown ? "" : "dropdown-top";
   isRight = isRight ? "" : "dropdown-end";
-  return (
+  return isMobile ? (
+    props.children
+  ) : (
     <div className={`dropdown dropdown-hover ${style} ${isRight} `}>
       <div tabIndex="0">
         <div
@@ -188,7 +191,7 @@ const PostDescWidget = ({ user, postDesc, isShowVerify }) => {
   isShowVerify = isShowVerify ?? false;
   const { username, isVerify } = user;
   return (
-    <div className="font-bold text-sm ">
+    <div className="font-bold text-sm textBlack">
       <UserInfoPopUp user={user} style={"dropdown-top"}>
         <div className="hover:underline inline">{username}</div>
       </UserInfoPopUp>
@@ -231,6 +234,7 @@ const UserMoreBar = ({
 }) => {
   isHideAddress = isHideAddress ?? false;
   const { username, isVerify } = user;
+  const [showisFollow,setShowIsFollow] = useState(!isFollow)
   const { isAddress, address, postId } = post;
   const isMobile = useMobile768();
   return (
@@ -252,7 +256,7 @@ const UserMoreBar = ({
                 followCallback();
               }}
             >
-              <div className=" text-black font-bold text-sm">
+              <div className=" textBlack font-bold text-sm">
                 {isMobile ? truncateName(username) : username}
               </div>
             </UserInfoPopUp>
@@ -268,9 +272,15 @@ const UserMoreBar = ({
           )}
         </div>
 
-        <div className="text-bold text-2xl">．</div>
+        {showisFollow && <div className="text-bold text-2xl textBlack">．</div>}
         {isFollow ? (
-          <div className="btnText font-bold text-sm">Following</div>
+          showisFollow && (
+            <div 
+            onClick={() => {
+              followCallback();
+            }}
+            className="btnText font-bold text-sm textBlack">Following</div>
+          )
         ) : (
           <div
             onClick={() => {

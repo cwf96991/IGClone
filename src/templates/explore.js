@@ -7,7 +7,7 @@ const Explore = () => {
         <div className="overflow-x-hidden p-0 m-0 noScrollBar   w-full">
           <PostWallet />
         </div>
-        <div className="min-w-[16px]"></div>
+        <div className="md:min-w-[16px]"></div>
       </div>
     </Base>
   );

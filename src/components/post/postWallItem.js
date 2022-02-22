@@ -2,6 +2,8 @@ import PostHover from "./postHover";
 import { StackSvg, PlayBtnSvg } from "../image";
 import PopUpPostWrapper from "./popUpPostWrapper";
 import React, { useState } from "react";
+import { useMobile768 } from "../../hook/useMobile";
+
 const imgBaseStyle = "object-cover object-center ";
 const imgStyle = "!w-full !aspect-square !block";
 
@@ -9,7 +11,7 @@ const PostWallItem = ({ post, user }) => {
   const { imgList, commentCount, likeCount, postId, isVideo, video } = post;
   const [finalLikeCount, setFinalLikeCount] = useState(likeCount);
   const [finalCommentCount, setFinalCommentCount] = useState(commentCount);
-
+  const isMobile = useMobile768();
   return (
     <>
       {isVideo ? (

@@ -32,8 +32,19 @@ a:hover {
   scrollbar-width: none; /* Firefox */
 }
 
+@media only screen and (max-width: 768px) {
+  .noScrollBarMobile {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .noScrollBarMobile::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
 .linkified {
-  @apply text-navyBlue hover:border-0;
+  @apply text-gray-300 md:text-navyBlue hover:border-0;
 }
 
 .showMoreText {
@@ -105,4 +116,20 @@ input[type="file"] {
 
 .opacity-unset {
   opacity: unset !important;
+}
+
+.textBlack {
+  @apply text-white md:text-black;
+}
+
+.fillBlack {
+  @apply fill-white md:fill-black
+}
+
+.strokeBlack{
+  @apply stroke-white md:stroke-black
+}
+
+.bgWhite {
+  @apply bg-black md:bg-white
 }

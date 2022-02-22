@@ -13,7 +13,7 @@ import EmojiTextPost from "./emojiTextPost";
 import { postCommentFunc, deleteCommentFunc } from "../../utils/postFunc";
 import React, { useState, useRef, useContext, useReducer } from "react";
 import OptionListModal from "../modal/optionListModal";
-import { useHeight953 } from "../../hook/useMobile";
+import { useHeight953, useMobile768 } from "../../hook/useMobile";
 import { UserContext } from "../../components/UserContext";
 
 const CommentSection = ({
@@ -47,6 +47,7 @@ const CommentSection = ({
     likedUser,
     isFdLiked,
   } = post;
+  const isMobile = useMobile768();
   const { fd } = user;
   const isHeight953 = useHeight953();
   const [textInput, setTextInput] = useState(commentInput);
@@ -286,7 +287,9 @@ const CommentSection = ({
     });
   };
 
-  return (
+  return isMobile ? (
+    children
+  ) : (
     <ModalWrapper
       id={`commentModal_${postHash}_${id}`}
       width={"!w-[80%] max-w-[1380px]"}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { LeftArrow, RightArrow } from "../image";
+import { useMobile768 } from "../../hook/useMobile";
 const Slider = (props) => {
   let style = props.style ?? "";
   let ref = props.ref ?? useRef(null);
@@ -7,6 +8,7 @@ const Slider = (props) => {
   const [hideLeftArrow, setHideLeftArrow] = useState(true);
   const [hideRightArrow, setHideRightArrow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isMobile = useMobile768();
   function callBack() {
     setHideLeftArrow(ref.current.scrollLeft == 0);
     setHideRightArrow(
@@ -38,7 +40,7 @@ const Slider = (props) => {
       className={`${style}  flex scroll-smooth overflow-x-scroll noScrollBar `}
     >
       {props.children}
-      {!hideLeftArrow && (
+      {!isMobile&&!hideLeftArrow && (
         <button
           onClick={() => {
             ref.current.scrollLeft -= ref.current.offsetWidth;
@@ -48,7 +50,7 @@ const Slider = (props) => {
           <LeftArrow />
         </button>
       )}
-      {!hideRightArrow && (
+      {!isMobile&&!hideRightArrow && (
         <button
           onClick={() => {
             ref.current.scrollLeft += ref.current.offsetWidth;
