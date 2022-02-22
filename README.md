@@ -98,6 +98,24 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 
 ---
 
+<details>
+  <summary>21 Feb 2022</summary>
+  
+- Working on New Post Modal - 70%
+
+</details>
+
+---
+
+<details>
+  <summary>22 Feb 2022</summary>
+  
+- Working on Mobile version
+- Dark mode in Mobile version
+
+</details>
+
+---
 ### Requirements
 
 - Node.js and npm
