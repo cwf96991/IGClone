@@ -1,5 +1,6 @@
 import ImageWidget from "./imageWidget";
-const Avatar = ({ size, isHighlight, img, isNFT }) => {
+import ProfileWrapper from "./profileWrapper";
+const Avatar = ({ size, isHighlight, img, isNFT, onClick, user }) => {
   isHighlight = isHighlight ?? false;
   isNFT = isNFT ?? true ? "mask mask-hexagon" : "";
   if (size == "56") {
@@ -18,38 +19,56 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
     size = "!w-[28px] !h-[28px]";
   } else if (size == "150") {
     size = "!w-[150px] !h-[150px]";
-  }else if (size == "80") {
+  } else if (size == "80") {
     size = "!w-[80px] !h-[80px]";
   }
+  const AvatarWidget = () => {
+    return onClick != null ? (
+      <div
+        onClick={() => {
+          console.log(onClick);
+          if (onClick) {
+            onClick();
+          }
+        }}
+      >
+        <ImageWidget
+          img={img}
+          placeholder={
+            <div
+              className={`rounded-full bg-slate-200 animate-pulse ${size} ${isNFT}`}
+            />
+          }
+          style={`rounded-full ${size} ${isNFT}`}
+        />
+      </div>
+    ) : (
+      <ProfileWrapper user={user}>
+        <ImageWidget
+          img={img}
+          placeholder={
+            <div
+              className={`rounded-full bg-slate-200 animate-pulse ${size} ${isNFT}`}
+            />
+          }
+          style={`rounded-full ${size} ${isNFT}`}
+        />
+      </ProfileWrapper>
+    );
+  };
   return isHighlight ? (
     <div className="avatar carousel-item cursor-pointer">
       <div
         className={`rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-fuchsia-700`}
       >
         <div className={`p-[2px] bg-white rounded-full `}>
-          <ImageWidget
-            img={img}
-            placeholder={
-              <div
-                className={`rounded-full bg-slate-200 animate-pulse ${size} ${isNFT}`}
-              />
-            }
-            style={`rounded-full ${size} ${isNFT}`}
-          />
+          <AvatarWidget />
         </div>
       </div>
     </div>
   ) : (
     <div className="avatar cursor-pointer">
-      <ImageWidget
-        img={img}
-        placeholder={
-          <div
-            className={`rounded-full bg-slate-200 animate-pulse ${size} ${isNFT}`}
-          />
-        }
-        style={`rounded-full ${size} ${isNFT}`}
-      />
+      <AvatarWidget />
     </div>
   );
 };

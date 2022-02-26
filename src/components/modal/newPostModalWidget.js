@@ -410,6 +410,7 @@ const Step4Panel = ({ uploadUrl }) => {
               size={"28"}
               isNFT={userInfo.user.isNFT}
               img={userInfo.user.avatar}
+              user={userInfo.user}
             />
             <div className="text-black font-bold ml-2">
               {userInfo.user.username}

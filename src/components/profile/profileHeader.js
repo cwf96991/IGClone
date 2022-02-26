@@ -83,7 +83,7 @@ const ProfileHeader = ({ user, isOwner }) => {
       {isMobile ? (
         <div className="mx-3 mt-4">
           <div className="flex items-center mb-5">
-          <Avatar size={"80"} isNFT={isNFT} img={avatar} />
+          <Avatar size={"80"} isNFT={isNFT} img={avatar} user={user}/>
 
             <div className={`flex flex-col max-w-[60%] ${isOwner ? "" : ""} `}>
               <div className="flex  ml-5">
@@ -122,7 +122,7 @@ const ProfileHeader = ({ user, isOwner }) => {
       ) : (
         <div className="flex items-center ">
           <div className="m-8">
-            <Avatar size={"150"} isNFT={isNFT} img={avatar} />
+            <Avatar size={"150"} isNFT={isNFT} img={avatar} user={user}/>
           </div>
 
           <div

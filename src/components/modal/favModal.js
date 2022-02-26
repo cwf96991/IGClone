@@ -12,12 +12,14 @@ const FavModal = ({ modalRef, onClose, contentRef, arrowRef, userList }) => {
               size={"32"}
               isNFT={userList[0].isNFT}
               img={userList[0].avatar}
+              user={userList[0]}
             />
             <div className="avatar translate-y-[8px]">
               <Avatar
                 size={"32"}
                 isNFT={userList[1].isNFT}
                 img={userList[1].avatar}
+                user={userList[1]}
               />
             </div>
           </div>
@@ -40,7 +42,7 @@ const FavModal = ({ modalRef, onClose, contentRef, arrowRef, userList }) => {
         <div className="flex justify-between items-center">
           <div className="flex items-center ">
             <div className="!w-[44px] !h-[44px] min-w-[44px] ">
-              <Avatar size={"44"} isNFT={user.isNFT} img={user.avatar} />
+              <Avatar size={"44"} isNFT={user.isNFT} img={user.avatar} user={user}/>
             </div>
             <div className=" ">
               {isFollow ? (

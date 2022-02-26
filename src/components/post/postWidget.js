@@ -18,7 +18,7 @@ import {
   MsgSvg,
   WhiteFavSvg,
 } from "../image";
-
+import ProfileWrapper from "../profileWrapper";
 const UserPostFollowerCol = ({ count, text, img }) => {
   return (
     <div className="flex flex-col items-start">
@@ -66,12 +66,15 @@ const UserHoverPopUp = ({ user, isFollow, followCallback }) => {
           isHighlight={isHighlight}
           img={avatar}
           isNFT={isNFT}
+          user={user}
         />
         <div className="flex flex-col ml-2 font-semibold text-sm justify-start">
           <div className="flex items-center">
+          <ProfileWrapper user={user}>
             <div className=" text-navyBlue cursor-pointer h-[16px]">
               {username}
             </div>
+            </ProfileWrapper>
             {isVerify && (
               <div className="ml-1 -translate-y-[2px]">
                 <VerifyIcon />
@@ -193,7 +196,9 @@ const PostDescWidget = ({ user, postDesc, isShowVerify }) => {
   return (
     <div className="font-bold text-sm textBlack">
       <UserInfoPopUp user={user} style={"dropdown-top"}>
-        <div className="hover:underline inline">{username}</div>
+        <ProfileWrapper user={user}>
+          <div className="hover:underline inline">{username}</div>
+        </ProfileWrapper>
       </UserInfoPopUp>
       {isVerify && isShowVerify && (
         <div className="ml-1 -translate-y-[2px] inline">
@@ -221,6 +226,7 @@ const AvatarWithPopUp = ({ user, isFollow, followCallback, size, mode }) => {
         isHighlight={isHighlight}
         img={avatar}
         isNFT={isNFT}
+        user={user}
       />
     </UserInfoPopUp>
   );
@@ -234,7 +240,7 @@ const UserMoreBar = ({
 }) => {
   isHideAddress = isHideAddress ?? false;
   const { username, isVerify } = user;
-  const [showisFollow,setShowIsFollow] = useState(!isFollow)
+  const [showisFollow, setShowIsFollow] = useState(!isFollow);
   const { isAddress, address, postId } = post;
   const isMobile = useMobile768();
   return (
@@ -256,9 +262,11 @@ const UserMoreBar = ({
                 followCallback();
               }}
             >
-              <div className=" textBlack font-bold text-sm">
-                {isMobile ? truncateName(username) : username}
-              </div>
+              <ProfileWrapper user={user}>
+                <div className=" textBlack font-bold text-sm">
+                  {isMobile ? truncateName(username) : username}
+                </div>
+              </ProfileWrapper>
             </UserInfoPopUp>
 
             {isVerify && (
@@ -275,11 +283,14 @@ const UserMoreBar = ({
         {showisFollow && <div className="text-bold text-2xl textBlack">．</div>}
         {isFollow ? (
           showisFollow && (
-            <div 
-            onClick={() => {
-              followCallback();
-            }}
-            className="btnText font-bold text-sm textBlack">Following</div>
+            <div
+              onClick={() => {
+                followCallback();
+              }}
+              className="btnText font-bold text-sm textBlack"
+            >
+              Following
+            </div>
           )
         ) : (
           <div
@@ -326,6 +337,7 @@ const AvatarUsernameActionRow = ({
             isHighlight={false}
             img={avatar}
             isNFT={isNFT}
+            user={user}
           />
         ) : (
           <UserInfoPopUp
@@ -342,6 +354,7 @@ const AvatarUsernameActionRow = ({
               isHighlight={false}
               img={avatar}
               isNFT={isNFT}
+              user={user}
             />
           </UserInfoPopUp>
         )}
@@ -361,11 +374,13 @@ const AvatarUsernameActionRow = ({
                   followCallback(true);
                 }}
               >
-                <div className="font-bold ">
-                  {isTruncateName
-                    ? truncateName(username, textLimit)
-                    : username}
-                </div>
+                <ProfileWrapper user={user}>
+                  <div className="font-bold ">
+                    {isTruncateName
+                      ? truncateName(username, textLimit)
+                      : username}
+                  </div>
+                </ProfileWrapper>
               </UserInfoPopUp>
             )}
 

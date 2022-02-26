@@ -15,16 +15,26 @@ const Profile = () => {
   const router = useRouter();
   const userInfo = useContext(UserContext).userContext;
   useEffect(() => {
-    if (userInfo.user) {
-      let username = router.query.username;
+    if (router.query.user) {
+      let user = JSON.parse(router.query.user);
+      serUser(user);
+      window.history.replaceState(
+        window.history.state,
+        "",
+        `/${user.username}`
+      );
+    } else {
+      if (userInfo.user) {
+        let username = router.query.username;
 
-      if (userInfo.user.username == username) {
-        setIsOwner(true);
-        serUser(userInfo.user);
-      } else {
-        // username
-        let user = getRandomUser(username);
-        serUser(user);
+        if (userInfo.user.username == username) {
+          setIsOwner(true);
+          serUser(userInfo.user);
+        } else {
+          // username
+          let user = getRandomUser(username);
+          serUser(user);
+        }
       }
     }
   }, [userInfo]);

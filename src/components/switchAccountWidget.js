@@ -21,7 +21,7 @@ const SwitchAccountItem = ({ user, isSelected, onClick }) => {
       className="normal-case btn btn-lg btn-ghost hover:bg-transparent flex items-center justify-between w-full mb-4 py-[8px] px-[16px]"
     >
       <div className="flex items-center">
-        <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} />
+        <Avatar size={"56"} isHighlight={false} img={avatar} isNFT={isNFT} user={user}/>
         <div className="font-bold text-sm ml-4">{username}</div>
       </div>
       {isSelected ?? true ? (

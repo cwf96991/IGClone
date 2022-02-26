@@ -47,14 +47,14 @@ const MobileNavBar = () => {
       icon: (
         <div className=" p-[1px] border border-black rounded-full  ">
           <div className="w-[24px] h-[24px]">
-            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />
+            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} user={user}/>
           </div>
         </div>
       ),
       unSelectedIcon: (
         <div className=" p-[1px] border border-black rounded-full  ">
           <div className="w-[24px] h-[24px]">
-            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />
+            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} user={user} />
           </div>
         </div>
       ),

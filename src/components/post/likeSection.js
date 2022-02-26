@@ -28,15 +28,17 @@ const LikeSection = ({ fd, isFdLiked, finalLikeCount, likedUser, postId }) => {
                 size={"20"}
                 isNFT={likedUser.isNFT}
                 img={likedUser.avatar}
+                user={likedUser}
               />
-              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar2} />
-              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar3} />
+              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar2} onClick={()=>{}}/>
+              <Avatar size={"20"} isNFT={fd.isNFT} img={fd.avatar3} onClick={()=>{}}/>
             </div>
           ) : (
             <Avatar
               size={"20"}
               isNFT={likedUser.isNFT}
               img={likedUser.avatar}
+              user={likedUser}
             />
           )}
           <div className="font-bold text-sm inline ml-2 textBlack">

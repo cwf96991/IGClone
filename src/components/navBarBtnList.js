@@ -100,7 +100,7 @@ const NavbarBtnList = ({ user }) => {
       icon: (
         <div className=" p-[1px] border border-black rounded-full  ">
           <div className="w-[24px] h-[24px]">
-            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />
+            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} user={user} onClick={()=>{}}/>
           </div>
         </div>
       ),
@@ -129,7 +129,7 @@ const NavbarBtnList = ({ user }) => {
       },
       unSelectedIcon: (
         <div className="translate-y-[1px]">
-          <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} />
+          <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} user={user} onClick={()=>{}}/>
         </div>
       ),
     },
