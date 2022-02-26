@@ -12,10 +12,14 @@ const Avatar = ({ size, isHighlight, img, isNFT }) => {
     size = "!w-[40px] !h-[40px]";
   } else if (size == "44") {
     size = "!w-[44px] !h-[44px]";
-  }else if (size == "24") {
+  } else if (size == "24") {
     size = "!w-[24px] !h-[24px]";
-  }else if (size == "28") {
+  } else if (size == "28") {
     size = "!w-[28px] !h-[28px]";
+  } else if (size == "150") {
+    size = "!w-[150px] !h-[150px]";
+  }else if (size == "80") {
+    size = "!w-[80px] !h-[80px]";
   }
   return isHighlight ? (
     <div className="avatar carousel-item cursor-pointer">

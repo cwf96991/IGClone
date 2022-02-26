@@ -76,7 +76,7 @@ function getRandomPostDesc() {
   }
   return tempDesc;
 }
-function getRandomUser() {
+function getRandomUser(username) {
   const user = faker.helpers.createCard();
   const isNew = faker.datatype.boolean();
   const follower = getRandomUsername();
@@ -87,7 +87,7 @@ function getRandomUser() {
   user.avatar = faker.image.avatar();
   user.isNFT = faker.datatype.boolean();
   user.isHighlight = faker.datatype.boolean();
-  user.username = getRandomUsername(user.name);
+  user.username = username ?? getRandomUsername(user.name);
   user.isNew = isNew;
   user.follower = follower;
   user.isWebsite = faker.datatype.boolean();
@@ -95,12 +95,14 @@ function getRandomUser() {
   user.extraFollower = extraFollower;
   user.isFollowing = faker.datatype.boolean();
   user.isVerify = faker.datatype.boolean();
-  user.postCount = faker.datatype.number();
+  user.postCount = faker.datatype.number(1000);
   user.userId = faker.datatype.uuid();
   user.followerCount = faker.datatype.number();
   user.followingCount = faker.datatype.number();
   user.isActive = faker.datatype.boolean();
   user.isTag = faker.datatype.boolean();
+  user.isPrivate = faker.datatype.boolean();
+  user.isVideo = faker.datatype.boolean();
   user.lastActiveTime = faker.datatype.number(23, { min: 0 });
   let tempImgList = [];
   for (let index = 0; index < 3; index++) {
@@ -115,6 +117,11 @@ function getRandomUser() {
     avatar2: faker.image.avatar(),
     avatar3: faker.image.avatar(),
   };
+  let wordCount = faker.datatype.number(20, { min: 5 });
+  let emoji = randomEmoji();
+  let words = faker.lorem.sentence(wordCount);
+  let text = mergeText(words, emoji);
+  user.bio = text;
   return user;
   // const {
   //   username,
@@ -180,12 +187,12 @@ function getRandomComment(needReply, time) {
 
   return comment;
 }
-async function getRandomPostList(isVideo, count) {
+async function getRandomPostList(isVideo, count, user) {
   isVideo = isVideo ?? faker.datatype.boolean();
   count = count ?? 5;
   let list = [];
   for (let index = 0; index < count; index++) {
-    const user = getRandomUser();
+    let postUser = getRandomUser();
 
     let post = {};
     post.isfav = faker.datatype.boolean();
@@ -226,7 +233,7 @@ async function getRandomPostList(isVideo, count) {
     }
     post.commentList = commentList;
 
-    list.push({ user: user, post: post });
+    list.push({ user: postUser, post: post });
   }
 
   return list;
@@ -253,6 +260,17 @@ async function getRandomPostWall(page, isReverse) {
 
   return postWallList;
 }
+async function getRandomProfilePost(page) {
+  let postWallList = [];
+  for (var i = 0; i < page; i++) {
+    let restImagePost = await getRandomPostList(false, 6);
+
+    postWallList.push(...restImagePost);
+  }
+
+  return postWallList;
+}
+
 export {
   getRandomPostList,
   getRandomUserList,
@@ -262,4 +280,5 @@ export {
   getRandomUsername,
   getRandomHashTag,
   getRandomPostWall,
+  getRandomProfilePost,
 };

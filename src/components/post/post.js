@@ -94,21 +94,7 @@ const Post = ({ data, currentUser }) => {
     );
     setCommentInput("");
   }
-  // function replyCommentHandler(index) {
-  //   targetIndex.current = index;
-  //   let user = finalCommentList[index].user;
-  //   changeCommentInput(commentInput + ` @${user.username}`);
-  // }
-  // function deleteCommentHandler(index) {
-  //   deleteCommentFunc(
-  //     index,
-  //     finalCommentList,
-  //     setFinalCommentList,
-  //     showCommentList,
-  //     setShowCommentList,
-  //     forceUpdate
-  //   );
-  // }
+
   const PostPopUpWrapper = ({ isShowComment, id, children }) => {
     isShowComment = isShowComment ?? false;
     return (
