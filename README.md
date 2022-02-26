@@ -16,7 +16,8 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
 - Reply and Like others comment
 - Placeholder post for loading effect
 - Double layer Modal
-
+- Dark Mode in Mobiler version
+- Profile Page
 ---
 
 ### Progress Log
@@ -112,6 +113,15 @@ Clone this project and use it to create your own [Next.js](https://nextjs.org) p
   
 - Working on Mobile version
 - Dark mode in Mobile version
+
+</details>
+
+---
+
+<details>
+  <summary>26 Feb 2022</summary>
+  
+- Working on Profile Page in PC version
 
 </details>
 
