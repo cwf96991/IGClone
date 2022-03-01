@@ -8,7 +8,7 @@ import SwitchAccountWidget from "../switchAccountWidget";
 const ProfileModal = ({ modalRef, onClose, contentRef, arrowRef }) => {
   const userInfo = useContext(UserContext).userContext;
   const switchModalRef = useRef(null);
-
+  const logoutModalRef = useRef(null);
   const itemList = [
     {
       icon: <ProfileSvg />,
@@ -49,7 +49,15 @@ const ProfileModal = ({ modalRef, onClose, contentRef, arrowRef }) => {
     {
       text: "Log out",
       handler: () => {
-        location.href = `/${userInfo.username}`;
+        let modal = document.getElementById("profileModal");
+
+        modal.checked = false;
+        enableBodyScroll(modalRef.current);
+        onClose();
+        let modal2 = document.getElementById("logoutModal");
+
+        modal2.checked = true;
+        disableBodyScroll(logoutModalRef.current);
       },
     },
   ];
@@ -118,6 +126,35 @@ const ProfileModal = ({ modalRef, onClose, contentRef, arrowRef }) => {
               enableBodyScroll(switchModalRef.current);
             }}
           />
+        }
+      />
+      <ModalWrapper
+        modalRef={logoutModalRef}
+        id={"logoutModal"}
+        onClose={() => {
+          location.href = "/login";
+        }}
+        content={
+          <div className="flex flex-col items-center">
+            <div className="textBlack font-medium text-lg mt-4">
+              Logging out
+            </div>
+            <div className="text-xs text-gray-300 mb-4">
+              You need to log back in.
+            </div>
+            <div className="lightGrayDivider-sm"></div>
+            <div
+              onClick={() => {
+                const modal = document.getElementById("logoutModal");
+                modal.checked = false;
+                enableBodyScroll(logoutModalRef.current);
+                location.href = "/login";
+              }}
+              className="text-xs btnText !font-normal !my-1"
+            >
+              Log In
+            </div>
+          </div>
         }
       />
     </>

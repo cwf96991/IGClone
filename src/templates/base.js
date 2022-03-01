@@ -12,6 +12,7 @@ const Basic = (props) => {
   const title = props?.title === undefined ? "" : `${props?.title} | `;
   const userInfo = useContext(UserContext);
   const user = useUser();
+  let isHideAll = props?.isHideAll??false
   let showHeader = props?.showHeader ?? false;
   const isMobile = useMobile768();
   showHeader = isMobile ? showHeader : true;
@@ -29,14 +30,14 @@ const Basic = (props) => {
         canonical={AppConfig.url}
         ogDescription={AppConfig.ogDescription}
       />
-      {showHeader && <Navbar user={props.user} />}
+      {!isHideAll && showHeader && <Navbar user={props.user} />}
 
       {showHeader ? (
         <div className="mt-[62.5px]">{props.children}</div>
       ) : (
         <div className="">{props.children}</div>
       )}
-      <MobileNavBar />
+      {!isHideAll && <MobileNavBar />}
       {/* <div>
         footer
       </div> */}

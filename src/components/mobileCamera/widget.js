@@ -35,19 +35,10 @@ const CaptureBtn = ({ webcamRef }) => {
   );
 };
 const btnListBasicStyle =
-  "absolute w-[95%] flex mx-4 justify-between items-center";
+  "absolute w-[96%] flex pl-5 justify-between items-center";
 const FlashLightBtn = () => {
   const [isOn, setIsOn] = useState(false);
   return (
-    // <label class="swap">
-    //   <input type="checkbox" />
-    //   <div class="swap-on">
-    //   <FlashLightSvg />
-    //   </div>
-    //   <div class="swap-off">
-    //     <FlashLightOffSvg />
-    //   </div>
-    // </label>
     <div
       onClick={() => {
         setIsOn(!isOn);
@@ -57,10 +48,16 @@ const FlashLightBtn = () => {
     </div>
   );
 };
-const HeaderBtnList = () => {
+const HeaderBtnList = ({ swipeableRef }) => {
   return (
     <div className={`top-5  ${btnListBasicStyle}`}>
-      <CrossSvg color="stroke-white" size="24" />
+      <div
+        onClick={() => {
+          swipeableRef.current.setIndexCurrent(1);
+        }}
+      >
+        <CrossSvg color="stroke-white" size="24" />
+      </div>
       <FlashLightBtn />
       <SettingSvg size="24" />
     </div>
@@ -122,14 +119,19 @@ const SideBtnList = () => {
     </div>
   );
 };
-const BottomBtnList = () => {
+const BottomBtnList = ({ onSwitch }) => {
   return (
     <div className={`bottom-[35px] ${btnListBasicStyle}`}>
       <SquareSvg />
       <div className=" ">
         <SectionSlider />
       </div>
-      <div className="svgBgBtn">
+      <div
+        onClick={() => {
+          onSwitch();
+        }}
+        className="svgBgBtn"
+      >
         <SwitchSvg size="24" />
       </div>
     </div>

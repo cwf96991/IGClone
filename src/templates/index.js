@@ -14,6 +14,7 @@ const Index = () => {
   const isMobile = useMobile768();
   const webcamRef = useRef(null);
   const userInfo = useContext(UserContext);
+  const swipeableRef = useRef(null);
   const MainScreen = () => {
     return (
       <div className="flex ">
@@ -38,7 +39,7 @@ const Index = () => {
   return isMobile ? (
     <SwipeableViews
       index={1}
-      slideClassName="slide"
+      ref={swipeableRef}
       onChangeIndex={(index, indexLatest, meta) => {
         if (indexLatest == 0 && index == 1) {
           enableBodyScroll(webcamRef.current);
@@ -49,7 +50,7 @@ const Index = () => {
       className="relative"
       enableMouseEvents
     >
-      <CameraMain webcamRef={webcamRef} />
+      <CameraMain webcamRef={webcamRef} swipeableRef={swipeableRef} />
       <Base showHeader={true}>
         <MainScreen />
       </Base>

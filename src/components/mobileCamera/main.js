@@ -7,7 +7,7 @@ import {
   BottomBtnList,
   SideBtnList,
 } from "./widget";
-const CameraMain = ({ webcamRef }) => {
+const CameraMain = ({ webcamRef,swipeableRef }) => {
   const [isFront, setIsFront] = useState(true);
   const size = useWindowSize();
   const isLandscape = size.height <= size.width;
@@ -24,7 +24,7 @@ const CameraMain = ({ webcamRef }) => {
     facingMode: { exact: "environment" },
     aspectRatio: ratio,
   };
-
+  
   return (
     <div
       onDoubleClick={() => {
@@ -38,13 +38,17 @@ const CameraMain = ({ webcamRef }) => {
         audio={false}
         height={finalHeight ?? 0}
         width={finalWidth ?? 0}
-        className={"w-full px-1 my-2 rounded-xl"}
+        className={"w-full px-2 my-2 rounded-2xl"}
         videoConstraints={isFront ? frontVideoConstraints : videoConstraints}
       />
-      <HeaderBtnList />
+      <HeaderBtnList swipeableRef={swipeableRef} />
       <SideBtnList />
       <CaptureBtn webcamRef={webcamRef} />
-      <BottomBtnList />
+      <BottomBtnList
+        onSwitch={() => {
+          setIsFront(!isFront);
+        }}
+      />
     </div>
   );
 };

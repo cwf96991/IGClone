@@ -375,7 +375,7 @@ const AvatarUsernameActionRow = ({
                 }}
               >
                 <ProfileWrapper user={user}>
-                  <div className="font-bold ">
+                  <div className="font-bold textBlack">
                     {isTruncateName
                       ? truncateName(username, textLimit)
                       : username}
