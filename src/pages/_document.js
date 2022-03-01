@@ -7,7 +7,7 @@ import UserStore from "../store/userStore";
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang={AppConfig.locale}>
+      <Html lang={AppConfig.locale} className="bgWhite">
         <Head />
         <body>
           <Main />

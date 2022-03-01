@@ -47,14 +47,24 @@ const MobileNavBar = () => {
       icon: (
         <div className=" p-[1px] border border-black rounded-full  ">
           <div className="w-[24px] h-[24px]">
-            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} user={user}/>
+            <Avatar
+              size={"24"}
+              isNFT={user.isNFT}
+              img={user.avatar}
+              user={user}
+            />
           </div>
         </div>
       ),
       unSelectedIcon: (
         <div className=" p-[1px] border border-black rounded-full  ">
           <div className="w-[24px] h-[24px]">
-            <Avatar size={"24"} isNFT={user.isNFT} img={user.avatar} user={user} />
+            <Avatar
+              size={"24"}
+              isNFT={user.isNFT}
+              img={user.avatar}
+              user={user}
+            />
           </div>
         </div>
       ),
@@ -83,15 +93,21 @@ const MobileNavBar = () => {
     <div className="fixed w-screen  z-10 bottom-0 bgWhite flex md:hidden justify-around py-2">
       {BtnList.map((item, index) => {
         const { icon, link, unSelectedIcon, focusString } = item;
-        return (
+        return focusString == "profile" ? (
           <div
             key={index}
             className="w-[24px] btnText h-[24px] cursor-pointer my-4"
           >
-            <a href={link} className="hover:border-0">
-              {focusString == focus ? icon : unSelectedIcon}
-            </a>
+            {focusString == focus ? icon : unSelectedIcon}
           </div>
+        ) : (
+          <a
+            key={index}
+            href={link}
+            className="hover:border-0 w-[24px] btnText h-[24px] cursor-pointer my-4"
+          >
+            {focusString == focus ? icon : unSelectedIcon}
+          </a>
         );
       })}
     </div>

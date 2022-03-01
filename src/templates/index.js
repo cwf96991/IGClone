@@ -1,18 +1,21 @@
 import Base from "./base";
 import { StorySlider } from "../components/slider";
-import { useMobile945 } from "../hook/useMobile";
+import { useMobile945, useMobile768 } from "../hook/useMobile";
 import { useState, useEffect, useRef, useContext } from "react";
-import { getRandomUser } from "../utils/random";
 import PostList from "../components/post";
 import UserList from "../components/userPanel";
 import { UserContext } from "../components/UserContext";
+import SwipeableViews from "react-swipeable-views";
+import { CameraMain } from "../components/mobileCamera";
+import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
 
 const Index = () => {
   const isHideSidePanel = useMobile945();
-  // const [user, setUser] = useState({});
+  const isMobile = useMobile768();
+  const webcamRef = useRef(null);
   const userInfo = useContext(UserContext);
-  return (
-    <Base showHeader={true}>
+  const MainScreen = () => {
+    return (
       <div className="flex ">
         <div
           className={`${
@@ -30,6 +33,30 @@ const Index = () => {
           </div>
         )}
       </div>
+    );
+  };
+  return isMobile ? (
+    <SwipeableViews
+      index={1}
+      slideClassName="slide"
+      onChangeIndex={(index, indexLatest, meta) => {
+        if (indexLatest == 0 && index == 1) {
+          enableBodyScroll(webcamRef.current);
+        } else if (indexLatest == 1 && index == 0) {
+          disableBodyScroll(webcamRef.current);
+        }
+      }}
+      className="relative"
+      enableMouseEvents
+    >
+      <CameraMain webcamRef={webcamRef} />
+      <Base showHeader={true}>
+        <MainScreen />
+      </Base>
+    </SwipeableViews>
+  ) : (
+    <Base showHeader={true}>
+      <MainScreen />
     </Base>
   );
 };

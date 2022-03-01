@@ -133,3 +133,6 @@ input[type="file"] {
 .bgWhite {
   @apply bg-black md:bg-white
 }
+.slide{
+  @apply relative
+}

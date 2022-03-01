@@ -68,7 +68,7 @@ function deleteCommentFunc(
     setFinalCommentList(newCommentList);
 
     let newShowCommentList = showCommentList;
-    const target = newShowCommentList.indexOf(comment);
+    let target = newShowCommentList.indexOf(comment);
     if (target > -1) {
       newShowCommentList.splice(target, 1); // 2nd parameter means remove one item only
     }
