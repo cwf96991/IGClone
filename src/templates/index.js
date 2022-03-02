@@ -51,6 +51,7 @@ const Index = () => {
       enableMouseEvents
     >
       <CameraMain webcamRef={webcamRef} swipeableRef={swipeableRef} />
+
       <Base showHeader={true}>
         <MainScreen />
       </Base>

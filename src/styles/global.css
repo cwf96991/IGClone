@@ -75,6 +75,9 @@ a:hover {
 .lightGrayDivider-sm {
   @apply w-full h-[0.5px] bg-gray-100;
 }
+.lightGrayDivider-xs {
+  @apply w-full h-[0.25px] bg-gray-100;
+}
 .lightGrayDivider {
   @apply w-full h-[1px] bg-gray-100;
 }

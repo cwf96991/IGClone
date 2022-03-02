@@ -164,7 +164,7 @@ const LoginPage = () => {
   };
   return (
     <Base isHideAll={true}>
-      <div className="flex mx-auto  w-[895px] items-start -mt-[32.5px]">
+      <div className="flex mx-auto  w-[895px] items-start mt-[30px]">
         <div className="w-[454px]">
           <MockPhone />
         </div>
