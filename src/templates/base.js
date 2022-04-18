@@ -22,7 +22,7 @@ const Basic = (props) => {
     }
   }, [user]);
   return (
-    <div className="antialiased text-black font-sans bg-black md:bg-[#fafafa] flex flex-col w-screen noScrollBarMobile h-fullScreen">
+    <div className="antialiased text-black font-sans bg-black md:bg-[#fafafa] flex flex-col w-screen noScrollBarMobile min-h-fullScreen">
       <Meta
         title={`${title}${AppConfig.title}`}
         ogTitle={`${title}${AppConfig.ogTitle}`}
